@@ -1,0 +1,24 @@
+@import "../../styles/variables";
+
+
+.faq_accordion_group {
+    .faq_accordion_heading {
+        font-size: 1em;
+        color: $cream_color;
+        font-weight: bold;
+        &:focus{
+            box-shadow:none;
+
+        }
+    }
+    .answer_wrapper{
+        .answer_label {
+            color: $dark_grey_color;
+            display: block;
+        }
+        .answer_body {
+            color: $black_color;
+            font-size: 1em;
+        }    
+    }
+}

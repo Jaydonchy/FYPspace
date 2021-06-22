@@ -1,0 +1,55 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+@import "./app/styles/variables";
+
+
+html,
+body {
+    height: 100%;
+    box-sizing:border-box;
+}
+
+body {
+    background-color: $bg_color;
+    margin: 0;
+    //For Scroll bar
+    overflow: overlay;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+//Helper Styles
+.card_left_border {
+    border-left: 5px solid $primary_color;
+}
+
+//Helper Styles Hyperlink
+.remove_focus:focus {
+    outline: 0;
+}
+
+//Drop down
+.dropdown {
+    .dropdown-item {
+        padding: 1rem 2rem;
+        &:hover {
+            background-color: $grey_color;
+        }
+    }
+}
+
+//FAQ
+.faq_accordion .faq_accordion_group {
+    .panel-default {
+        background-color: $bg_color;
+        .panel-heading.card-header {
+            &,
+            .faq_accordion_heading {
+                background-color: $secondary_color;
+                color: $secondary_text;
+            }
+        }
+        .panel-collapse {
+            border: 1px solid grey;
+        }
+    }
+}

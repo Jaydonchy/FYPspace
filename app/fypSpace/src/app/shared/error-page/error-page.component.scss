@@ -1,0 +1,24 @@
+@import "../../styles/variables";
+.error-container{
+    background-color:$primary_color_lighter;
+    border-radius:15px;
+    padding: 5vh 6vw;
+    .error_header{
+        width:100%;
+        display:flex;
+        justify-content: center;
+        font-size: 5vw;
+    }
+    .error_code{
+        width:100%;
+        display:flex;
+        justify-content:center;
+        font-size:15vw;
+    }
+    .error_description{
+        width:100%;
+        display:flex;
+        justify-content:center;
+        font-size:3vw;
+    }
+}

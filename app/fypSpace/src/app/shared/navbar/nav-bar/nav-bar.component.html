@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand">
+    <div class="navbar-logo">
+        <span class="navbar-brand mb-0 h1">FYPSpace</span>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav-wrapper">
+            <ul class="navbar-nav mr-auto">
+                <li *ngFor="let nav_item of left_nav_items">
+                    <div [routerLink]="nav_item.router_link" *ngIf="!childItemExist(nav_item)" class="nav-item remove_focus">
+                        <a>{{nav_item.display_name}}</a>
+                    </div>
+                    <div *ngIf="childItemExist(nav_item)" class="dropdown" dropdown>
+                        <a class="nav-link nav-item dropdown-toggle" id="navbardrop" data-toggle="dropdown" dropdownToggle>
+                            {{nav_item.display_name}}
+                        </a>
+                        <div class="dropdown-menu" *dropdownMenu>
+                            <a *ngFor="let nav_child of nav_item.childItem" class="dropdown-item" [routerLink]="nav_child.router_link">
+                                {{nav_child.display_name}}
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li *ngFor="let nav_item of right_nav_items">
+                    <div [routerLink]="nav_item.router_link" *ngIf="!childItemExist(nav_item)" class="nav-item remove_focus">
+                        <a>{{nav_item.display_name}}</a>
+                    </div>
+                    <div *ngIf="childItemExist(nav_item)" class="dropdown" dropdown>
+                        <a class="nav-link nav-item dropdown-toggle" id="navbardrop" data-toggle="dropdown" dropdownToggle>
+                            {{nav_item.display_name}}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
+                            <a *ngFor="let nav_child of nav_item.childItem" class="dropdown-item" [routerLink]="nav_child.router_link">
+                                {{nav_child.display_name}}
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,25 @@
+@import "../../../styles/variables";
+
+$primary_color_text: #f1f1f1;
+$primary_color_hover : rgb(255, 255, 255);
+$primary_color_hover_text: rgb(0, 0, 0);
+
+.navbar {
+    background-color: $primary_color;
+    height:10vh;
+    padding:0px 2vw;
+    .navbar-logo{
+        padding:0px 2vw;
+    }
+    .nav-item{
+        font-size:20px;
+        padding: 10px 15px;
+        color:$primary_color_text;
+        &:hover{
+            background-color: $primary_color_hover;
+            color: $primary_color_hover_text;
+            border-radius:5px;
+            cursor: pointer;
+        }
+    }
+}

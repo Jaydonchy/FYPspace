@@ -1,0 +1,15 @@
+@import "../../../styles/variables";
+
+
+footer {
+    background-color: $black_color;
+    width: 100%;
+    color:$cream_color;
+    font-weight:bold;
+    .content-wrap{
+        padding:3vh 0;
+        display:flex;
+        justify-content:space-between;
+    }
+}
+
