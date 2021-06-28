@@ -1,0 +1,16 @@
+<div class="side_nav_header">
+    <div class="header_content">
+        <span>
+            <span class="icon" *ngIf="sideNavService.icon != undefined">
+                <mat-icon>{{sideNavService.icon}}</mat-icon>
+            </span>
+            <span class="title">{{sideNavService.title}}</span>
+        </span>
+        <button mat-icon-button class="close" (click)="sideNavService.close()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+</div>
+<div class="side_nav_content">
+    <ng-template [cdkPortalOutlet]="sideNavService.panelPortal | async"></ng-template>
+</div>

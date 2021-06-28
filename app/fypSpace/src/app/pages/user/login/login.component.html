@@ -1,0 +1,25 @@
+<div class="login_wrapper">
+    <mat-card class="mat-elevation-z5 login_form_container">
+        <mat-card-content class="login_form_content">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <h2>Log In</h2>
+                <mat-error *ngIf="loginInvalid">
+                    The username and password were not recognised
+                </mat-error>
+                <mat-form-field class="full-width-input">
+                    <input matInput placeholder="Your APU APSPACE / LBEF email address" formControlName="username" required>
+                    <mat-error>
+                        Please provide a valid email address
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="full-width-input">
+                    <input matInput type="Password ( Do not enter your APSPACE / LBEF password )" placeholder="Password" formControlName="password" required>
+                    <mat-error>
+                        Please provide a valid password
+                    </mat-error>
+                </mat-form-field>
+                <button mat-raised-button color="accent">Login</button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

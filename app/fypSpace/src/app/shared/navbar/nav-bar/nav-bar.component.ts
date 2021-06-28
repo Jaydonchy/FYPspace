@@ -12,7 +12,17 @@ export class NavBarComponent implements OnInit {
     left_nav_items: nav_item[] = [
         {
             display_name: "Home",
-            router_link: ["/"],
+            router_link: ["/Home"],
+            icon:"home"
+        },
+
+    ];
+
+    mid_nav_items: nav_item[] = [
+        {
+            display_name: "Match",
+            router_link: ["/matching"],
+            icon:"supervisor_account"
         },
 
     ];
@@ -42,11 +52,11 @@ export class NavBarComponent implements OnInit {
         },
         {
             display_name: "Login",
-            router_link: ["/Login"],
+            router_link: ["/user","login"],
         },
         {
             display_name: "Register",
-            router_link: ["/Register"],
+            router_link: ["/user","register"],
         },
     ]
 
@@ -63,4 +73,5 @@ export interface nav_item {
     display_name: string,
     router_link: string[],
     childItem?: nav_item[],
+    icon?:string,
 }

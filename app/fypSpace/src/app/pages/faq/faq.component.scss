@@ -17,6 +17,7 @@
             display: block;
         }
         .answer_body {
+            white-space: pre-line;
             color: $black_color;
             font-size: 1em;
         }    

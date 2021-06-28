@@ -15,13 +15,11 @@ export class FaqComponent implements OnInit {
         {
             heading: "I am unable to login to FYPBank, What should I do?",
             body: "Please email your details ( Your fullname, gender, student Id, APU/LBEF Email address, intake/class code, Programme/Course name ) to dhason@apu.edu.my / your Project manager." +
-                "" +
                 "Please send your details as given below :" +
-                "" +
+                "\n" +
                 "For example, [ YOUR FULL NAME | MALE | TP000001 | TP00001@mail.apu.edu.my | UC3F1410 | BSc (Hons) in Computer Games Development ]." +
-                "" +
+                "\n\n" +
                 "Your FYPBaNK login a/c details will be emailed to your APU/LBEF Email address within 24-hour or 1-working-day" +
-                "" +
                 ".",
             access_role: [
                 "student",
@@ -46,7 +44,6 @@ export class FaqComponent implements OnInit {
         {
             heading: "I have already selected a project proposal from the FYPBaNK. Can I select another project proposal from the same?",
             body: "Login to FYPBaNK,deselect the project proposal that you selected earlier. Wait for a minimum of 48-hour or 2-working-day, so that the concerned supervisor would approve your request. Once the supervisor has approved your request, you may search and select another project proposal from the same." +
-                "" +
                 ".",
             access_role: [
                 "student",

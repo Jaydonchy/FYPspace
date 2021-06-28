@@ -1,12 +1,13 @@
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import "./app/styles/variables";
 
+$scroll_bar: rgb(248, 247, 247);
+$scroll_bar_bg: rgb(146, 146, 146);
 
 html,
 body {
     height: 100%;
-    box-sizing:border-box;
+    box-sizing: border-box;
 }
 
 body {
@@ -15,6 +16,81 @@ body {
     //For Scroll bar
     overflow: overlay;
     font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+//scrollbar
+* {
+    scrollbar-width: thin;
+    scrollbar-color: $scroll_bar_bg $scroll_bar;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+    background: $scroll_bar;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: $scroll_bar_bg;
+    border-radius: 20px;
+    border: 3px solid $scroll_bar;
+}
+
+mat-icon {
+    font-size: 30px;
+}
+
+//Styling input color
+mat-form-field,.no_hint_error{
+    .mat-form-field-wrapper{
+        margin-bottom:-1.25em;
+    }
+}
+
+.mat-form-field{
+    .mat-input-element, 
+    .mat-form-field-label,
+    .mat-form-field-required-marker{
+        &,&.mat-focused{
+            color: $primary_color;
+        }
+    }
+    .mat-form-field-underline,
+    .mat-form-field-ripple  {
+        &,&.mat-focused{
+            background-color: $primary_color;
+        }
+    }
+    &.primary_color{
+        .mat-input-element, 
+        .mat-form-field-label,
+        .mat-form-field-required-marker{
+            &,&.mat-focused{
+                color: $primary_text;
+            }
+        }
+        .mat-form-field-underline,
+        .mat-form-field-ripple  {
+            &,&.mat-focused{
+                background-color: $primary_text;
+            }
+        } 
+    }
+}
+
+
+button:focus,
+button:active:focus,
+button.active:focus {
+    outline: none !important;
+    outline-style: none !important;
+}
+
+.mat-button-focus-overlay {
+    background-color: transparent !important;
 }
 
 //Helper Styles
@@ -49,7 +125,6 @@ body {
             }
         }
         .panel-collapse {
-            border: 1px solid grey;
         }
     }
 }

@@ -1,7 +1,14 @@
-<div class="page-container">
-    <app-nav-bar></app-nav-bar>
-    <div class="content-wrap container pt-4">
-        <router-outlet></router-outlet>
-    </div>
-    <app-footer class="footer"></app-footer>
-</div>
+<mat-sidenav-container class="sidenav_container" >
+    <mat-sidenav-content>
+        <div class="page-container">
+            <app-nav-bar></app-nav-bar>
+            <div class="content-wrap container pt-4">
+                <router-outlet></router-outlet>
+            </div>
+            <app-footer class="footer"></app-footer>
+        </div>
+    </mat-sidenav-content>
+    <mat-sidenav #sideNav [fixedInViewport]="true" class="side_nav" position="end">
+        <app-sidenav></app-sidenav>
+    </mat-sidenav>
+</mat-sidenav-container>

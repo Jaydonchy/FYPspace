@@ -1,0 +1,27 @@
+.register_wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    .register_form_container {
+        margin: auto;
+        border-radius:15px;
+        h2{
+            text-align:center;
+        }
+        .register_form_content {
+            padding:3vh 2vw;
+            .form_fields{
+                display:flex;
+                justify-content: space-between;
+                .inner_form_field{
+                    padding: 1vh 3vw;
+                    display:flex;
+                    flex-direction: column;
+                }
+            }
+            .submit_button{
+                float:right;
+            }
+        }
+    }
+}

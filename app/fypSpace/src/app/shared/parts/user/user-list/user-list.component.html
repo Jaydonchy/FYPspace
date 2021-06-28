@@ -1,0 +1,40 @@
+<div class="list_container">
+    <div class="list_header">
+        {{header}}
+    </div>
+    <div class="list_toolbar">
+        <div class="selected_item"> Selected : </div>
+        <div class="list_config">
+            <div class="search" >
+                <mat-form-field class="primary_color " >
+                    <input  matInput type="text" [(ngModel)]="searchString" placeholder="Search">
+                    <button *ngIf="searchString" matSuffix class="searchbar_icon" mat-icon-button aria-label="Clear" (click)="searchString=''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <button matSuffix mat-icon-button class="searchbar_icon" aria-label="Search">
+                        <mat-icon>search</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <button (click)="sort()" mat-icon-button class="icon_wrapper">
+                <mat-icon class="icon" aria-hidden="false">sort</mat-icon>
+            </button>
+            <button (click)="filter()" mat-icon-button class="icon_wrapper">
+                <mat-icon class="icon" aria-hidden="false">filter_alt</mat-icon>
+            </button>
+        </div>
+    </div>
+    <div class="list_util">
+        <div class="">Filter: </div>
+        <div class="">Sort by: </div>
+    </div>
+    <mat-action-list class="list_content">
+        <app-user-list-item (click)="itemSelect()" mat-list-item></app-user-list-item>
+    </mat-action-list>
+</div>
+<ng-template #filterPanel>
+    <app-list-filter-panel></app-list-filter-panel>
+</ng-template>
+<ng-template #sortPanel>
+    <app-list-sort-panel></app-list-sort-panel>
+</ng-template>
