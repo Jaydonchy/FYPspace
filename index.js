@@ -1,12 +1,12 @@
 //Importing Module
 const express = require('express');
 const app = express();
+const env = require('dotenv').config();
 
 //Middleware
 
 //Database Connection
-const dbConfig = require ("./src/config/db.config");
-const env = require('dotenv').config();
+const dbConnection = require ("./src/Helper/mysql-connection");
 
 //Routes
 const userRoutes = require("./src/routes/userRoutes");

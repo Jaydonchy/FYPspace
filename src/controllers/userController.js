@@ -1,10 +1,18 @@
 //Require Model
+const userModel = require('../models/user');
 
 
 //Methods
 const test = (req,res) =>{
-    return console.log("Testing routes from controller");
-}
+    userModel.add("insert via knex")
+    .then(id => {
+        res.status(200).json(id);
+    })
+    .catch(err =>{
+        console.log(err);
+        res.status(500).json({message:"cannot add post"});
+    });
+};
 
 //Exports
 module.exports ={
