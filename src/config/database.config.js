@@ -7,7 +7,6 @@ module.exports = {
             password: process.env.DB_PASSWORD || "",
             database: process.env.DB_NAME || "fypspace"
         },
-        debug:true,
     },
     production: {},
     staging: {}
