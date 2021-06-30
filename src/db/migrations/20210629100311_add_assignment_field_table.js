@@ -18,5 +18,10 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-
+    return knex.schema
+        .table('assignment_field', table => {
+            table.dropForeign('assignment_id');
+            table.dropForeign('field_id');
+        })
+        .dropTableIfExists('assignment_field');
 };

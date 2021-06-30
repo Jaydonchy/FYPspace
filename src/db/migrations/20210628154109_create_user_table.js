@@ -1,6 +1,3 @@
-const knexfile = require('../knexfile');
-const knex = require('knex')(knexfile.development);
-
 exports.up = function (knex) {
     return knex.schema
         .createTable('campus', table => {

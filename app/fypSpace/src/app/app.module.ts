@@ -2,6 +2,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule} from '@angular/router';
 //components
@@ -50,9 +51,10 @@ import { ListFilterPanelComponent } from './shared/sidenav/list-filter-panel/lis
         ListFilterPanelComponent,
     ],
     imports: [
+        BrowserModule,
         AppRoutingModule,
         RouterModule,
-        BrowserModule,
+        HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,

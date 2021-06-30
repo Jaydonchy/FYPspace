@@ -49,9 +49,11 @@ exports.up = function (knex) {
 exports.down = function (knex) {
     return knex.schema
         .table('assignment', table => {
-            ['student_id', 'supervisor_id', 'marker_id', 'ppf', 'psf'].map(fk =>
-                table.dropForeign(fk)
-            );
+            table.dropForeign('student_id');
+            table.dropForeign('supervisor_id');
+            table.dropForeign('marker_id');
+            table.dropForeign('ppf');
+            table.dropForeign('psf');
         })
         .dropTableIfExists('assignment');
 };

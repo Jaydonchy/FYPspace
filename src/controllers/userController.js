@@ -1,21 +1,23 @@
 //Require Model
-const userModel = require('../models/user');
-
+const userModel = require('../models/userModel');
+const basicModel = require('../models/basicModel');
 
 //Methods
-const test = (req,res) =>{
-    userModel.add("insert via knex")
-    .then(id => {
-        res.status(200).json(id);
-    })
-    .catch(err =>{
-        console.log(err);
-        res.status(500).json({message:"cannot add post"});
-    });
+
+const selectAllCampus = (req, res) => {
+    const promise = basicModel.selectAll('campus')
+        .then(query => res.status(200).send(query))
+        .catch(err => res.status(400).send({ message: `error in retrieving courses, ${err}` }));
+};
+
+const selectAllSchools = (req, res) => {
+    const promise = basicModel.selectAll('school')
+        .then(query => res.status(200).send(query))
+        .catch(err => res.status(400).send({ message: `error in retrieving courses, ${err}` }));
 };
 
 //Exports
-module.exports ={
-    //Method name
-    test,
+module.exports = {
+    selectAllCampus,
+    selectAllSchools,
 }

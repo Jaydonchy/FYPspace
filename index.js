@@ -2,20 +2,19 @@
 const express = require('express');
 const app = express();
 const env = require('dotenv').config();
+const cors = require('cors');
 
 //Middleware
+app.use(express.json());
+app.use(cors());
 
 //Database Connection
 const dbConnection = require ("./src/Helper/mysql-connection");
 
 //Routes
-const userRoutes = require("./src/routes/userRoutes");
-app.use("/user",userRoutes);
+const router = require('./src/routes/routeIndex');
 
-
-app.get('/', (req, res) => {
-    res.send('Hello World...');
-});
+app.use('/api',router);
 
 //PORT Connection
 const port = process.env.PORT || '3200';

@@ -29,8 +29,8 @@ exports.up = function (knex) {
 
 exports.down = function (knex) {
     return knex.schema
-    .table('meeting_log',table=>
-        table.dropForeign('assignment_id')
-    )
-    .dropTableIfExists('meeting_log');
+        .table('meeting_log', table =>
+            table.dropForeign('assignment_id')
+        )
+        .dropTableIfExists('meeting_log');
 };

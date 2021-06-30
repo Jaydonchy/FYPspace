@@ -1,13 +1,13 @@
 <div class="register_wrapper">
     <mat-card class="mat-elevation-z5 register_form_container">
         <mat-card-content class="register_form_content">
-            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <form [formGroup]="register_form" (ngSubmit)="onSubmit()">
                 <h2>Register</h2>
                 <div class="form_fields">
                     <div class="inner_form_field">
                         <!-- TP Number -->
                         <mat-form-field>
-                            <input matInput placeholder="TP Number / Student ID" formControlName="username" required>
+                            <input matInput placeholder="TP Number / Student ID" formControlName="full_name" required>
                             <mat-error>
                                 Please provide a valid email address
                             </mat-error>
@@ -15,15 +15,19 @@
                         <!-- Level of Study -->
                         <mat-form-field>
                             <mat-label>Level of Study</mat-label>
-                            <mat-select>
-                                <mat-option>test</mat-option>
+                            <mat-select formControlName="level_of_study">
+                                <mat-option *ngFor=" let level of study_levels$ | async" [value]="level">
+                                    {{level.name}}
+                                </mat-option>
                             </mat-select>
                         </mat-form-field>
                         <!-- Intake / Class Code -->
                         <mat-form-field>
                             <mat-label>Intake/ Class code</mat-label>
-                            <mat-select>
-                                <mat-option>test</mat-option>
+                            <mat-select formControlName="intake_id">
+                                <mat-option *ngFor="let intake of this.intakes$ | async" [value]="intake">
+                                    {{intake.name}}
+                                </mat-option>
                             </mat-select>
                         </mat-form-field>
                         <!-- Full Name -->
@@ -33,56 +37,57 @@
                         <!-- Select your School -->
                         <mat-form-field>
                             <mat-label>Select your School</mat-label>
-                            <mat-select>
-                                <mat-option>test</mat-option>
+                            <mat-select formControlName="school_id">
+                                <mat-option *ngFor=" let school of schools$ | async" [value]="school">
+                                    {{school.description}}
+                                </mat-option>
                             </mat-select>
                         </mat-form-field>
                         <!-- Student Email -->
                         <mat-form-field>
-                            <input matInput placeholder="APU APSpace / LBEF Email Address" required>
+                            <input matInput formControlName="email_work" placeholder="APU APSpace / LBEF Email Address"
+                                required>
                         </mat-form-field>
                         <!-- Campus -->
                         <mat-form-field>
                             <mat-label>Campus</mat-label>
-                            <mat-select>
-                                <mat-option>test</mat-option>
+                            <mat-select formControlName="campus_id">
+                                <mat-option *ngFor=" let campus of campus$ | async" [value]="campus">
+                                    {{campus.name}}
+                                </mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
                     <div class="inner_form_field">
-                        <!-- Category -->
+                        <!-- Category: Full Time/Part Time -->
                         <mat-form-field>
                             <mat-label>Category</mat-label>
-                            <mat-select>
-                                <mat-option>test</mat-option>
+                            <mat-select formControlName="is_full_time">
+                                <mat-option *ngFor="let category of categories" [value]="category">
+                                    {{category.title}}
+                                </mat-option>
                             </mat-select>
                         </mat-form-field>
-                        <!-- Student of  -->
-                        <mat-form-field>
-                            <mat-label>You are a student of </mat-label>
-                            <mat-select>
-                                <mat-option>test</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        <!-- Programme Course -->
+                        <!-- Programme Course B(Sc) -->
                         <mat-form-field>
                             <mat-label>Programme / Course</mat-label>
-                            <mat-select>
-                                <mat-option>test</mat-option>
+                            <mat-select formControlName="course_id">
+                                <mat-option *ngFor="let course of courses$ | async" [value]="course">
+                                    {{course.name}}
+                                </mat-option>
                             </mat-select>
                         </mat-form-field>
                         <!-- Personal Email -->
                         <mat-form-field>
-                            <input matInput placeholder="Personal Email Address" required>
+                            <input matInput placeholder="Personal Email Address" formControlName="email_personal" required>
                         </mat-form-field>
                         <!-- Mobile Phone Number -->
                         <mat-form-field>
-                            <input matInput placeholder="Mobile Phone Number"
-                                required>
+                            <input matInput placeholder="Mobile Phone Number" formControlName="contact_no" required>
                         </mat-form-field>
                     </div>
                 </div>
-                <button mat-raised-button class="submit_button"color="accent">Register</button>
+                <button mat-raised-button type ="submit" class="submit_button" color="accent">Register</button>
             </form>
         </mat-card-content>
     </mat-card>

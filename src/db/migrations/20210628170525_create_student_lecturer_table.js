@@ -25,11 +25,6 @@ exports.up = function (knex) {
                 .defaultTo('1970-01-01 00:00:00');
             table.datetime('final_submission')
                 .defaultTo('1970-01-01 00:00:00');
-            table.integer('course_id')
-                .unsigned()
-                .references('id')
-                .inTable('course')
-                .onUpdate("CASCADE");
             table.datetime('created_at')
                 .defaultTo(knex.fn.now());
             table.datetime('deleted_at')
@@ -51,6 +46,11 @@ exports.up = function (knex) {
                 .references('id')
                 .inTable('student')
                 .onUpdate("CASCADE");
+            table.integer('course_id')
+                .unsigned()
+                .references('id')
+                .inTable('course')
+                .onUpdate("CASCADE");
             table.integer('intake_id')
                 .unsigned()
                 .references('id')
@@ -63,12 +63,10 @@ exports.down = function (knex) {
     return knex.schema
         .table('student', table => {
             table.dropForeign('intake_id');
+            table.dropForeign('course_id');
             table.dropForeign('user_id');
         })
         .dropTableIfExists('student')
-        .table('intake', table => {
-            table.dropForeign('course_id');
-        })
         .dropTableIfExists('intake')
         .dropTableIfExists('course')
         .dropTableIfExists('study_level');
