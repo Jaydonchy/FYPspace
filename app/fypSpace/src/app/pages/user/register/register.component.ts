@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { course, study_level, school, campus, intake } from '../../../interfaces/db_models';
@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
     ) {
     }
 
-
+    formSubmitting = false; 
     intakes$?: Observable<intake[]>;
     study_levels$?: Observable<study_level[]>;
     schools$?: Observable<school[]>
@@ -39,23 +39,19 @@ export class RegisterComponent implements OnInit {
 
 
     register_form = this._fb.group({
-        full_name: [''],
-        level_of_study: [''],
-        intake_id: [''],
-        password: [''],
-        school_id: [''],
-        email_work: [''],
+        tp_number: ['', [Validators.required, Validators.minLength(6)]],
+        fullname: ['', [Validators.required]],
+        level_of_study: ['', [Validators.required]],
+        intake_id: ['', Validators.required],
+        password: ['', [Validators.required, Validators.minLength(5)]],
+        school_id: ['', Validators.required],
+        email_work: ['', [Validators.email, Validators.required]],
         email_personal: [''],
         contact_no: [''],
-        campus_id: [''],
-        is_full_time: [''],
-        course_id: [''],
-        tp_number: ['']
+        campus_id: ['', Validators.required],
+        is_full_time: ['', Validators.required],
+        course_id: ['', Validators.required],
     });
-
-    public loginInvalid?: boolean;
-    private formSubmitAttempt?: boolean;
-    private returnUrl?: string;
 
     formFieldModels = () => {
         this.intakes$ = this._api.doGet<intake[]>('/student/intakes');
@@ -70,7 +66,23 @@ export class RegisterComponent implements OnInit {
     }
 
     onSubmit() {
-        console.log(this.register_form.value);
+        if(this.register_form.valid){
+            this.formSubmitting = true;
+            this._api.doPost('/student/register', this.register_form.value)
+                .subscribe({
+                    next: res => {
+                        console.log('Signup Successful');
+                        this.formSubmitting = false;
+                        this.router.navigate(['..','login'],{relativeTo: this.route});
+                    },
+                    error: err => {
+                        console.log(err);
+                    }
+    
+                });
+        } else {
+            console.warn('Register form is not valid')
+        }
     }
 
 }

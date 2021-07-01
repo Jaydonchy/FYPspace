@@ -16,8 +16,17 @@ const selectAllSchools = (req, res) => {
         .catch(err => res.status(400).send({ message: `error in retrieving courses, ${err}` }));
 };
 
+const login = (req, res) => {
+    console.log('login attempted');
+    const { email_work, password } = req.body;
+    query = userModel.getLoginCredentials(req.body) 
+    .then(q =>
+        res.status(200).send(q));
+}
+
 //Exports
 module.exports = {
     selectAllCampus,
     selectAllSchools,
+    login,
 }

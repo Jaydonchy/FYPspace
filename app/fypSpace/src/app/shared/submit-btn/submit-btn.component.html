@@ -1,0 +1,6 @@
+<button mat-raised-button type="submit" class="submit_button" color="accent" [disabled]="this.formSubmitting">
+    <div class="spinner_button_wrapper">
+        <span>Register</span>
+        <mat-progress-spinner *ngIf="this.formSubmitting" class="spinner" [mode]="'indeterminate'" [diameter]="25" [strokeWidth]="5" ></mat-progress-spinner>
+    </div>
+</button>

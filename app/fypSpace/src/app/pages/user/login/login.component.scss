@@ -8,9 +8,16 @@
         margin: auto;
         border-radius:15px;
         .login_form_content {
+            h2{
+                text-align:center;
+            }
             form{
                 display: flex;
                 flex-direction: column;
+                .submit_button{
+                    display:flex;
+                    flex-direction:row-reverse;
+                }
             }
         }
     }

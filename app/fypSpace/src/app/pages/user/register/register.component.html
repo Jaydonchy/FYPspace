@@ -7,15 +7,12 @@
                     <div class="inner_form_field">
                         <!-- TP Number -->
                         <mat-form-field>
-                            <input matInput placeholder="TP Number / Student ID" formControlName="full_name" required>
-                            <mat-error>
-                                Please provide a valid email address
-                            </mat-error>
+                            <input matInput placeholder="TP Number / Student ID" formControlName="tp_number">
                         </mat-form-field>
                         <!-- Level of Study -->
                         <mat-form-field>
                             <mat-label>Level of Study</mat-label>
-                            <mat-select formControlName="level_of_study">
+                            <mat-select disableOptionCentering formControlName="level_of_study">
                                 <mat-option *ngFor=" let level of study_levels$ | async" [value]="level">
                                     {{level.name}}
                                 </mat-option>
@@ -24,7 +21,7 @@
                         <!-- Intake / Class Code -->
                         <mat-form-field>
                             <mat-label>Intake/ Class code</mat-label>
-                            <mat-select formControlName="intake_id">
+                            <mat-select disableOptionCentering formControlName="intake_id">
                                 <mat-option *ngFor="let intake of this.intakes$ | async" [value]="intake">
                                     {{intake.name}}
                                 </mat-option>
@@ -32,12 +29,12 @@
                         </mat-form-field>
                         <!-- Full Name -->
                         <mat-form-field>
-                            <input matInput placeholder="Full Name" formControlName="password" required>
+                            <input matInput placeholder="Full Name" formControlName="fullname">
                         </mat-form-field>
                         <!-- Select your School -->
                         <mat-form-field>
                             <mat-label>Select your School</mat-label>
-                            <mat-select formControlName="school_id">
+                            <mat-select disableOptionCentering formControlName="school_id">
                                 <mat-option *ngFor=" let school of schools$ | async" [value]="school">
                                     {{school.description}}
                                 </mat-option>
@@ -51,7 +48,7 @@
                         <!-- Campus -->
                         <mat-form-field>
                             <mat-label>Campus</mat-label>
-                            <mat-select formControlName="campus_id">
+                            <mat-select disableOptionCentering formControlName="campus_id">
                                 <mat-option *ngFor=" let campus of campus$ | async" [value]="campus">
                                     {{campus.name}}
                                 </mat-option>
@@ -62,7 +59,7 @@
                         <!-- Category: Full Time/Part Time -->
                         <mat-form-field>
                             <mat-label>Category</mat-label>
-                            <mat-select formControlName="is_full_time">
+                            <mat-select disableOptionCentering formControlName="is_full_time">
                                 <mat-option *ngFor="let category of categories" [value]="category">
                                     {{category.title}}
                                 </mat-option>
@@ -71,7 +68,7 @@
                         <!-- Programme Course B(Sc) -->
                         <mat-form-field>
                             <mat-label>Programme / Course</mat-label>
-                            <mat-select formControlName="course_id">
+                            <mat-select disableOptionCentering formControlName="course_id">
                                 <mat-option *ngFor="let course of courses$ | async" [value]="course">
                                     {{course.name}}
                                 </mat-option>
@@ -79,15 +76,20 @@
                         </mat-form-field>
                         <!-- Personal Email -->
                         <mat-form-field>
-                            <input matInput placeholder="Personal Email Address" formControlName="email_personal" required>
+                            <input matInput placeholder="Personal Email Address" formControlName="email_personal">
                         </mat-form-field>
                         <!-- Mobile Phone Number -->
                         <mat-form-field>
-                            <input matInput placeholder="Mobile Phone Number" formControlName="contact_no" required>
+                            <input matInput placeholder="Mobile Phone Number" formControlName="contact_no">
+                        </mat-form-field>
+                        <!-- Password -->
+                        <mat-form-field>
+                            <input type="password" matInput placeholder="Password" formControlName="password">
                         </mat-form-field>
                     </div>
                 </div>
-                <button mat-raised-button type ="submit" class="submit_button" color="accent">Register</button>
+                <app-submit-btn class='submit_button' [formSubmitting]="formSubmitting"></app-submit-btn>
+                
             </form>
         </mat-card-content>
     </mat-card>

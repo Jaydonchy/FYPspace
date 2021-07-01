@@ -38,13 +38,13 @@ exports.up = function (knex) {
             table.integer('user_id')
                 .unsigned()
                 .references('id')
-                .inTable('student')
+                .inTable('user')
                 .onUpdate("CASCADE")
                 .onDelete("CASCADE");
             table.integer('level_of_study')
                 .unsigned()
                 .references('id')
-                .inTable('student')
+                .inTable('study_level')
                 .onUpdate("CASCADE");
             table.integer('course_id')
                 .unsigned()

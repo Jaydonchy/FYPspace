@@ -1,4 +1,3 @@
-@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import "./app/styles/variables";
 
 $scroll_bar: rgb(248, 247, 247);
@@ -47,37 +46,6 @@ mat-icon {
 mat-form-field,.no_hint_error{
     .mat-form-field-wrapper{
         margin-bottom:-1.25em;
-    }
-}
-
-.mat-form-field{
-    .mat-input-element, 
-    .mat-form-field-label,
-    .mat-form-field-required-marker{
-        &,&.mat-focused{
-            color: $primary_color;
-        }
-    }
-    .mat-form-field-underline,
-    .mat-form-field-ripple  {
-        &,&.mat-focused{
-            background-color: $primary_color;
-        }
-    }
-    &.primary_color{
-        .mat-input-element, 
-        .mat-form-field-label,
-        .mat-form-field-required-marker{
-            &,&.mat-focused{
-                color: $primary_text;
-            }
-        }
-        .mat-form-field-underline,
-        .mat-form-field-ripple  {
-            &,&.mat-focused{
-                background-color: $primary_text;
-            }
-        } 
     }
 }
 

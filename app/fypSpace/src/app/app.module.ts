@@ -25,6 +25,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon'; 
 import {MatChipsModule} from '@angular/material/chips'; 
 import {MatSidenavModule} from '@angular/material/sidenav'; 
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
 import { PortalModule } from '@angular/cdk/portal';
 //Additional packages
 //Pipes
@@ -34,6 +35,7 @@ import { UserListComponent } from './shared/parts/user/user-list/user-list.compo
 import { SidenavComponent } from './shared/sidenav/sidenav.component';
 import { ListSortPanelComponent } from './shared/sidenav/list-sort-panel/list-sort-panel.component';
 import { ListFilterPanelComponent } from './shared/sidenav/list-filter-panel/list-filter-panel.component';
+import { SubmitBtnComponent } from './shared/submit-btn/submit-btn.component';
 
 
 
@@ -49,6 +51,7 @@ import { ListFilterPanelComponent } from './shared/sidenav/list-filter-panel/lis
         SidenavComponent,
         ListSortPanelComponent,
         ListFilterPanelComponent,
+        SubmitBtnComponent,
     ],
     imports: [
         BrowserModule,
@@ -71,6 +74,7 @@ import { ListFilterPanelComponent } from './shared/sidenav/list-filter-panel/lis
         MatIconModule,
         MatChipsModule,
         MatSidenavModule,
+        MatProgressSpinnerModule,
         PortalModule,
     ],
     providers: [],

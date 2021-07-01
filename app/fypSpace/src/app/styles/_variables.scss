@@ -1,24 +1,40 @@
 @use '~@angular/material' as mat;
 
+@include mat.core();
+
 $primary-palette: mat.define-palette(mat.$blue-palette);
 $secondary-palette: mat.define-palette(mat.$amber-palette);
 $warn-palette: mat.define-palette(mat.$red-palette);
 
-$primary_color : mat.get-color-from-palette($primary-palette, 'default');
-$primary_text : mat.get-color-from-palette($primary-palette,'default-contrast');
-$primary_color_darker : mat.get-color-from-palette($primary-palette, 900);
-$primary_text_darker : mat.get-color-from-palette($primary-palette,'darker-contrast');
-$primary_color_lighter : mat.get-color-from-palette($primary-palette, 'lighter');
-$primary_text_lighter : mat.get-color-from-palette($primary-palette,'lighter-contrast');
+$app-theme: mat.define-light-theme(
+    (
+        color: (
+            primary: $primary-palette,
+            accent: $secondary-palette,
+            warn: $warn-palette,
+        ),
+    )
+);
+
+@include mat.core-theme($app-theme);
+@include mat.button-theme($app-theme);
+@include mat.all-component-themes($app-theme);
+
+$primary_color: mat.get-color-from-palette($primary-palette, "default");
+$primary_text: mat.get-color-from-palette($primary-palette, "default-contrast");
+$primary_color_darker: mat.get-color-from-palette($primary-palette, 900);
+$primary_text_darker: mat.get-color-from-palette($primary-palette, "darker-contrast");
+$primary_color_lighter: mat.get-color-from-palette($primary-palette, "lighter");
+$primary_text_lighter: mat.get-color-from-palette($primary-palette, "lighter-contrast");
 $accent_color: #490009;
-$secondary_color: mat.get-color-from-palette($secondary-palette,'default');
-$secondary_text: mat.get-color-from-palette($secondary-palette,'default-contrast');
-$secondary_color_darker: mat.get-color-from-palette($secondary-palette,'darker');
-$secondary_text_darker: mat.get-color-from-palette($secondary-palette,'darker-contrast');
-$secondary_color_lighter: mat.get-color-from-palette($secondary-palette,'lighter');
-$secondary_text_lighter: mat.get-color-from-palette($secondary-palette,'lighter-contrast');
-$warn_color:  mat.get-color-from-palette($warn-palette, 'default');
-$warn_text:  mat.get-color-from-palette($warn-palette, 'default-contrast');
+$secondary_color: mat.get-color-from-palette($secondary-palette, "default");
+$secondary_text: mat.get-color-from-palette($secondary-palette, "default-contrast");
+$secondary_color_darker: mat.get-color-from-palette($secondary-palette, "darker");
+$secondary_text_darker: mat.get-color-from-palette($secondary-palette, "darker-contrast");
+$secondary_color_lighter: mat.get-color-from-palette($secondary-palette, "lighter");
+$secondary_text_lighter: mat.get-color-from-palette($secondary-palette, "lighter-contrast");
+$warn_color: mat.get-color-from-palette($warn-palette, "default");
+$warn_text: mat.get-color-from-palette($warn-palette, "default-contrast");
 $tertiary_color: #013766;
 $black_color: #263238;
 $grey_color: #dadada;
