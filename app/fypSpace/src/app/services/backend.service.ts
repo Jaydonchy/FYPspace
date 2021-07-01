@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import { resetFakeAsyncZone } from '@angular/core/testing';
 
 @Injectable({
     providedIn: 'root'
@@ -22,18 +23,20 @@ export class BackendService {
         return `${this.root}${route}`;
     }
 
-    doGet<T>(route: string): Observable<T> {
-        return this._http.get<T>(this.appendRoute(route))
+    async doGet<T>(route: string): Promise<Observable<T>> {
+        const res = await this._http.get<T>(this.appendRoute(route))
             .pipe(
                 catchError(this.handleError)
             );
+        return res;
     }
 
-    doPost(route: string, body: any): Observable<Object> {
-        return this._http.post(this.appendRoute(route), body, this.httpOptions)
+    async doPost(route: string, body: any): Promise<Observable<Object>> {
+        const res = await this._http.post(this.appendRoute(route), body, this.httpOptions)
             .pipe(
                 catchError(this.handleError)
-        );
+            );
+        return res;
     }
 
     handleError(err: HttpErrorResponse) {

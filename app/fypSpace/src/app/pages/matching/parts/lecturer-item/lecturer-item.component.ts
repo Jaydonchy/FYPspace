@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { lecturer_item } from 'src/app/interfaces/matching';
+import { school } from 'src/app/interfaces/db_models';
+import { LecturerService } from 'src/app/services/lecturer.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
     selector: 'app-lecturer-item',
@@ -8,8 +11,12 @@ import { lecturer_item } from 'src/app/interfaces/matching';
 })
 export class LecturerItemComponent implements OnInit {
 
-    @Input() item?: lecturer_item | null;
-    constructor() { }
+    @Input() item!: lecturer_item;
+    constructor(
+        public _user: UserService,
+        public _lecturer: LecturerService,
+    ) { }
+
 
     ngOnInit(): void {
     }

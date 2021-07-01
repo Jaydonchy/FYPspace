@@ -3,8 +3,8 @@
         <div class="user_name">
             Example Lecturer
             <span class="badge_wrapper">
-                <span class="badge pm"> PM </span>
-                <span class="badge admin"> Admin </span>
+                <span class="badge pm" *ngIf="this.item.lecturer.is_pm"> PM </span>
+                <span class="badge admin" *ngIf="this.item.lecturer.is_admin"> Admin </span>
             </span>
         </div> 
         <div class="user_specialization">
@@ -15,8 +15,13 @@
             </mat-chip-list>
         </div>
         <div class="user_intake">
-            <span class="school badge"> SOCT </span>
-            <span class="campus badge"> APU </span>
+            <span class="school badge">
+                {{this._user.getSchoolNameById(this.item.user.school_id)}}
+                <!-- {{this._user.getSchoolNameByIdTest | async}} -->
+            </span>
+            <span class="campus badge">
+                {{this._user.getCampusNameById(this.item.user.campus_id)}}
+            </span>
             <span class="department badge"> Location </span>
             <span class="location badge"> Department </span>
         </div>

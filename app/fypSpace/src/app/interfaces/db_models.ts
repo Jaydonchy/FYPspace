@@ -15,7 +15,7 @@ export interface school {
 }
 
 export interface campus {
-    interface: number,
+    id: number,
     name: string,
 }
 

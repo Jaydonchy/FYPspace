@@ -1,12 +1,21 @@
 <!-- Student -->
 <mat-card class="item_container mat-elevation-z2">
     <div class="user_profile">
-        <div class="user_name"> Example Student </div>
+        <div class="user_name"> {{this.item.user.fullname}} </div>
         <div class="user_topic "> Example Topic </div>
         <div class="user_intake">
-            <span class="school badge"> SOCT </span>
-            <span class="campus badge"> APIIT </span>
-            <span class="intake">UC3F2011</span>
+            <span class="school badge">
+                {{this._user.getSchoolNameById(this.item.user.school_id)}}
+            </span>
+            <span class="campus badge">
+                {{this._user.getCampusNameById(this.item.user.campus_id)}}
+            </span>
+            <span class="intake badge">
+                {{this._student.getIntakeById(this.item.student.intake_id)}}
+            </span>
+            <span class="course badge">
+                {{this._student.getCourseById(this.item.student.course_id)}}
+            </span>
         </div>
     </div>
     <div class="item_util">

@@ -4,7 +4,9 @@ const userController = require("../controllers/userController");
 
 //Routes
 router.get('/schools',userController.selectAllSchools)
+router.get('/school/:id',userController.selectSchoolById)
 router.get('/campus',userController.selectAllCampus)
 router.post('/login',userController.login)
+
 
 module.exports= router;

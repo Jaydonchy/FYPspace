@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { StudentService } from 'src/app/services/student.service';
+import { UserService } from 'src/app/services/user.service';
 import { student_item } from '../../../../interfaces/matching';
 
 @Component({
@@ -9,13 +10,13 @@ import { student_item } from '../../../../interfaces/matching';
 })
 export class StudentItemComponent implements OnInit {
 
-    @Input() item?: student_item | null;
+    @Input() item!: student_item;
     constructor(
-        private _student: StudentService,
+        public _student: StudentService,
+        public _user: UserService,
     ) { }
-
     ngOnInit(): void {
-        console.log(this.item);
     }
+
 
 }

@@ -31,14 +31,14 @@ export class LoginComponent implements OnInit {
     onSubmit() {
         if (this.form.valid) {
             this.formSubmitting = true;
-            this._api.doPost('/user/login', this.form.value)
-                .subscribe({
+            this._api.doPost('/user/login', this.form.value).then(
+                res => res.subscribe({
                     next: res => {
                         this.formSubmitting = false;
                         const r = res as Array<Object>;
                         if (r.length == 1) {
                             console.log('Login Successful');
-                            let [user]= r;
+                            let [user] = r;
                             console.log(user);
                         }
                         else {
@@ -50,7 +50,9 @@ export class LoginComponent implements OnInit {
                         console.log(err);
                     }
 
-                });
+                })
+            )
+
         } else {
             console.warn('Login form is not valid')
         }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { StudentService } from 'src/app/services/student.service';
+import { UserService } from 'src/app/services/user.service';
 import { course, study_level, school, campus, intake } from '../../../interfaces/db_models';
 import { BackendService } from '../../../services/backend.service';
 
@@ -15,12 +17,14 @@ export class RegisterComponent implements OnInit {
     constructor(
         private _fb: FormBuilder,
         private _api: BackendService,
+        private _user: UserService,
+        private _student: StudentService,
         private route: ActivatedRoute,
         private router: Router,
     ) {
     }
 
-    formSubmitting = false; 
+    formSubmitting = false;
     intakes$?: Observable<intake[]>;
     study_levels$?: Observable<study_level[]>;
     schools$?: Observable<school[]>
@@ -54,11 +58,21 @@ export class RegisterComponent implements OnInit {
     });
 
     formFieldModels = () => {
-        this.intakes$ = this._api.doGet<intake[]>('/student/intakes');
-        this.study_levels$ = this._api.doGet<study_level[]>('/student/study_level');
-        this.schools$ = this._api.doGet<school[]>('/user/schools');
-        this.campus$ = this._api.doGet<campus[]>('/user/campus');
-        this.courses$ = this._api.doGet<course[]>('/student/courses');
+        this._api.doGet<intake[]>('/student/intakes').then(
+            res => this.intakes$ = res
+        );
+        this._api.doGet<study_level[]>('/student/study_level').then(
+            res => this.study_levels$ = res
+        );
+        this._api.doGet<school[]>('/user/schools').then(
+            res => this.schools$ = res
+        );
+        this._api.doGet<campus[]>('/user/campus').then(
+            res => this.campus$ = res
+        );
+        this._api.doGet<course[]>('/student/courses').then(
+            res => this.courses$ = res
+        );
     }
 
     ngOnInit(): void {
@@ -66,20 +80,21 @@ export class RegisterComponent implements OnInit {
     }
 
     onSubmit() {
-        if(this.register_form.valid){
+        if (this.register_form.valid) {
             this.formSubmitting = true;
-            this._api.doPost('/student/register', this.register_form.value)
-                .subscribe({
+            this._api.doPost('/student/register', this.register_form.value).then(
+                res => res.subscribe({
                     next: res => {
                         console.log('Signup Successful');
                         this.formSubmitting = false;
-                        this.router.navigate(['..','login'],{relativeTo: this.route});
+                        this.router.navigate(['..', 'login'], { relativeTo: this.route });
                     },
                     error: err => {
                         console.log(err);
                     }
-    
-                });
+
+                })
+            );
         } else {
             console.warn('Register form is not valid')
         }

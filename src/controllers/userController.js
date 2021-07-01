@@ -17,14 +17,22 @@ const selectAllSchools = (req, res) => {
 };
 
 const login = (req, res) => {
-    query = userModel.getLoginCredentials(req.body) 
-    .then(q =>
-        res.status(200).send(q));
+    query = userModel.getLoginCredentials(req.body)
+        .then(q => res.status(200).send(q))
+        .catch(q => res.status(500).send({ message: ' error in login' }));
+}
+
+const selectSchoolById = (req, res) => {
+    const { id } = req.params;
+    query = basicModel.selectOneById('school', id)
+        .then(q => res.status(200).send(q))
+        .catch(q => res.status(400).send({ message: 'error in getting specific school' }));
 }
 
 //Exports
 module.exports = {
     selectAllCampus,
     selectAllSchools,
+    selectSchoolById,
     login,
 }
