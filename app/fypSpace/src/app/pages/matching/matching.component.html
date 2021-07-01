@@ -1,9 +1,9 @@
 <div class="page_header">
-    <span class="header" >
+    <span class="header">
         Match
     </span>
     <!-- Put explanation here -->
-    <span class="sub_header" >
+    <span class="sub_header">
         Match student with their supervisor and 2nd supervisor
     </span>
 </div>
@@ -12,10 +12,18 @@
 <div class="workspace mat-elevation-z5">
     <div class="lists_container ">
         <div class="list_wrapper first-child">
-            <app-item-list></app-item-list>
+            <app-item-list [header]="'Student'">
+                <div *ngFor="let student of this.studentItems" (click)="selectStudent(student)">
+                    <app-student-item [item]="student"></app-student-item>
+                </div>
+            </app-item-list>
         </div>
         <div class="list_wrapper">
-            <app-item-list></app-item-list>
+            <app-item-list [header]="'Lecturer'">
+                <div *ngFor="let lecturer of this.lecturerItems" (click)="selectLecturer(lecturer)">
+                    <app-lecturer-item [item]="lecturer"></app-lecturer-item>
+                </div>
+            </app-item-list>
         </div>
     </div>
     <div class="action_bar">

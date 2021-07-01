@@ -17,8 +17,6 @@ const selectAllSchools = (req, res) => {
 };
 
 const login = (req, res) => {
-    console.log('login attempted');
-    const { email_work, password } = req.body;
     query = userModel.getLoginCredentials(req.body) 
     .then(q =>
         res.status(200).send(q));

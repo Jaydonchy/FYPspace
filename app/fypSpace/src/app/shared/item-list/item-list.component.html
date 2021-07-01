@@ -29,8 +29,7 @@
         <div class="">Sort by: </div>
     </div>
     <mat-action-list class="list_content">
-        <app-student-item (click)="itemSelect()" mat-list-item></app-student-item>
-        <app-lecturer-item (click)="itemSelect()" mat-list-item></app-lecturer-item>
+        <ng-content></ng-content>
     </mat-action-list>
 </div>
 

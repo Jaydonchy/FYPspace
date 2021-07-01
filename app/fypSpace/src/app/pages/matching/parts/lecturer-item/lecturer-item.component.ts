@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { lecturer_item } from 'src/app/interfaces/matching';
 
 @Component({
-  selector: 'app-lecturer-item',
-  templateUrl: './lecturer-item.component.html',
-  styleUrls: ['../../matching.component.scss']
+    selector: 'app-lecturer-item',
+    templateUrl: './lecturer-item.component.html',
+    styleUrls: ['../../matching.component.scss']
 })
 export class LecturerItemComponent implements OnInit {
 
-  constructor() { }
+    @Input() item?: lecturer_item | null;
+    constructor() { }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
 }
