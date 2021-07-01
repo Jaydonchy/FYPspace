@@ -3,11 +3,11 @@ import { SidenavService } from 'src/app/services/sidenav.service';
 import { TemplatePortal } from '@angular/cdk/portal';
 
 @Component({
-    selector: 'app-user-list',
-    templateUrl: './user-list.component.html',
-    styleUrls: ['./user-list.component.scss']
+  selector: 'app-item-list',
+  templateUrl: './item-list.component.html',
+  styleUrls: ['./item-list.component.scss']
 })
-export class UserListComponent implements OnInit {
+export class ItemListComponent implements OnInit {
 
     @Input() header="placeholder list header";
     @ViewChild('filterPanel', { static: true }) filterPanel?: TemplateRef<any>;
@@ -44,5 +44,6 @@ export class UserListComponent implements OnInit {
 
     ngOnInit(): void {
     }
+
 
 }

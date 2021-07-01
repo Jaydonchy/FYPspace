@@ -29,9 +29,11 @@
         <div class="">Sort by: </div>
     </div>
     <mat-action-list class="list_content">
-        <app-user-list-item (click)="itemSelect()" mat-list-item></app-user-list-item>
+        <app-student-item (click)="itemSelect()" mat-list-item></app-student-item>
+        <app-lecturer-item (click)="itemSelect()" mat-list-item></app-lecturer-item>
     </mat-action-list>
 </div>
+
 <ng-template #filterPanel>
     <app-list-filter-panel></app-list-filter-panel>
 </ng-template>

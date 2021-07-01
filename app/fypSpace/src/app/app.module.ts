@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule} from '@angular/router';
+import { RouterModule } from '@angular/router';
 //components
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './shared/navbar/nav-bar/nav-bar.component';
@@ -16,26 +16,28 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 //Angular Material
-import {MatCardModule} from '@angular/material/card'; 
-import {MatFormFieldModule} from '@angular/material/form-field'; 
-import {MatInputModule} from '@angular/material/input'; 
-import {MatButtonModule } from '@angular/material/button';
-import {MatSelectModule} from '@angular/material/select';
-import {MatListModule} from '@angular/material/list'; 
-import {MatIconModule} from '@angular/material/icon'; 
-import {MatChipsModule} from '@angular/material/chips'; 
-import {MatSidenavModule} from '@angular/material/sidenav'; 
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PortalModule } from '@angular/cdk/portal';
 //Additional packages
 //Pipes
 import { FilterPipePipe } from './pipes/filter-pipe.pipe';
-import { UserListItemComponent } from './shared/parts/user/user-list-item/user-list-item.component';
-import { UserListComponent } from './shared/parts/user/user-list/user-list.component';
+//Component
 import { SidenavComponent } from './shared/sidenav/sidenav.component';
 import { ListSortPanelComponent } from './shared/sidenav/list-sort-panel/list-sort-panel.component';
 import { ListFilterPanelComponent } from './shared/sidenav/list-filter-panel/list-filter-panel.component';
 import { SubmitBtnComponent } from './shared/submit-btn/submit-btn.component';
+import { ItemListComponent } from './shared/item-list/item-list.component';
+import { StudentItemComponent } from './pages/matching/parts/student-item/student-item.component';
+import { LecturerItemComponent } from './pages/matching/parts/lecturer-item/lecturer-item.component';
 
 
 
@@ -46,12 +48,13 @@ import { SubmitBtnComponent } from './shared/submit-btn/submit-btn.component';
         NavBarComponent,
         FooterComponent,
         FilterPipePipe,
-        UserListItemComponent,
-        UserListComponent,
         SidenavComponent,
         ListSortPanelComponent,
         ListFilterPanelComponent,
         SubmitBtnComponent,
+        ItemListComponent,
+        StudentItemComponent,
+        LecturerItemComponent,
     ],
     imports: [
         BrowserModule,
