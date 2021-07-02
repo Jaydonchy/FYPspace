@@ -4,13 +4,13 @@ const basicModel = require('../models/basicModel');
 
 //Methods
 
-const selectAllCampus = (req, res) => {
+const getAllCampus = (req, res) => {
     const promise = basicModel.selectAll('campus')
         .then(query => res.status(200).send(query))
         .catch(err => res.status(400).send({ message: `error in retrieving courses, ${err}` }));
 };
 
-const selectAllSchools = (req, res) => {
+const getAllSchools = (req, res) => {
     const promise = basicModel.selectAll('school')
         .then(query => res.status(200).send(query))
         .catch(err => res.status(400).send({ message: `error in retrieving courses, ${err}` }));
@@ -22,7 +22,7 @@ const login = (req, res) => {
         .catch(q => res.status(500).send({ message: ' error in login' }));
 }
 
-const selectSchoolById = (req, res) => {
+const getSchoolById = (req, res) => {
     const { id } = req.params;
     query = basicModel.selectOneById('school', id)
         .then(q => res.status(200).send(q))
@@ -31,8 +31,8 @@ const selectSchoolById = (req, res) => {
 
 //Exports
 module.exports = {
-    selectAllCampus,
-    selectAllSchools,
-    selectSchoolById,
+    getAllCampus,
+    getAllSchools,
+    getSchoolById,
     login,
 }

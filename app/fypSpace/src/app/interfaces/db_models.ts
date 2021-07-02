@@ -76,3 +76,29 @@ export interface lecturer {
     location_id: number,
     lect_field?: lect_field[] | null,
 }
+
+export interface lecturer_simple {
+    id: number,
+    name: string,
+}
+
+export interface assignment_field {
+    field_id: number,
+    field_name: string,
+}
+
+export interface assignment {
+    id: number,
+    student_id:number,
+    title:string,
+    description: string,
+    supervisor_id: lecturer_simple,
+    marker_id: lecturer_simple,
+    ppf: number,
+    psf: number,
+    ir: boolean,
+    final: boolean,
+    assignment_field: assignment_field[],
+    created_at?: Date,
+    deleted_at?:Date,
+}

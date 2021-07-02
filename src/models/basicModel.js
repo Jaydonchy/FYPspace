@@ -3,6 +3,7 @@ const db = require('../Helper/knex-connection');
 module.exports = {
     selectAll,
     selectOneById,
+    selectAllByField
 }
 
 async function selectAll(tablename) {
@@ -10,6 +11,13 @@ async function selectAll(tablename) {
         .select()
         .from(tablename)
         .orderBy('id', 'asc');
+    return res;
+}
+
+async function selectAllByField(tablename,fieldname) {
+    const res = await db
+    .select(fieldname)
+    .from(tablename)
     return res;
 }
 

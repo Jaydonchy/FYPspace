@@ -37,6 +37,30 @@ exports.seed = function (knex) {
                 department_id: 3,
                 location_id: 2
             },
+            {
+                user_id: 7,
+                position_id: 3,
+                is_pm: false,
+                is_admin: false,
+                department_id: 3,
+                location_id: 2
+            },
+            {
+                user_id: 8,
+                position_id: 3,
+                is_pm: false,
+                is_admin: false,
+                department_id: 3,
+                location_id: 2
+            },
+            {
+                user_id: 9,
+                position_id: 3,
+                is_pm: false,
+                is_admin: true,
+                department_id: 3,
+                location_id: 2
+            },
         ]);
     });
 };

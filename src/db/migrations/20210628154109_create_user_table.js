@@ -5,6 +5,7 @@ exports.up = function (knex) {
             table.string('name')
                 .notNullable();
             table.unique('name');
+            table.index('name');
         })
         .createTable('school', table => {
             table.increments('id');
@@ -44,6 +45,7 @@ exports.up = function (knex) {
             table.datetime('deleted_at')
                 .defaultTo('1970-01-01 00:00:00');
             table.unique('email_work');
+            table.index('school_id');
         });
 
 };

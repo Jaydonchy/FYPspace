@@ -56,6 +56,8 @@ exports.up = function (knex) {
                 .references('id')
                 .inTable('intake')
                 .onUpdate("CASCADE");
+            table.index('user_id');
+            table.unique('user_id');
         })
 };
 
@@ -65,6 +67,8 @@ exports.down = function (knex) {
             table.dropForeign('intake_id');
             table.dropForeign('course_id');
             table.dropForeign('user_id');
+            table.dropIndex('user_id');
+            table.dropUnique('user_id');
         })
         .dropTableIfExists('student')
         .dropTableIfExists('intake')

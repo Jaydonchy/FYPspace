@@ -32,7 +32,28 @@ exports.seed = function (knex) {
                     level_of_study: 3,
                     intake_id: 3,
                     course_id: 3,
-                }
+                },
+                {
+                    user_id: 10,
+                    tp_number: "TP024356",
+                    level_of_study: 3,
+                    intake_id: 3,
+                    course_id: 3,
+                },
+                {
+                    user_id: 11,
+                    tp_number: "TP0237656",
+                    level_of_study: 2,
+                    intake_id: 3,
+                    course_id: 3,
+                },
+                {
+                    user_id: 12,
+                    tp_number: "TP034456",
+                    level_of_study: 1,
+                    intake_id: 3,
+                    course_id: 3,
+                },
             ])
         })
 };

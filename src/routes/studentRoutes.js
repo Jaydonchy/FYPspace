@@ -1,9 +1,12 @@
 const router = require('express').Router();
 const studentController = require('../controllers/studentController');
 
-router.get("/courses", studentController.selectAllCourses);
-router.get("/intakes", studentController.selectAllIntakes);
-router.get("/study_level", studentController.selectAllStudyLevels);
+
+router.get("/list",studentController.getStudentList);
+router.get("/courses", studentController.getAllCourses);
+router.get("/intakes", studentController.getAllIntakes);
+router.get("/study_level", studentController.getAllStudyLevels);
+router.get('/item/all',studentController.getAllStudentItems);
 
 router.route("/register")
     .post(studentController.registerNewStudent);

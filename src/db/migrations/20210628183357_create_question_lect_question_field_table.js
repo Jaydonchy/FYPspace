@@ -6,14 +6,14 @@ exports.up = function (knex) {
                 .unsigned()
                 .notNullable()
                 .references('id')
-                .inTable('course')
+                .inTable('lecturer')
                 .onUpdate('CASCADE')
                 .onDelete('CASCADE');
             table.integer('field_id')
                 .unsigned()
                 .notNullable()
                 .references('id')
-                .inTable('course')
+                .inTable('lecturer')
                 .onUpdate('CASCADE')
                 .onDelete('CASCADE');
             table.index('lect_id');

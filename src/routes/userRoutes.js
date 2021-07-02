@@ -3,9 +3,9 @@ const router = require('express').Router();
 const userController = require("../controllers/userController");
 
 //Routes
-router.get('/schools',userController.selectAllSchools)
-router.get('/school/:id',userController.selectSchoolById)
-router.get('/campus',userController.selectAllCampus)
+router.get('/schools',userController.getAllSchools)
+router.get('/school/:id',userController.getSchoolById)
+router.get('/campus',userController.getAllCampus)
 router.post('/login',userController.login)
 
 
