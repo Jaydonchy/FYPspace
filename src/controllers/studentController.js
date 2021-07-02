@@ -3,25 +3,25 @@ const basicModel = require('../models/basicModel');
 const assignmentModel = require('../models/assignmentModel');
 
 const getAllCourses = (req, res) => {
-    const promise = basicModel.selectAll('course')
+    basicModel.selectAll('course')
         .then(query => res.status(200).send(query))
         .catch(err => res.status(400).send({ message: `error in retrieving courses, ${err}` }));
 }
 
 const getAllIntakes = (req, res) => {
-    const promise = basicModel.selectAll('intake')
-        .then(query => res.status(200).send(query))
+    basicModel.selectAll('intake')
+    .then(query => res.status(200).send(query))
         .catch(err => res.status(400).send({ message: `error in retrieving intakes : ${err}` }));
 }
 
 const getAllStudyLevels = (req, res) => {
-    const promise = basicModel.selectAll('study_level')
+    basicModel.selectAll('study_level')
         .then(query => res.status(200).send(query))
         .catch(err => res.status(400).send({ message: `error in retrieving Study level : ${err}` }));
 }
 
 const getStudentList = (req, res) => {
-    const promise = basicModel.selectAllByField('student', { id: 'id' })
+    basicModel.selectAllByField('student', { id: 'id' })
         .then(query => res.status(200).send(query))
         .catch(err => res.status(400).send({ message: `error in retrieving student list: ${err}` }))
 }
@@ -60,9 +60,9 @@ const registerNewStudent = (req, res) => {
             intake_id: intake_id.id,
         }
     }
-    const promise = studentModel.addNewStudent(student_user)
+    studentModel.addNewStudent(student_user)
         .then(
-            query_res => res.status(200).send({ message: 'Signup successful' })
+            res.status(200).send({ message: 'Signup successful' })
         )
         .catch(
             err => res.status(400).send({ message: `error in creating new student Error: ${err}` })
@@ -117,7 +117,7 @@ const getAllStudentItems = async (req, res) => {
     const studentUsers = getAllStudentUsers();
     //Promise : Get Assignment and Get Assignment_field
     const assignmentFields = getAllAssignmentWithField();
-    const studentItems = Promise.all([assignmentFields, studentUsers])
+    Promise.all([assignmentFields, studentUsers])
         .then(([assignmentFields, studentUsers]) => {
             //Group the assignment with student id
             return assignmentFields.map(assignment => {

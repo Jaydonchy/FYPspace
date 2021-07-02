@@ -12,7 +12,7 @@
     "author": "Jaydon Chong Hong Yong",
     "license": "ISC",
     "devDependencies": {
-        "eslint": "^7.24.0"
+        "eslint": "^7.29.0"
     },
     "dependencies": {
         "cors": "^2.8.5",

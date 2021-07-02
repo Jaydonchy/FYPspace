@@ -3,16 +3,15 @@ import { SidenavService } from 'src/app/services/sidenav.service';
 import { TemplatePortal } from '@angular/cdk/portal';
 
 @Component({
-  selector: 'app-item-list',
-  templateUrl: './item-list.component.html',
-  styleUrls: ['./item-list.component.scss']
+    selector: 'app-item-list',
+    templateUrl: './item-list.component.html',
+    styleUrls: ['./item-list.component.scss']
 })
 export class ItemListComponent implements OnInit {
-
-    @Input() header="placeholder list header";
+    @Input() header = "placeholder list header";
     @ViewChild('filterPanel', { static: true }) filterPanel?: TemplateRef<any>;
-    @ViewChild('sortPanel', { static: true }) sortPanel?: TemplateRef<any>; 
-    searchString="";
+    @ViewChild('sortPanel', { static: true }) sortPanel?: TemplateRef<any>;
+    searchString = "";
 
     constructor(
         public sideNavService: SidenavService,
@@ -26,20 +25,20 @@ export class ItemListComponent implements OnInit {
         this.sideNavService.open(portal);
     }
 
-    itemSelect(){
+    itemSelect() {
         console.log("itemSelected");
     }
 
     sort() {
         this.sideNavService.title = "Sort";
         this.sideNavService.icon = "sort";
-        return this.sortPanel != undefined ? this.openSideNav(this.sortPanel):null;
+        return this.sortPanel != undefined ? this.openSideNav(this.sortPanel) : null;
     }
 
     filter() {
         this.sideNavService.title = "Filter";
         this.sideNavService.icon = "filter_alt";
-        return this.filterPanel != undefined ? this.openSideNav(this.filterPanel):null;
+        return this.filterPanel != undefined ? this.openSideNav(this.filterPanel) : null;
     }
 
     ngOnInit(): void {
