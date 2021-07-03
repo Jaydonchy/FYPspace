@@ -6,7 +6,6 @@ module.exports = {
 }
 
 
-
 async function addNewStudent({ user, student }) {
 
     const [user_id] = await db('user').insert(user);

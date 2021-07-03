@@ -23,7 +23,7 @@ async function selectAllAssignmentFields() {
 
 async function selectAllSupervisoryLoad() {
     const res = await db.select('supervisor_id')
-        .count('supervisor_id as load_count')
+        .count('supervisor_id as sv_load')
         .from('assignment')
         .groupBy('supervisor_id');
     return res;
@@ -31,7 +31,7 @@ async function selectAllSupervisoryLoad() {
 
 async function selectAllMarkerLoad() {
     const res = await db.select('marker_id')
-        .count('marker_id as load_count')
+        .count('marker_id as m_load')
         .from('assignment')
         .groupBy('marker_id');
     return res;

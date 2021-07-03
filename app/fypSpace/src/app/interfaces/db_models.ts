@@ -30,7 +30,7 @@ export interface intake {
 }
 
 export interface user {
-    id: number,
+    user_id: number,
     fullname: string,
     email_work: string,
     email_personal: string,
@@ -59,7 +59,7 @@ export interface lect_field {
 
 export interface student {
     tp_number: string,
-    id: number,
+    student_id: number,
     level_of_study: number,
     course_id: number,
     intake_id: number,
@@ -67,7 +67,7 @@ export interface student {
 }
 
 export interface lecturer {
-    id: number,
+    lecturer_id: number,
     availability: boolean,
     is_pm: boolean,
     is_admin: boolean,

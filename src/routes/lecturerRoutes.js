@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const lecturerController = require('../controllers/lecturerController');
 
-router.get('/supervisor/load', lecturerController.getAllSupervisoryLoad);
-router.get('/marker/load', lecturerController.getAllMarkerLoad);
+
+router.get('/item/all', lecturerController.getAllLecturerItems);
+router.get('/load/all', lecturerController.groupLecturerLoad);
 
 module.exports = router;
