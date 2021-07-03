@@ -30,22 +30,13 @@ $badge-font: 15px;
     .lists_container {
         display: flex;
         justify-content: space-between;
-
-        .first-child {
-            margin-right: 1vw;
-        }
+        // .first-child {
+        //     margin-right: 1vw;
+        // }
         .list_wrapper {
-            width: 100%;
+            width:49%;
+            max-width: 49%;
             background-color: white;
-            // width:40vw;
-            .list {
-                border: 1px solid black;
-                height: 100%;
-                background: lightblue;
-                .list_item {
-                    border: 1px solid black;
-                }
-            }
         }
     }
     .action_bar {
@@ -56,12 +47,9 @@ $badge-font: 15px;
             margin-left: 10px;
         }
         .cancel_btn {
-            background-color: $warn_color;
             color: $warn_text;
         }
         .match_btn {
-            background-color: $secondary_color_darker;
-            color: $secondary_text_darker;
             padding: 5px 20px;
         }
     }
@@ -73,14 +61,24 @@ $badge-font: 15px;
     justify-content: space-between;
     border-bottom: 1px solid grey;
     // background-color:$secondary_color_lighter;
+    &.selected{
+        background-color:$grey_color;
+        position:sticky;
+        top:0;
+    }
     .user_profile {
+        width:80%;
         .user_name {
-            font-size: 25px;
+            font-size: 20px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .user_position {
             .badge_wrapper {
                 .badge {
                     padding: 5px;
                     margin-left: 5px;
-                    font-size: 45%;
                     &.pm {
                         background-color: rgba(86, 179, 230, 0.782);
                     }
@@ -90,10 +88,8 @@ $badge-font: 15px;
                 }
             }
         }
-        .user_topic {
-            font-size: 20px;
-        }
         .user_specialization {
+            display: flex;
             margin: 5px 0;
         }
         .user_intake {
@@ -113,10 +109,10 @@ $badge-font: 15px;
                 &.location {
                     background-color: rgb(225, 189, 97);
                 }
-                &.course{
+                &.course {
                     background-color: rgb(239, 170, 104);
                 }
-                &.intake{
+                &.intake {
                     background-color: rgb(107, 197, 228);
                 }
             }
@@ -144,11 +140,18 @@ $badge-font: 15px;
         mat-icon {
             margin-left: 1vw;
             font-size: $util-size;
-        }
-        mat-icon,
-        .circleNumber {
-            &:hover {
-                color: green;
+            color: $dark_grey_color;
+            &.secondary {
+                color: $secondary_color_darker;
+            }
+            &.stateless {
+                color: $black_color;
+            }
+            &.green {
+                color: rgb(8, 99, 8);
+            }
+            &.red {
+                color: $warn_color;
             }
         }
     }

@@ -21,8 +21,7 @@ export class RegisterComponent implements OnInit {
         private _student: StudentService,
         private route: ActivatedRoute,
         private router: Router,
-    ) {
-    }
+    ) {}
 
     formSubmitting = false;
     intakes$?: Observable<intake[]>;

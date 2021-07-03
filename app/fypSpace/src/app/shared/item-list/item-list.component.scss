@@ -1,60 +1,61 @@
 @import "../../styles/variables";
-.list_container{
-    width:100%;
-    .list_header{
-        font-size:20px;
+.list_container {
+    width: 100%;
+    .list_toolbar {
+        background-color: $primary_color;
         padding: 1vh 1vw;
-    }
-    .list_toolbar{
-        background-color:$primary_color;
-        padding:1vh 1vw;
-        display:flex;
-        justify-content:space-between;
-        .selected_item{
-            align-self:center;
-            color:$primary_text;
+        display: flex;
+        justify-content: space-between;
+        .list_header {
+            align-self: center;
+            font-size: 20px;
+            color: $primary_text;
+            padding: 1vh 1vw;
         }
-        .list_config{
-            display:flex;
+        .list_config {
+            display: flex;
             vertical-align: center;
-            .search{
-                border-radius:5%;
-                mat-form-field{
-                    max-width:75%;
-                    float:right;
-                }
-                .searchbar_icon{
-                    font-size:150%;
-                    color:$primary_text;
+            .search {
+                border-radius: 5%;
+                mat-form-field {
+                    max-width: 75%;
+                    float: right;
                 }
             }
-            .icon_wrapper{
-                color:$primary_text_darker;
-                padding:1vh 1v 0 1vw;
-                margin-left:1vw;
-                vertical-align:middle; 
-                .icon{
-                    font-size:25px;
-                    &:hover{
-                        color:$secondary_color;
-                        cursor:pointer;
+            .filter_sort_wrapper {
+                display: flex;
+                flex-direction: column;
+                .searchbar_icon {
+                    font-size: 100%;
+                    color: $primary_text;
+                }
+            }
+            .icon_wrapper {
+                color: $primary_text_darker;
+                padding: 1vh 1v 0 1vw;
+                margin-left: 1vw;
+                vertical-align: middle;
+                .icon {
+                    font-size: 25px;
+                    &:hover {
+                        color: $secondary_color;
+                        cursor: pointer;
                     }
                 }
             }
         }
     }
-    .list_util{
-        display:flex;
-        justify-content:space-between;
-        padding:1vh 1vw;
-        background-color:$primary_color_lighter;
+    .list_util {
+        display: flex;
+        justify-content: space-between;
+        padding: 1vh 1vw;
+        background-color: $primary_color_lighter;
     }
-    .list_content{
-        overflow-y:overlay;
-        padding-top:0;
-        height:50vh;
-        background-color:$grey_color;
-        max-height:50vh;
+    .list_content {
+        overflow-y: overlay;
+        padding-top: 0;
+        height: 50vh;
+        background-color: $grey_color;
+        max-height: 50vh;
     }
 }
-

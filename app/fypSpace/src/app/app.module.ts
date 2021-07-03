@@ -15,6 +15,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 //Angular Material
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -26,6 +27,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {MatTooltipModule} from '@angular/material/tooltip'; 
 import { PortalModule } from '@angular/cdk/portal';
 //Additional packages
 //Pipes
@@ -68,6 +70,7 @@ import { LecturerItemComponent } from './pages/matching/parts/lecturer-item/lect
         BsDropdownModule.forRoot(),
         AccordionModule.forRoot(),
         ButtonsModule.forRoot(),
+        TooltipModule.forRoot(),
         MatCardModule,
         MatFormFieldModule,
         MatInputModule,
@@ -78,6 +81,7 @@ import { LecturerItemComponent } from './pages/matching/parts/lecturer-item/lect
         MatChipsModule,
         MatSidenavModule,
         MatProgressSpinnerModule,
+        MatTooltipModule,
         PortalModule,
     ],
     providers: [],

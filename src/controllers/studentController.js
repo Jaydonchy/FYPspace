@@ -10,7 +10,7 @@ const getAllCourses = (req, res) => {
 
 const getAllIntakes = (req, res) => {
     basicModel.selectAll('intake')
-    .then(query => res.status(200).send(query))
+        .then(query => res.status(200).send(query))
         .catch(err => res.status(400).send({ message: `error in retrieving intakes : ${err}` }));
 }
 
@@ -119,15 +119,17 @@ const getAllStudentItems = async (req, res) => {
     const assignmentFields = getAllAssignmentWithField();
     Promise.all([assignmentFields, studentUsers])
         .then(([assignmentFields, studentUsers]) => {
-            //Group the assignment with student id
-            return assignmentFields.map(assignment => {
-                const { user, student } = studentUsers.find(studentUser => studentUser.id == assignmentFields.student_id)
-                return {
-                    user: user,
-                    student: student,
-                    assignment: assignment,
+            //Attach the assignment with student id
+            assignmentFields.forEach((assignment) => {
+                studentUsers.forEach(studentUser => {
+                    if (studentUser.student.student_id == assignment.student_id) {
+                        studentUser.assignment = assignment;
+                        return;
+                    }
                 }
+                )
             })
+            return studentUsers;
         })
         .then(items => res.status(200).send(items))
         .catch(err => res.status(500).send({ message: err }));
@@ -178,8 +180,8 @@ const restructureStudentUser = ({
 }) => {
     return {
         user: {
-            id: user_id,
-            fullaname: fullname,
+            user_id: user_id,
+            fullname: fullname,
             email_work: email_work,
             email_personal: email_personal,
             contact_no: contact_no,
@@ -188,12 +190,13 @@ const restructureStudentUser = ({
             is_full_time: is_full_time,
         },
         student: {
-            id: student_id,
+            student_id: student_id,
             tp_number: tp_number,
             level_of_study: level_of_study,
             course_id: course_id,
             intake_id: intake_id,
-        }
+        },
+        assignment: {}
     }
 }
 

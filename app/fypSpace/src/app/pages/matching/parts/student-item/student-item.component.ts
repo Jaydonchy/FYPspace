@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { StudentService } from 'src/app/services/student.service';
 import { UserService } from 'src/app/services/user.service';
-import { student_item } from '../../../../interfaces/matching';
+import { student_item } from '../../../../interfaces/list';
 
 @Component({
     selector: 'app-student-item',
@@ -11,12 +11,14 @@ import { student_item } from '../../../../interfaces/matching';
 export class StudentItemComponent implements OnInit {
 
     @Input() item!: student_item;
+    @Input() isSelected = false;
+
     constructor(
         public _student: StudentService,
         public _user: UserService,
     ) { }
+
     ngOnInit(): void {
     }
-
 
 }

@@ -1,33 +1,43 @@
-<div class="page_header">
+<!-- <div class="page_header">
     <span class="header">
         Match
     </span>
-    <!-- Put explanation here -->
     <span class="sub_header">
         Match student with their supervisor and 2nd supervisor
     </span>
-</div>
-
-
+</div> -->
 <div class="workspace mat-elevation-z5">
     <div class="lists_container ">
         <div class="list_wrapper first-child">
             <app-item-list [header]="'Student'">
-                <div *ngFor="let student of this.studentItems" (click)="selectStudent(student)">
-                    <app-student-item [item]="student"></app-student-item>
+                <div *ngIf="this.studentItems$ | async as studentItems">
+                    <div *ngFor="let student of studentItems" (click)="selectStudent(student)">
+                        <app-student-item [isSelected]="student.user.user_id == this._matching.selectedStudent?.user?.user_id" [item]="student"></app-student-item>
+                    </div>
                 </div>
             </app-item-list>
         </div>
         <div class="list_wrapper">
-            <app-item-list [header]="'Lecturer'">
-                <div *ngFor="let lecturer of this.lecturerItems" (click)="selectLecturer(lecturer)">
-                    <app-lecturer-item [item]="lecturer"></app-lecturer-item>
+            <app-item-list  [header]="'Lecturer'">
+                <div *ngIf="this.lecturerItems$ | async as lecturerItems">
+                    <div *ngFor="let lecturer of lecturerItems" (click)="selectLecturer(lecturer)">
+                        <app-lecturer-item [isSelected]="lecturer.user.user_id == this._matching.selectedLecturer?.user?.user_id" [item]="lecturer"></app-lecturer-item>
+                    </div>
                 </div>
             </app-item-list>
         </div>
     </div>
     <div class="action_bar">
-        <button mat-raised-button class="match_btn action_btn">Match</button>
-        <button mat-raised-button class="cancel_btn action_btn">Cancel</button>
+        <button mat-raised-button color="accent" [disabled]="!showSupervisorBtn" class="match_btn action_btn">Assign
+            Supervisor
+        </button>
+        <button mat-raised-button color="accent" [disabled]="!showMarkerBtn" class="match_btn action_btn">Assign 2nd
+            Marker
+        </button>
+        <button mat-raised-button color="warn" [disabled]="!showCancelBtn" class="cancel_btn action_btn"
+            (click)="cancelSelection()">
+            Cancel
+        </button>
+        <span class="action_warning"></span>
     </div>
 </div>

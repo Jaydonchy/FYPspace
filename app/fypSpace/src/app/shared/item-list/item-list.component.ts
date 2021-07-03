@@ -25,10 +25,6 @@ export class ItemListComponent implements OnInit {
         this.sideNavService.open(portal);
     }
 
-    itemSelect() {
-        console.log("itemSelected");
-    }
-
     sort() {
         this.sideNavService.title = "Sort";
         this.sideNavService.icon = "sort";

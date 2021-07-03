@@ -27,7 +27,8 @@ exports.seed = function (knex) {
                 is_pm: false,
                 is_admin: false,
                 department_id: 2,
-                location_id: 2
+                location_id: 2,
+                availability: false,
             },
             {
                 user_id: 6,
@@ -43,11 +44,12 @@ exports.seed = function (knex) {
                 is_pm: false,
                 is_admin: false,
                 department_id: 3,
-                location_id: 2
+                location_id: 2,
+                availability: false,
             },
             {
                 user_id: 8,
-                position_id: 3,
+                position_id: 5,
                 is_pm: false,
                 is_admin: false,
                 department_id: 3,

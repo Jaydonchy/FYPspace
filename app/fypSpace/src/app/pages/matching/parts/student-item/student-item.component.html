@@ -1,35 +1,44 @@
 <!-- Student -->
-<mat-card class="item_container mat-elevation-z2">
+<mat-card *ngIf="item != undefined" (click)="isSelected = !isSelected" [ngClass]="{'selected':isSelected}"class="item_container mat-elevation-z2">
     <div class="user_profile">
         <div class="user_name"> {{this.item.user.fullname}} </div>
-        <div class="user_topic "> Example Topic </div>
+        <div class="user_topic"> 
+            {{this.item.assignment?.title || "No Title given"}}
+        </div>
+        <div class="user_specialization">
+            <mat-chip-list *ngFor="let field of item.assignment?.assignment_fields">
+                <mat-chip>{{field.field_name}}</mat-chip>
+            </mat-chip-list>
+        </div>
         <div class="user_intake">
             <span class="school badge">
-                {{this._user.getSchoolNameById(this.item.user.school_id)}}
+                {{this._user.getSchoolNameById(item.user.school_id)}}
             </span>
             <span class="campus badge">
-                {{this._user.getCampusNameById(this.item.user.campus_id)}}
+                {{this._user.getCampusNameById(item.user.campus_id)}}
             </span>
             <span class="intake badge">
-                {{this._student.getIntakeById(this.item.student.intake_id)}}
+                {{this._student.getIntakeById(item.student.intake_id)}}
             </span>
             <span class="course badge">
-                {{this._student.getCourseById(this.item.student.course_id)}}
+                {{this._student.getCourseById(item.student.course_id)}}
             </span>
         </div>
     </div>
     <div class="item_util">
         <!-- Supervisor -->
-        <mat-icon>person</mat-icon>
+        <mat-icon class="cursor" placement="top" matTooltip="supervisor" [ngClass]="(this.item.assignment?.supervisor_id != undefined || this.item.assignment?.supervisor_id != null)?'secondary pointable': 'default'">
+            person
+        </mat-icon>
         <!-- Second Supervisor -->
-        <mat-icon>people</mat-icon>
+        <mat-icon class="cursor" matTooltip="2nd marker" [ngClass]="(this.item.assignment?.marker_id != undefined || this.item.assignment?.marker_id != null)?'secondary pointable': 'default'">people</mat-icon>
         <!-- View Profile -->
-        <mat-icon>account_circle</mat-icon>
+        <mat-icon class="cursor pointable stateless" matTooltip="View Profile">account_circle</mat-icon>
         <!-- Top 5 Supervisor -->
-        <mat-icon>filter_5</mat-icon>
+        <mat-icon class="cursor stateless" matTooltip="Top 5 lecturer">filter_5</mat-icon>
         <!-- MORE DETAILS -->
-        <mat-icon>wysiwyg</mat-icon>
+        <mat-icon class="cursor pointable stateless" matTooltip="View PPF">wysiwyg</mat-icon>
         <!-- Message -->
-        <mat-icon>message</mat-icon>
+        <mat-icon class="cursor pointable stateless" matTooltip="Message">message</mat-icon>
     </div>
 </mat-card>

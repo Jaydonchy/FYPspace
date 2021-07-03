@@ -1,17 +1,18 @@
-<mat-card class="item_container mat-elevation-z4">
+<mat-card *ngIf="item != undefined"  (click)="isSelected = !isSelected" [ngClass]="{'selected':isSelected}" class="item_container mat-elevation-z4">
     <div class="user_profile">
         <div class="user_name">
-            Example Lecturer
+            {{item.user.fullname}}
+        </div>
+        <div class="user_position">
+            {{this._lecturer.getPositionById(this.item.lecturer.position_id)}}
             <span class="badge_wrapper">
                 <span class="badge pm" *ngIf="this.item.lecturer.is_pm"> PM </span>
                 <span class="badge admin" *ngIf="this.item.lecturer.is_admin"> Admin </span>
             </span>
-        </div> 
+        </div>
         <div class="user_specialization">
-            <mat-chip-list>
-                <mat-chip>Software Engineering</mat-chip>
-                <mat-chip>Cyber Security</mat-chip>
-                <mat-chip>...</mat-chip>
+            <mat-chip-list *ngFor="let field of item.lect_field">
+                <mat-chip>{{field.field_name}}</mat-chip>
             </mat-chip-list>
         </div>
         <div class="user_intake">
@@ -22,20 +23,25 @@
             <span class="campus badge">
                 {{this._user.getCampusNameById(this.item.user.campus_id)}}
             </span>
-            <span class="department badge"> Location </span>
-            <span class="location badge"> Department </span>
+            <span class="department badge">
+                {{this._lecturer.getDepartmentById(this.item.lecturer.department_id)}}
+            </span>
+            <span class="location badge">
+                {{this._lecturer.getLocationById(this.item.lecturer.location_id)}}
+            </span>
         </div>
     </div>
     <div class="item_util">
-        <div class="circleNumber supervisor">5</div>
-        <div class="circleNumber marker">3</div>
+        <div class="circleNumber cursor default supervisor" matTooltip="supervisory load">{{item.supervisor_load}}</div>
+        <div class="circleNumber cursor default marker" matTooltip="marker load">{{item.marker_load}}</div>
         <!-- View Profile -->
-        <mat-icon>account_circle</mat-icon>
+        <mat-icon class="stateless cursor pointable" matTooltip="view user">account_circle</mat-icon>
         <!-- Unanswered Question -->
-        <mat-icon>help_center</mat-icon>
+        <mat-icon class="cursor default" matTooltip="view questions">help_center</mat-icon>
         <!-- Availability -->
-        <mat-icon>check</mat-icon>
+        <mat-icon *ngIf="item.lecturer.availability" matTooltip="available" class="green cursor pointable">done</mat-icon>
+        <mat-icon *ngIf="!item.lecturer.availability" matTooltip="unavailable" class="red cursor pointable">close</mat-icon>
         <!-- Message -->
-        <mat-icon>message</mat-icon>
+        <mat-icon class="stateless cursor pointable" matTooltip="Message">message</mat-icon>
     </div>
 </mat-card>

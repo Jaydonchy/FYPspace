@@ -3,8 +3,6 @@ const db = require('../Helper/knex-connection');
 module.exports = {
     selectAllAssignments,
     selectAllAssignmentFields,
-    selectAllSupervisoryLoad,
-    selectAllMarkerLoad,
 };
 
 async function selectAllAssignments() {
@@ -21,18 +19,3 @@ async function selectAllAssignmentFields() {
     return res;
 }
 
-async function selectAllSupervisoryLoad() {
-    const res = await db.select('supervisor_id')
-        .count('supervisor_id as sv_load')
-        .from('assignment')
-        .groupBy('supervisor_id');
-    return res;
-}
-
-async function selectAllMarkerLoad() {
-    const res = await db.select('marker_id')
-        .count('marker_id as m_load')
-        .from('assignment')
-        .groupBy('marker_id');
-    return res;
-}
