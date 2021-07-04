@@ -7,6 +7,7 @@ router.get("/courses", studentController.getAllCourses);
 router.get("/intakes", studentController.getAllIntakes);
 router.get("/study_level", studentController.getAllStudyLevels);
 router.get('/item/all',studentController.getAllStudentItems);
+router.get('/proposed/:id',studentController.getProposedLecturerByStudent);
 
 router.route("/register")
     .post(studentController.registerNewStudent);

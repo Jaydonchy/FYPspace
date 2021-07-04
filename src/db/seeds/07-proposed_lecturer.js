@@ -13,19 +13,49 @@ exports.seed = function (knex) {
             return knex('proposed_lecturer').insert([
                 {
                     student_id: 1,
-                    lect_one: 1,
-                    lect_two: 2,
-                    lect_three:3,
+                    lecturer_id: 2,
+                    priority: 1
                 },
                 {
-                    student_id: 2
+                    student_id: 1,
+                    lecturer_id: 1,
+                    priority: 2
+                },
+                {
+                    student_id: 1,
+                    lecturer_id: 3,
+                    priority: 3
+                },
+                {
+                    student_id: 1,
+                    lecturer_id: 4,
+                    priority: 4
+                },
+                {
+                    student_id: 1,
+                    lecturer_id: 1,
+                    priority: 5
+                },
+                {
+                    student_id: 2,
+                    lecturer_id: 3,
+                    priority: 2
                 },
                 {
                     student_id: 3,
-                    lect_one: 2,
-                    lect_three: 1,
-                    lect_two: 3,
-                }
+                    lecturer_id: 4,
+                    priority: 1
+                },
+                {
+                    student_id: 2,
+                    lecturer_id: 3,
+                    priority: 1
+                },
+                {
+                    student_id: 5,
+                    lecturer_id: 3,
+                    priority: 1
+                },
             ]);
         });
 };

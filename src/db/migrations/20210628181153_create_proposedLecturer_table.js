@@ -1,4 +1,3 @@
-let lects = ["lect_one","lect_two","lect_three","lect_four","lect_five"];
 exports.up = function (knex) {
     return knex.schema
         .createTable('proposed_lecturer', table => {
@@ -9,16 +8,16 @@ exports.up = function (knex) {
                 .inTable('student')
                 .onUpdate('CASCADE')
                 .onDelete('CASCADE');
-            lects.map(lect=>{
-                table.integer(lect)
+            table.integer('lecturer_id')
                 .unsigned()
-                .defaultTo(null)
+                .notNullable()
                 .references('id')
                 .inTable('lecturer')
                 .onUpdate('CASCADE')
                 .onDelete('CASCADE');
-            });
-            table.unique('student_id');
+            table.integer('priority')
+                .unsigned()
+                .notNullable()
             table.index('student_id');
         });
 
@@ -26,8 +25,9 @@ exports.up = function (knex) {
 
 exports.down = function (knex) {
     return knex.schema
-    .table('proposed_lecturer',table=>{
-        lects.map(lect=> table.dropForeign(lect));
-    })
-    .dropTableIfExists('proposed_lecturer');
+        .table('proposed_lecturer', table => {
+            table.dropForeign('lecturer_id')
+            table.dropForeign('student_id')
+        })
+        .dropTableIfExists('proposed_lecturer');
 };

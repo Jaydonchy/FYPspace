@@ -28,15 +28,25 @@
         </div>
     </div>
     <div class="action_bar">
-        <button mat-raised-button color="accent" [disabled]="!showSupervisorBtn" class="match_btn action_btn">Assign
-            Supervisor
+        <button mat-raised-button color="accent" [disabled]="!showSupervisorBtn" class="match_btn action_btn" 
+        (click)="assignmentSubmit(true)">
+            Assign Supervisor
         </button>
-        <button mat-raised-button color="accent" [disabled]="!showMarkerBtn" class="match_btn action_btn">Assign 2nd
-            Marker
+        <button mat-raised-button color="accent" [disabled]="!showMarkerBtn" class="match_btn action_btn"
+        (click)="assignmentSubmit(false)">
+            Assign 2nd Marker
+        </button>
+        <button mat-raised-button color="accent" [disabled]="!showDeAssignMarker" class="match_btn action_btn"
+        (click)="assignmentSubmit(false,true)">
+            DeAssign 2nd Marker
+        </button>
+        <button mat-raised-button color="accent" [disabled]="!showDeAssignSupervisor" class="match_btn action_btn"
+        (click)="assignmentSubmit(true,true)">
+            DeAssign Supervisor
         </button>
         <button mat-raised-button color="warn" [disabled]="!showCancelBtn" class="cancel_btn action_btn"
             (click)="cancelSelection()">
-            Cancel
+            Cancel Selection
         </button>
         <span class="action_warning"></span>
     </div>

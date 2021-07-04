@@ -1,6 +1,7 @@
 const studentModel = require('../models/studentModel');
 const basicModel = require('../models/basicModel');
 const assignmentModel = require('../models/assignmentModel');
+const { query } = require('express');
 
 const getAllCourses = (req, res) => {
     basicModel.selectAll('course')
@@ -61,8 +62,8 @@ const registerNewStudent = (req, res) => {
         }
     }
     studentModel.addNewStudent(student_user)
-        .then(
-            res.status(200).send({ message: 'Signup successful' })
+        .then(query =>
+            res.status(200).send({ message: 'success', res: query })
         )
         .catch(
             err => res.status(400).send({ message: `error in creating new student Error: ${err}` })
@@ -200,6 +201,13 @@ const restructureStudentUser = ({
     }
 }
 
+const getProposedLecturerByStudent = async (req, res) =>{
+    const { id } = req.params;
+    studentModel.selectProposedLecturerById(id)
+        .then(query => res.status(200).send(query))
+        .catch(err => res.status(200).send({ message: err }));
+}
+
 module.exports = {
     getAllCourses,
     getAllIntakes,
@@ -207,4 +215,5 @@ module.exports = {
     registerNewStudent,
     getStudentList,
     getAllStudentItems,
+    getProposedLecturerByStudent,
 }

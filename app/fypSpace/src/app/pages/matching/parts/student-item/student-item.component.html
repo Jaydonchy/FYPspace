@@ -27,17 +27,17 @@
     </div>
     <div class="item_util">
         <!-- Supervisor -->
-        <mat-icon class="cursor" placement="top" matTooltip="supervisor" [ngClass]="(this.item.assignment?.supervisor_id != undefined || this.item.assignment?.supervisor_id != null)?'secondary pointable': 'default'">
+        <mat-icon class="cursor" placement="top"  [matTooltip]="supervisor_name" [ngClass]="(this.item.assignment?.supervisor_id != undefined || this.item.assignment?.supervisor_id != null)?'secondary pointable': 'default'">
             person
         </mat-icon>
         <!-- Second Supervisor -->
-        <mat-icon class="cursor" matTooltip="2nd marker" [ngClass]="(this.item.assignment?.marker_id != undefined || this.item.assignment?.marker_id != null)?'secondary pointable': 'default'">people</mat-icon>
+        <mat-icon class="cursor" [matTooltip]="marker_name" [ngClass]="(this.item.assignment?.marker_id != undefined || this.item.assignment?.marker_id != null)?'secondary pointable': 'default'">people</mat-icon>
         <!-- View Profile -->
         <mat-icon class="cursor pointable stateless" matTooltip="View Profile">account_circle</mat-icon>
         <!-- Top 5 Supervisor -->
-        <mat-icon class="cursor stateless" matTooltip="Top 5 lecturer">filter_5</mat-icon>
+        <mat-icon class="cursor" [ngClass]="this.proposed_lecturer != 'No proposed lecturer'?'stateless':''" [matTooltipClass]="'newline'" [matTooltip]="this.proposed_lecturer">filter_5</mat-icon>
         <!-- MORE DETAILS -->
-        <mat-icon class="cursor pointable stateless" matTooltip="View PPF">wysiwyg</mat-icon>
+        <mat-icon class="cursor pointable stateless" [matTooltip]="this.sypnopsis">wysiwyg</mat-icon>
         <!-- Message -->
         <mat-icon class="cursor pointable stateless" matTooltip="Message">message</mat-icon>
     </div>

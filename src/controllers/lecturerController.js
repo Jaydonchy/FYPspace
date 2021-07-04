@@ -14,10 +14,10 @@ const getAllLocation = async (req, res) => {
         .catch(err => res.status(500).send({ message: err }));
 }
 
-const getAllPosition = async (req,res) => {
+const getAllPosition = async (req, res) => {
     return await basicModel.selectAll('position')
-    .then(query => res.status(200).send(query))
-    .catch(err => res.status(500).send({ message: err }));
+        .then(query => res.status(200).send(query))
+        .catch(err => res.status(500).send({ message: err }));
 }
 
 const getAllLecturerUser = async () => {
@@ -29,6 +29,13 @@ const getAllLecturerUser = async () => {
         })
         .catch(err => console.log(`getLecturerUser: ${err}`))
 
+}
+
+const getLecturerNameById = async (req, res) => {
+    const { id } = req.params;
+    return await lecturerModel.selectSimpleLecturerById(id)
+        .then(query => res.status(200).send(query[0]))
+        .catch(err => res.status(500).send({ message: `lecturer not found :${err}` }))
 }
 
 const getAllLecturerItems = async (req, res) => {
@@ -111,4 +118,5 @@ module.exports = {
     getAllDepartment,
     getAllLocation,
     getAllPosition,
+    getLecturerNameById,
 }

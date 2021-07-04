@@ -49,7 +49,7 @@ exports.seed = function (knex) {
             },
             {
                 user_id: 8,
-                position_id: 5,
+                position_id: 4,
                 is_pm: false,
                 is_admin: false,
                 department_id: 3,

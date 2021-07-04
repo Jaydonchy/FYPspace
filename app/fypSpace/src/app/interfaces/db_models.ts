@@ -45,11 +45,9 @@ export interface user {
 }
 
 export interface proposed_lecturer {
-    lect_one: number | null,
-    lect_two: number | null,
-    lect_three: number | null,
-    lect_four: number | null,
-    lect_five: number | null,
+   lecturer_id: number,
+   lecturer_name: number,
+   priority: number
 }
 
 export interface department {
@@ -78,7 +76,6 @@ export interface student {
     level_of_study: number,
     course_id: number,
     intake_id: number,
-    proposed_lecturer?: proposed_lecturer[] | null,
 }
 
 export interface lecturer {
@@ -94,7 +91,7 @@ export interface lecturer {
 
 export interface lecturer_simple {
     id: number,
-    name: string,
+    fullname: string,
 }
 
 export interface assignment_field {
@@ -107,8 +104,8 @@ export interface assignment {
     student_id: number,
     title: string,
     description: string,
-    supervisor_id: lecturer_simple,
-    marker_id: lecturer_simple,
+    supervisor_id: number,
+    marker_id: number,
     ppf: number,
     psf: number,
     ir: boolean,

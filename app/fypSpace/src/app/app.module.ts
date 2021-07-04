@@ -27,7 +27,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import {MatTooltipModule} from '@angular/material/tooltip'; 
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { PortalModule } from '@angular/cdk/portal';
 //Additional packages
 //Pipes
@@ -82,6 +83,7 @@ import { LecturerItemComponent } from './pages/matching/parts/lecturer-item/lect
         MatSidenavModule,
         MatProgressSpinnerModule,
         MatTooltipModule,
+        MatSnackBarModule,
         PortalModule,
     ],
     providers: [],

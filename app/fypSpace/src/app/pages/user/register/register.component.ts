@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { StudentService } from 'src/app/services/student.service';
@@ -21,7 +22,8 @@ export class RegisterComponent implements OnInit {
         private _student: StudentService,
         private route: ActivatedRoute,
         private router: Router,
-    ) {}
+        private _snackbar: MatSnackBar,
+    ) { }
 
     formSubmitting = false;
     intakes$?: Observable<intake[]>;
@@ -84,11 +86,20 @@ export class RegisterComponent implements OnInit {
             this._api.doPost('/student/register', this.register_form.value).then(
                 res => res.subscribe({
                     next: res => {
-                        console.log('Signup Successful');
-                        this.formSubmitting = false;
+                        this._snackbar.open('Registration ', 'Successful!', {
+                            duration: 2500,
+                            horizontalPosition: 'center',
+                            verticalPosition: 'top'
+                        })
                         this.router.navigate(['..', 'login'], { relativeTo: this.route });
                     },
                     error: err => {
+                        this._snackbar.open('Registration ', 'Unsuccessful!', {
+                            duration: 2500,
+                            horizontalPosition: 'center',
+                            verticalPosition: 'top'
+                        })
+                        this.formSubmitting =false;
                         console.log(err);
                     }
 

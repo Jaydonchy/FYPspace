@@ -1,6 +1,6 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Injectable } from '@angular/core';
-import { department, position, location } from '../interfaces/db_models';
+import { department, position, location, lecturer_simple } from '../interfaces/db_models';
 import { BackendService } from './backend.service';
 
 @Injectable({
@@ -65,6 +65,7 @@ export class LecturerService {
             position.id == id
         )!.name : 'Loading';
     }
+
 
     getDepartments = async () => {
         return await this._api.doGet<department[]>('/lecturer/departments');

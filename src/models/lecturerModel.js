@@ -4,6 +4,7 @@ module.exports = {
     selectAllLecturerUser,
     selectAllLecturerLoad,
     selectAllLecturerFields,
+    selectSimpleLecturerById,
 }
 
 async function selectAllLecturerUser() {
@@ -29,6 +30,20 @@ async function selectAllLecturerUser() {
         .from('lecturer')
         .innerJoin('user', 'lecturer.user_id', 'user.id')
     return res;
+}
+
+async function selectSimpleLecturerById(id) {
+    return await db
+        .select(
+            'lecturer.id as lecturer_id',
+            'user.fullname as fullname'
+        )
+        .from('lecturer')
+        .where({
+            "lecturer.id" : id,
+        })
+        .innerJoin('user', 'lecturer.user_id', 'user.id')
+        .limit(1);
 }
 
 // RAW QUERY:
