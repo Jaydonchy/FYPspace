@@ -41,6 +41,8 @@ import { SubmitBtnComponent } from './shared/submit-btn/submit-btn.component';
 import { ItemListComponent } from './shared/item-list/item-list.component';
 import { StudentItemComponent } from './pages/matching/parts/student-item/student-item.component';
 import { LecturerItemComponent } from './pages/matching/parts/lecturer-item/lecturer-item.component';
+import { StudentSearchPipe } from './pipes/student-search.pipe';
+import { LecturerSearchPipe } from './pipes/lecturer-search.pipe';
 
 
 
@@ -58,6 +60,8 @@ import { LecturerItemComponent } from './pages/matching/parts/lecturer-item/lect
         ItemListComponent,
         StudentItemComponent,
         LecturerItemComponent,
+        StudentSearchPipe,
+        LecturerSearchPipe,
     ],
     imports: [
         BrowserModule,

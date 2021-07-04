@@ -35,7 +35,8 @@ export class MatchingComponent implements OnInit {
     showDeAssignSupervisor = false;
     showDeAssignMarker = false;
     action_warning = ''
-
+    student_SearchString ='';
+    lecturer_SearchString ='';
 
     getModel() {
         this._backend.doGet<student_item[]>('/student/item/all').then(

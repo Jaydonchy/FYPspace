@@ -9,39 +9,45 @@
 <div class="workspace mat-elevation-z5">
     <div class="lists_container ">
         <div class="list_wrapper first-child">
-            <app-item-list [header]="'Student'">
+            <app-item-list [header]="'Student'" (searchStringEmitter)="this.student_SearchString = $event">
                 <div *ngIf="this.studentItems$ | async as studentItems">
-                    <div *ngFor="let student of studentItems" (click)="selectStudent(student)">
-                        <app-student-item [isSelected]="student.user.user_id == this._matching.selectedStudent?.user?.user_id" [item]="student"></app-student-item>
+                    <div *ngFor="let student of studentItems | studentSearch:student_SearchString"
+                        (click)="selectStudent(student)">
+                        <app-student-item
+                            [isSelected]="student.user.user_id == this._matching.selectedStudent?.user?.user_id"
+                            [item]="student"></app-student-item>
                     </div>
                 </div>
             </app-item-list>
         </div>
         <div class="list_wrapper">
-            <app-item-list  [header]="'Lecturer'">
+            <app-item-list [header]="'Lecturer'" (searchStringEmitter)="this.lecturer_SearchString = $event">
                 <div *ngIf="this.lecturerItems$ | async as lecturerItems">
-                    <div *ngFor="let lecturer of lecturerItems" (click)="selectLecturer(lecturer)">
-                        <app-lecturer-item [isSelected]="lecturer.user.user_id == this._matching.selectedLecturer?.user?.user_id" [item]="lecturer"></app-lecturer-item>
+                    <div *ngFor="let lecturer of lecturerItems | lecturerSearch: lecturer_SearchString" 
+                    (click)="selectLecturer(lecturer)">
+                        <app-lecturer-item
+                            [isSelected]="lecturer.user.user_id == this._matching.selectedLecturer?.user?.user_id"
+                            [item]="lecturer"></app-lecturer-item>
                     </div>
                 </div>
             </app-item-list>
         </div>
     </div>
     <div class="action_bar">
-        <button mat-raised-button color="accent" [disabled]="!showSupervisorBtn" class="match_btn action_btn" 
-        (click)="assignmentSubmit(true)">
+        <button mat-raised-button color="accent" [disabled]="!showSupervisorBtn" class="match_btn action_btn"
+            (click)="assignmentSubmit(true)">
             Assign Supervisor
         </button>
         <button mat-raised-button color="accent" [disabled]="!showMarkerBtn" class="match_btn action_btn"
-        (click)="assignmentSubmit(false)">
+            (click)="assignmentSubmit(false)">
             Assign 2nd Marker
         </button>
         <button mat-raised-button color="accent" [disabled]="!showDeAssignMarker" class="match_btn action_btn"
-        (click)="assignmentSubmit(false,true)">
+            (click)="assignmentSubmit(false,true)">
             DeAssign 2nd Marker
         </button>
         <button mat-raised-button color="accent" [disabled]="!showDeAssignSupervisor" class="match_btn action_btn"
-        (click)="assignmentSubmit(true,true)">
+            (click)="assignmentSubmit(true,true)">
             DeAssign Supervisor
         </button>
         <button mat-raised-button color="warn" [disabled]="!showCancelBtn" class="cancel_btn action_btn"

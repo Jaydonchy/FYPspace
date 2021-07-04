@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, Input, Output, OnInit, TemplateRef, ViewChild, ViewContainerRef, EventEmitter } from '@angular/core';
 import { SidenavService } from 'src/app/services/sidenav.service';
 import { TemplatePortal } from '@angular/cdk/portal';
 
@@ -11,12 +11,17 @@ export class ItemListComponent implements OnInit {
     @Input() header = "placeholder list header";
     @ViewChild('filterPanel', { static: true }) filterPanel?: TemplateRef<any>;
     @ViewChild('sortPanel', { static: true }) sortPanel?: TemplateRef<any>;
+    @Output() searchStringEmitter = new EventEmitter<string>();
     searchString = "";
 
     constructor(
         public sideNavService: SidenavService,
         private vcf: ViewContainerRef,
     ) { }
+
+    onSearchChange(newValue:string){
+        this.searchStringEmitter.emit(newValue);
+    }
 
     //Open Right Panel
     openSideNav(templateRef: TemplateRef<any>) {
