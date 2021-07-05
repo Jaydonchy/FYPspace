@@ -26,8 +26,6 @@ export class MatchingComponent implements OnInit {
 
     studentItems$?: Observable<student_item[]>;
     lecturerItems$?: Observable<lecturer_item[]>;
-    studentItems?: student_item[];
-    lecturerItems?: lecturer_item[];
     //Buttons
     showCancelBtn = false;
     showSupervisorBtn = false;

@@ -31,7 +31,7 @@ export class StudentItemComponent implements OnInit {
         const req = this._backend.doGet<lecturer_simple>(`/lecturer/simple/${this.item.assignment?.supervisor_id}`)
             .then(res => res.subscribe({
                 next: ({ fullname }) => {
-                    this.supervisor_name = fullname;
+                    this.supervisor_name = `Supervisor: ${fullname}`;
                 },
                 error: err => {
                     console.warn(`Unable to retrieve supervisor name : ${err}`);
@@ -43,7 +43,7 @@ export class StudentItemComponent implements OnInit {
         this._backend.doGet<lecturer_simple>(`/lecturer/simple/${this.item.assignment?.marker_id}`)
             .then(res => res.subscribe({
                 next: ({ fullname }) => {
-                    this.marker_name = fullname;
+                    this.marker_name = `2nd Marker: ${fullname}`;
                 },
                 error: err => {
                     console.warn(`Unable to retrieve marker name : ${err}`);

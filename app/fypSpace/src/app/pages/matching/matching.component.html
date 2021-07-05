@@ -10,8 +10,8 @@
     <div class="lists_container ">
         <div class="list_wrapper first-child">
             <app-item-list [header]="'Student'" (searchStringEmitter)="this.student_SearchString = $event">
-                <div *ngIf="this.studentItems$ | async as studentItems">
-                    <div *ngFor="let student of studentItems | studentSearch:student_SearchString"
+                <div *ngIf="this.studentItems$">
+                    <div *ngFor="let student of (studentItems$| async) | studentSearch:student_SearchString"
                         (click)="selectStudent(student)">
                         <app-student-item
                             [isSelected]="student.user.user_id == this._matching.selectedStudent?.user?.user_id"
@@ -22,9 +22,9 @@
         </div>
         <div class="list_wrapper">
             <app-item-list [header]="'Lecturer'" (searchStringEmitter)="this.lecturer_SearchString = $event">
-                <div *ngIf="this.lecturerItems$ | async as lecturerItems">
-                    <div *ngFor="let lecturer of lecturerItems | lecturerSearch: lecturer_SearchString" 
-                    (click)="selectLecturer(lecturer)">
+                <div *ngIf="this.lecturerItems$">
+                    <div *ngFor="let lecturer of (lecturerItems$|async) | lecturerSearch: lecturer_SearchString"
+                        (click)="selectLecturer(lecturer)">
                         <app-lecturer-item
                             [isSelected]="lecturer.user.user_id == this._matching.selectedLecturer?.user?.user_id"
                             [item]="lecturer"></app-lecturer-item>

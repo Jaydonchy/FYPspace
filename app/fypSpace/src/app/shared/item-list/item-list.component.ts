@@ -1,6 +1,7 @@
 import { Component, Input, Output, OnInit, TemplateRef, ViewChild, ViewContainerRef, EventEmitter } from '@angular/core';
 import { SidenavService } from 'src/app/services/sidenav.service';
 import { TemplatePortal } from '@angular/cdk/portal';
+import { listable } from 'src/app/interfaces/list';
 
 @Component({
     selector: 'app-item-list',
