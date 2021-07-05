@@ -1,26 +1,33 @@
 @import "../../styles/variables";
-.side_nav_header {
-    display: flex;
-    flex-direction: column;
-    padding: 0 10px;
-    background-color: $secondary_color;
-    color: $secondary_text;
-    .header_content {
+.side_nav_container {
+    max-height: 100vh;
+    .side_nav_header {
         display: flex;
-        justify-content: space-between;
-        padding: 1.5vh 1vw;
-        .icon {
-            margin-right: 1vw;
-        }
-        // border-bottom:1px solid black;
-        .title {
-            font-size: 2vw;
-        }
-        .close {
-            font-weight: bold;
+        flex-direction: column;
+        padding: 0 10px;
+        height: 8vh;
+        background-color: $secondary_color;
+        color: $secondary_text;
+        .header_content {
+            display: flex;
+            justify-content: space-between;
+            padding: 1.5vh 1vw;
+            align-items:flex-end;
+            .icon {
+                margin-right: 1vw;
+            }
+            // border-bottom:1px solid black;
+            .title {
+                font-size: 2vw;
+            }
+            .close {
+                font-weight: bold;
+            }
         }
     }
-}
-.side_nav_content {
-    padding: 1.5vh 1vw;
+    .side_nav_content {
+        padding: 1.5vh 1vw;
+
+        height: 92vh;
+    }
 }

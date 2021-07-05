@@ -1,3 +1,4 @@
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 import {user,student,lecturer,lect_field, assignment} from "./db_models";
 
 export interface listable {}
@@ -16,3 +17,16 @@ export interface lecturer_item extends listable {
     marker_load: number,
 }
 
+export interface filterConfig {
+    filter_name: string,
+    keyPath: string,
+    filterOptions: filterOption[],
+    //Not implemented
+    filter_fn?: (item:listable) => listable,
+}
+
+export interface filterOption {
+    value: string | number,
+    disp: string,
+    enabled: boolean
+}

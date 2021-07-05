@@ -29,6 +29,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatDividerModule} from '@angular/material/divider';
 import { PortalModule } from '@angular/cdk/portal';
 //Additional packages
 //Pipes
@@ -43,6 +44,7 @@ import { StudentItemComponent } from './pages/matching/parts/student-item/studen
 import { LecturerItemComponent } from './pages/matching/parts/lecturer-item/lecturer-item.component';
 import { StudentSearchPipe } from './pipes/student-search.pipe';
 import { LecturerSearchPipe } from './pipes/lecturer-search.pipe';
+import { ListFilterPipe } from './pipes/list-filter.pipe';
 
 
 
@@ -62,6 +64,7 @@ import { LecturerSearchPipe } from './pipes/lecturer-search.pipe';
         LecturerItemComponent,
         StudentSearchPipe,
         LecturerSearchPipe,
+        ListFilterPipe,
     ],
     imports: [
         BrowserModule,
@@ -88,6 +91,7 @@ import { LecturerSearchPipe } from './pipes/lecturer-search.pipe';
         MatProgressSpinnerModule,
         MatTooltipModule,
         MatSnackBarModule,
+        MatDividerModule,
         PortalModule,
     ],
     providers: [],

@@ -1,1 +1,33 @@
-<p>list-filter-panel works!</p>
+<div *ngIf="this.filterConfigs" class="panel_container">
+    <div class="options">
+        <div *ngFor="let config of filterConfigs" class="selects">
+            <div class="option">
+                <h4>{{config.filter_name}}</h4>
+                <mat-form-field appearance="fill">
+                    <mat-label>{{config.filter_name}}</mat-label>
+                    <mat-select (selectionChange)="addFilter(config,$event.value)">
+                        <mat-option *ngFor="let option of config.filterOptions" [value]="option">
+                            {{option.disp}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <mat-divider></mat-divider>
+        </div>
+        <div class="selected_filters">
+            <mat-chip-list>
+                <span *ngFor="let selectedConfig of filterConfigs$|async">
+                    <mat-chip *ngFor="let filter of selectedConfig.filterOptions" (removed)="this.removeFilter(selectedConfig,filter)" [removable]="true">
+                        {{filter.disp}}
+                        <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                </span>
+            </mat-chip-list>
+        </div>
+    </div>
+    <div class="buttons">
+        <button mat-raised-button color="accent">Submit</button>
+        <button mat-raised-button [disabled]="this.selectedFilters.length<1" color="accent">Clear</button>
+        <button mat-raised-button color="warn">Cancel</button>
+    </div>
+</div>

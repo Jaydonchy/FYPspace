@@ -9,9 +9,9 @@
 <div class="workspace mat-elevation-z5">
     <div class="lists_container ">
         <div class="list_wrapper first-child">
-            <app-item-list [header]="'Student'" (searchStringEmitter)="this.student_SearchString = $event">
+            <app-item-list [header]="'Student'" (searchStringEmitter)="this.student_SearchString = $event" [filterConfigs]="student_Filter">
                 <div *ngIf="this.studentItems$">
-                    <div *ngFor="let student of (studentItems$| async) | studentSearch:student_SearchString"
+                    <div *ngFor="let student of (studentItems$| async) | studentSearch:student_SearchString|listFilter:student_Filter_applied"
                         (click)="selectStudent(student)">
                         <app-student-item
                             [isSelected]="student.user.user_id == this._matching.selectedStudent?.user?.user_id"
@@ -21,7 +21,7 @@
             </app-item-list>
         </div>
         <div class="list_wrapper">
-            <app-item-list [header]="'Lecturer'" (searchStringEmitter)="this.lecturer_SearchString = $event">
+            <app-item-list [header]="'Lecturer'" (searchStringEmitter)="this.lecturer_SearchString = $event" [filterConfigs]="lecturer_Filter">
                 <div *ngIf="this.lecturerItems$">
                     <div *ngFor="let lecturer of (lecturerItems$|async) | lecturerSearch: lecturer_SearchString"
                         (click)="selectLecturer(lecturer)">
@@ -54,6 +54,5 @@
             (click)="cancelSelection()">
             Cancel Selection
         </button>
-        <span class="action_warning"></span>
     </div>
 </div>
