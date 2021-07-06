@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { BackendService } from 'src/app/services/backend.service';
 import { LecturerService } from 'src/app/services/lecturer.service';
 import { StudentService } from 'src/app/services/student.service';
-import { Observable, Subject, } from 'rxjs';
-import { student_item, lecturer_item, filterConfig, filterOption } from '../../interfaces/list';
+import { Observable } from 'rxjs';
+import { student_item, lecturer_item, filterConfig, filterOption} from '../../interfaces/list';
+import { assignment } from '../../interfaces/db_models';
 import { MatchingService } from 'src/app/services/matching.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-matching',
@@ -43,19 +43,38 @@ export class MatchingComponent implements OnInit {
     student_Filter: filterConfig[] = [];
     lecturer_Filter: filterConfig[] = [];
 
-    createFilterConfig(filter_name: string, keyPath: string, filterOptions: filterOption[]): filterConfig {
+    createSelectFilterConfig(filter_name: string, keyPath: string, filterOptions: filterOption[]): filterConfig {
         return {
             filter_name: filter_name,
             keyPath: keyPath,
             filterOptions: filterOptions,
+            type: 'select',
         }
     }
 
-    createFilterOption(value: string | number, disp: string): filterOption {
+    createRadioFilterConfig(filter_name: string, keyPath: string, filterOptions: filterOption[]): filterConfig {
+        return {
+            filter_name: filter_name,
+            keyPath: keyPath,
+            filterOptions: filterOptions,
+            type: 'radio',
+        }
+    }
+
+    createSelectFilterOption(value: string | number, disp: string): filterOption {
         return {
             value: value,
             disp: disp,
             enabled: false,
+        }
+    }
+
+    createRadioFilterOption(disp: string, isDefault: boolean = false, callback: (arg: any) => boolean): filterOption {
+        return {
+            value: 0,
+            disp: disp,
+            enabled: isDefault,
+            filter_fn: callback,
         }
     }
 
@@ -65,9 +84,9 @@ export class MatchingComponent implements OnInit {
                 obs.subscribe(schools => {
                     const filterOptions = schools.map(school => {
                         const { id, name } = school;
-                        return this.createFilterOption(id, name);
+                        return this.createSelectFilterOption(id, name);
                     });
-                    resolve(this.createFilterConfig('Schools', 'user.school_id', filterOptions));
+                    resolve(this.createSelectFilterConfig('Schools', 'user.school_id', filterOptions));
                 })
             })
         })
@@ -77,9 +96,9 @@ export class MatchingComponent implements OnInit {
                 obs.subscribe(campus => {
                     const filterOptions = campus.map(camp => {
                         const { id, name } = camp;
-                        return this.createFilterOption(id, name);
+                        return this.createSelectFilterOption(id, name);
                     });
-                    resolve(this.createFilterConfig('Campus', 'user.campus_id', filterOptions));
+                    resolve(this.createSelectFilterConfig('Campus', 'user.campus_id', filterOptions));
                 })
             })
         });
@@ -90,9 +109,9 @@ export class MatchingComponent implements OnInit {
                 obs.subscribe(course => {
                     const filterOptions = course.map(course => {
                         const { id, name } = course;
-                        return this.createFilterOption(id, name);
+                        return this.createSelectFilterOption(id, name);
                     })
-                    resolve(this.createFilterConfig('Courses', 'student.course_id', filterOptions));
+                    resolve(this.createSelectFilterConfig('Courses', 'student.course_id', filterOptions));
                 })
             })
         });
@@ -102,9 +121,9 @@ export class MatchingComponent implements OnInit {
                 obs.subscribe(intakes => {
                     const filterOptions = intakes.map(intake => {
                         const { id, name } = intake
-                        return this.createFilterOption(id, name);
+                        return this.createSelectFilterOption(id, name);
                     })
-                    resolve(this.createFilterConfig('Intakes', 'student.intake_id', filterOptions));
+                    resolve(this.createSelectFilterConfig('Intakes', 'student.intake_id', filterOptions));
                 })
             })
         });
@@ -114,9 +133,9 @@ export class MatchingComponent implements OnInit {
                 obs.subscribe(departments => {
                     const filterOptions = departments.map(department => {
                         const { id, name } = department
-                        return this.createFilterOption(id, name);
+                        return this.createSelectFilterOption(id, name);
                     })
-                    resolve(this.createFilterConfig('Departments', 'lecturer.department_id', filterOptions));
+                    resolve(this.createSelectFilterConfig('Departments', 'lecturer.department_id', filterOptions));
                 })
             })
         });
@@ -126,9 +145,9 @@ export class MatchingComponent implements OnInit {
                 obs.subscribe(positions => {
                     const filterOptions = positions.map(position => {
                         const { id, name } = position
-                        return this.createFilterOption(id, name);
+                        return this.createSelectFilterOption(id, name);
                     })
-                    resolve(this.createFilterConfig('Positions', 'lecturer.position_id', filterOptions));
+                    resolve(this.createSelectFilterConfig('Positions', 'lecturer.position_id', filterOptions));
                 })
             })
         });
@@ -138,14 +157,51 @@ export class MatchingComponent implements OnInit {
                 obs.subscribe(locations => {
                     const filterOptions = locations.map(location => {
                         const { id, name } = location
-                        return this.createFilterOption(id, name);
+                        return this.createSelectFilterOption(id, name);
                     })
-                    resolve(this.createFilterConfig('Location', 'lecturer.location_id', filterOptions));
+                    resolve(this.createSelectFilterConfig('Location', 'lecturer.location_id', filterOptions));
                 })
             })
         });
 
+
+
         return Promise.all([schools, campus, courses, intakes, departments, positions, locations]);
+    }
+
+    getDisplayConfig() {
+        const displayAll = new Promise(resolve => {
+            resolve(this.createRadioFilterOption('Display All', true, (item: student_item) => {
+                return true;
+            }))
+        });
+        const lecturerAssigned = new Promise(resolve => {
+            resolve(this.createRadioFilterOption('Supervisor and Marker Assigned', false, (item: student_item) => {
+                return item.assignment?.supervisor_id && item.assignment.marker_id ? true : false
+            }));
+        })
+        const lecturerUnassigned = new Promise(resolve => {
+            resolve(this.createRadioFilterOption('Supervisor and Marker Unassigned', false, (item: student_item) => {
+                return !item.assignment?.supervisor_id && !item.assignment?.marker_id ? true : false
+            }));
+        })
+        const markerAssigned = new Promise(resolve => {
+            resolve(this.createRadioFilterOption('Only Marker Assigned', false, (item: student_item) => {
+                return !item.assignment?.supervisor_id && item.assignment?.marker_id ? true : false
+            }));
+        })
+        const supervisorAssigned = new Promise(resolve => {
+            resolve(
+                this.createRadioFilterOption('Only Supervisor Assigned', false, (item: student_item) => {
+                    return item.assignment?.supervisor_id && !item.assignment?.marker_id ? true : false
+                }));
+        })
+
+        return Promise.all([displayAll, lecturerAssigned, lecturerUnassigned, markerAssigned, supervisorAssigned]).then((options) => {
+            const option: filterOption[] = options.map(x => x as filterOption);
+            return this.createRadioFilterConfig('Display', 'assignment', option);
+        }
+        )
     }
 
     getModel() {
@@ -250,6 +306,8 @@ export class MatchingComponent implements OnInit {
         this.getFilterConfig().then(([schools, campus, courses, intakes, departments, positions, locations]) => {
             [schools, campus, courses, intakes].forEach(config => this.student_Filter.push(config));
             [schools, campus, departments, positions, locations].forEach(config => this.lecturer_Filter?.push(config));
+            this.getDisplayConfig().then(res => this.student_Filter.push(res));
+            console.log(this.student_Filter);
         })
     }
 }

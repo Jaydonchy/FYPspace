@@ -47,6 +47,27 @@ export class ListFilterPanelComponent implements OnInit {
         )
     }
 
+    changeRadioConfig(config: filterConfig,event: filterOption) {
+        console.log(config);
+        this.filterConfigs?.some(filterConfig => {
+            if (filterConfig.filter_name == config.filter_name) {
+                filterConfig.filterOptions.forEach(option => {
+                    if (option.disp == event.disp) {
+                        option.enabled = true;
+                    } else {
+                        option.enabled = false;
+                    }
+                })
+                return true;
+            } return false;
+        })
+    }
+
+    getSelectedRadio(config: filterConfig) {
+        const [res, ...arg] = config.filterOptions.filter(option => option.enabled);
+        return res;
+    }
+
     clearSelectedFilter() {
         this.filterConfigs.forEach(config => {
             config.filterOptions.forEach(option => option.enabled = false)

@@ -1,5 +1,4 @@
-import { OverlayConfig } from '@angular/cdk/overlay';
-import { TypeScriptEmitter } from '@angular/compiler';
+
 import { Pipe, PipeTransform } from '@angular/core';
 import { filterConfig, filterOption, listable } from '../interfaces/list';
 
@@ -22,22 +21,25 @@ export class ListFilterPipe implements PipeTransform {
         }
         const filterApplied = filterConfig.map(config => {
             let filterExists = false;
-            config.filterOptions.forEach(option => { if (option.enabled) filterExists = true })
+            if(config.type == 'select'){
+                config.filterOptions.forEach(option => { if (option.enabled) filterExists = true })
+            }
             return filterExists;
         }).some(filterExists => filterExists);
         //No filter applied
-        if(!filterApplied) return items;
-        
+        if (!filterApplied) return items;
+
         const res = items.filter(item => {
             let included = false;
             filterConfig.forEach((config) => {
-                const values = config.filterOptions.filter(option => option.enabled).map(option => option.value);
-                if (values.length > 0) {
+                const itemvalue = this.resolveKeyPath(item, config.keyPath);
+                if (config.type == 'select') {
+                    const values = config.filterOptions.filter(option => option.enabled).map(option => option.value);
                     //There is an enabled filter
-                    const itemvalue = this.resolveKeyPath(item, config.keyPath);
                     //Items would have to pass all filter test
-                    if (values.includes(itemvalue)) included = true;
-                    else included = false;
+                    included = values.includes(itemvalue);
+                } else {
+                    // included = itemvalue == config.showValue;
                 }
             });
             return included;

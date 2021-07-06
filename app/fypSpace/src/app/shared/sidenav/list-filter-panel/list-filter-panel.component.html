@@ -1,7 +1,7 @@
 <div *ngIf="this.filterConfigs" class="panel_container">
     <div class="options">
         <div *ngFor="let config of filterConfigs" class="selects">
-            <div class="option">
+            <div *ngIf="config.type=='select'" class="option">
                 <h4>{{config.filter_name}}</h4>
                 <mat-form-field appearance="fill">
                     <mat-label>{{config.filter_name}}</mat-label>
@@ -14,15 +14,28 @@
             </div>
             <mat-divider></mat-divider>
         </div>
+        <div *ngFor="let config of filterConfigs" class="checkboxes">
+            <div *ngIf="config.type=='radio'">
+                {{config.filter_name}}
+                <mat-radio-group (change)="changeRadioConfig(config,$event.value)">
+                    <mat-radio-button *ngFor="let option of config.filterOptions" [value]="option"
+                        [checked]="option.enabled">
+                        {{option.disp}}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
         <div class="selected_filters">
             <mat-chip-list>
                 <span *ngFor="let selectedConfig of filterConfigs">
-                    <span *ngFor="let filter of selectedConfig.filterOptions">
-                        <mat-chip (removed)="this.removeFilter(selectedConfig,filter)" *ngIf="filter.enabled"
-                            [removable]="true">
-                            {{filter.disp}}
-                            <mat-icon matChipRemove>cancel</mat-icon>
-                        </mat-chip>
+                    <span *ngIf="selectedConfig.type=='select'">
+                        <span *ngFor="let filter of selectedConfig.filterOptions">
+                            <mat-chip (removed)="this.removeFilter(selectedConfig,filter)" *ngIf="filter.enabled"
+                                [removable]="true">
+                                {{filter.disp}}
+                                <mat-icon matChipRemove>cancel</mat-icon>
+                            </mat-chip>
+                        </span>
                     </span>
                 </span>
             </mat-chip-list>

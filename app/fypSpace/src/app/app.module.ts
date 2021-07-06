@@ -29,7 +29,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import {MatDividerModule} from '@angular/material/divider';
+import {MatCheckboxModule} from '@angular/material/checkbox'; 
+import { MatDividerModule } from '@angular/material/divider';
+import {MatRadioModule} from '@angular/material/radio'; 
 import { PortalModule } from '@angular/cdk/portal';
 //Additional packages
 //Pipes
@@ -92,6 +94,8 @@ import { ListFilterPipe } from './pipes/list-filter.pipe';
         MatTooltipModule,
         MatSnackBarModule,
         MatDividerModule,
+        MatCheckboxModule,
+        MatRadioModule,
         PortalModule,
     ],
     providers: [],
