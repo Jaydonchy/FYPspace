@@ -1,9 +1,11 @@
 import { OverlayConfig } from '@angular/cdk/overlay';
+import { TypeScriptEmitter } from '@angular/compiler';
 import { Pipe, PipeTransform } from '@angular/core';
 import { filterConfig, filterOption, listable } from '../interfaces/list';
 
 @Pipe({
-    name: 'listFilter'
+    name: 'listFilter',
+    pure: false,
 })
 export class ListFilterPipe implements PipeTransform {
     resolveKeyPath(object: any, path: string) {
@@ -14,11 +16,19 @@ export class ListFilterPipe implements PipeTransform {
             reduce((o: any, k: string) => (o || {})[k], object);
     }
 
-    transform<T extends listable>(items: T[] | null, filterConfig: filterConfig[]): T[] | null {
-        if (!items || filterConfig.length < 1) {
+    transform<T extends listable>(items: T[] | null, filterConfig: filterConfig[] | null): T[] | null {
+        if (!items || !filterConfig) {
             return items;
         }
-        return items.filter(item => {
+        const filterApplied = filterConfig.map(config => {
+            let filterExists = false;
+            config.filterOptions.forEach(option => { if (option.enabled) filterExists = true })
+            return filterExists;
+        }).some(filterExists => filterExists);
+        //No filter applied
+        if(!filterApplied) return items;
+        
+        const res = items.filter(item => {
             let included = false;
             filterConfig.forEach((config) => {
                 const values = config.filterOptions.filter(option => option.enabled).map(option => option.value);
@@ -30,9 +40,9 @@ export class ListFilterPipe implements PipeTransform {
                     else included = false;
                 }
             });
-            console.log(included);
             return included;
         })
+        return res;
     }
 
 }

@@ -37,7 +37,7 @@
 </div>
 
 <ng-template #filterPanel>
-    <app-list-filter-panel [filterConfigs]="this.filterConfigs" (filterConfigEmitter)="filterConfigEmitter.emit($event)">
+    <app-list-filter-panel [filterConfigs]="this.filterConfigs">
     </app-list-filter-panel>
 </ng-template>
 <ng-template #sortPanel>

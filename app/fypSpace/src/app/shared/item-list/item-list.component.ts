@@ -17,7 +17,6 @@ export class ItemListComponent implements OnInit {
 
     //Filter
     @Input() filterConfigs!: filterConfig[];
-    @Output() filterConfigEmitter = new EventEmitter<filterConfig[]>();
     //Sort
 
     constructor(
@@ -25,7 +24,7 @@ export class ItemListComponent implements OnInit {
         private vcf: ViewContainerRef,
     ) { }
 
-    onSearchChange(newValue:string){
+    onSearchChange(newValue: string) {
         this.searchStringEmitter.emit(newValue);
     }
 

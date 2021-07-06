@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { Subject } from 'rxjs/internal/Subject';
 import { filterConfig, filterOption } from 'src/app/interfaces/list';
+import { SidenavService } from 'src/app/services/sidenav.service';
 
 @Component({
     selector: 'app-list-filter-panel',
@@ -9,11 +9,11 @@ import { filterConfig, filterOption } from 'src/app/interfaces/list';
 })
 export class ListFilterPanelComponent implements OnInit {
 
-    constructor() { }
+    constructor(
+        public _sidenav: SidenavService,
+    ) { }
 
     @Input() filterConfigs: filterConfig[] = [];
-    @Output() filterConfigEmitter = new EventEmitter<filterConfig[]>();
-    filterConfigs$ = new Subject<filterConfig[]>();
 
     selectedFilters: filterConfig[] = [];
 
@@ -30,7 +30,6 @@ export class ListFilterPanelComponent implements OnInit {
             } return false;
         }
         )
-        this.filterConfigs$.next(this.getEnabledOptionsOnly(this.filterConfigs));
     }
 
     removeFilter(config: filterConfig, option: filterOption) {
@@ -46,18 +45,12 @@ export class ListFilterPanelComponent implements OnInit {
             } return false;
         }
         )
-        this.filterConfigs$.next(this.getEnabledOptionsOnly(this.filterConfigs));
     }
 
-    getEnabledOptionsOnly(filterConfigs: filterConfig[]): filterConfig[] {
-        return this.filterConfigs.map(config => {
-            let { filter_name, keyPath, filterOptions } = config;
-            return {
-                filter_name: filter_name,
-                keyPath: keyPath,
-                filterOptions: filterOptions.map(x => x).filter(option => option.enabled)
-            }
-        });
+    clearSelectedFilter() {
+        this.filterConfigs.forEach(config => {
+            config.filterOptions.forEach(option => option.enabled = false)
+        })
     }
 
     ngOnInit(): void {

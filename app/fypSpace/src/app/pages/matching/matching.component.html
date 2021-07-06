@@ -11,7 +11,7 @@
         <div class="list_wrapper first-child">
             <app-item-list [header]="'Student'" (searchStringEmitter)="this.student_SearchString = $event" [filterConfigs]="student_Filter">
                 <div *ngIf="this.studentItems$">
-                    <div *ngFor="let student of (studentItems$| async) | studentSearch:student_SearchString|listFilter:student_Filter_applied"
+                    <div *ngFor="let student of (studentItems$| async) | studentSearch:student_SearchString|listFilter:student_Filter"
                         (click)="selectStudent(student)">
                         <app-student-item
                             [isSelected]="student.user.user_id == this._matching.selectedStudent?.user?.user_id"

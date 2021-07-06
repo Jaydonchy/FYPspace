@@ -16,18 +16,20 @@
         </div>
         <div class="selected_filters">
             <mat-chip-list>
-                <span *ngFor="let selectedConfig of filterConfigs$|async">
-                    <mat-chip *ngFor="let filter of selectedConfig.filterOptions" (removed)="this.removeFilter(selectedConfig,filter)" [removable]="true">
-                        {{filter.disp}}
-                        <mat-icon matChipRemove>cancel</mat-icon>
-                    </mat-chip>
+                <span *ngFor="let selectedConfig of filterConfigs">
+                    <span *ngFor="let filter of selectedConfig.filterOptions">
+                        <mat-chip (removed)="this.removeFilter(selectedConfig,filter)" *ngIf="filter.enabled"
+                            [removable]="true">
+                            {{filter.disp}}
+                            <mat-icon matChipRemove>cancel</mat-icon>
+                        </mat-chip>
+                    </span>
                 </span>
             </mat-chip-list>
         </div>
     </div>
     <div class="buttons">
-        <button mat-raised-button color="accent">Submit</button>
-        <button mat-raised-button [disabled]="this.selectedFilters.length<1" color="accent">Clear</button>
-        <button mat-raised-button color="warn">Cancel</button>
+        <button mat-raised-button color="accent" (click)="clearSelectedFilter()">Clear</button>
+        <button mat-raised-button color="warn" (click)="this._sidenav.close()">Close</button>
     </div>
 </div>

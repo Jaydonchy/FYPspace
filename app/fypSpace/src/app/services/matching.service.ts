@@ -132,7 +132,6 @@ export class MatchingService {
                 }
             }
         }
-        console.log(`missing code path in Assigning Lecturer: Assigned: ${assigned}`);
         return null;
     }
 

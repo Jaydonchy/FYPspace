@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BackendService } from 'src/app/services/backend.service';
 import { LecturerService } from 'src/app/services/lecturer.service';
 import { StudentService } from 'src/app/services/student.service';
-import { Observable, } from 'rxjs';
+import { Observable, Subject, } from 'rxjs';
 import { student_item, lecturer_item, filterConfig, filterOption } from '../../interfaces/list';
 import { MatchingService } from 'src/app/services/matching.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -41,9 +41,7 @@ export class MatchingComponent implements OnInit {
     lecturer_SearchString = '';
     //Filter
     student_Filter: filterConfig[] = [];
-    student_Filter_applied: filterConfig[] = [];
-    lecturer_Filter: filterConfig[]=[];
-    lecturer_Filter_applied: filterConfig[] = [];
+    lecturer_Filter: filterConfig[] = [];
 
     createFilterConfig(filter_name: string, keyPath: string, filterOptions: filterOption[]): filterConfig {
         return {
@@ -250,8 +248,8 @@ export class MatchingComponent implements OnInit {
     ngOnInit(): void {
         this.getModel();
         this.getFilterConfig().then(([schools, campus, courses, intakes, departments, positions, locations]) => {
-            [schools,campus,courses,intakes].forEach(config => this.student_Filter.push(config));
-            [schools,campus,departments,positions,locations].forEach(config=> this.lecturer_Filter?.push(config));
+            [schools, campus, courses, intakes].forEach(config => this.student_Filter.push(config));
+            [schools, campus, departments, positions, locations].forEach(config => this.lecturer_Filter?.push(config));
         })
     }
 }
