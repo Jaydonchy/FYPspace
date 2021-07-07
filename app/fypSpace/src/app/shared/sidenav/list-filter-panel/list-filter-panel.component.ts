@@ -47,8 +47,7 @@ export class ListFilterPanelComponent implements OnInit {
         )
     }
 
-    changeRadioConfig(config: filterConfig,event: filterOption) {
-        console.log(config);
+    changeRadioConfig(config: filterConfig, event: filterOption) {
         this.filterConfigs?.some(filterConfig => {
             if (filterConfig.filter_name == config.filter_name) {
                 filterConfig.filterOptions.forEach(option => {
@@ -70,7 +69,7 @@ export class ListFilterPanelComponent implements OnInit {
 
     clearSelectedFilter() {
         this.filterConfigs.forEach(config => {
-            config.filterOptions.forEach(option => option.enabled = false)
+            config.filterOptions.forEach(option => { if (config.type == 'select') option.enabled = false })
         })
     }
 
