@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { BackendService } from 'src/app/services/backend.service';
 import { LecturerService } from 'src/app/services/lecturer.service';
 import { StudentService } from 'src/app/services/student.service';
-import { Observable } from 'rxjs';
-import { student_item, lecturer_item, filterConfig, filterOption} from '../../interfaces/list';
-import { assignment } from '../../interfaces/db_models';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { student_item, lecturer_item, filterConfig, filterOption } from '../../interfaces/list';
 import { MatchingService } from 'src/app/services/matching.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+
 
 @Component({
     selector: 'app-matching',
@@ -28,8 +28,11 @@ export class MatchingComponent implements OnInit {
         private router: Router,
     ) { }
 
+    private _studentItems$ = new BehaviorSubject<student_item[]>([]);
     studentItems$?: Observable<student_item[]>;
+
     lecturerItems$?: Observable<lecturer_item[]>;
+    _lecturerItems$ = new BehaviorSubject<lecturer_item[]>([]);
     //Buttons
     showCancelBtn = false;
     showSupervisorBtn = false;
@@ -169,7 +172,7 @@ export class MatchingComponent implements OnInit {
         return Promise.all([schools, campus, courses, intakes, departments, positions, locations]);
     }
 
-    getDisplayConfig() {
+    getStudentDisplayConfig() {
         const displayAll = new Promise(resolve => {
             resolve(this.createRadioFilterOption('Display All', true, (item: student_item) => {
                 return true;
@@ -204,14 +207,41 @@ export class MatchingComponent implements OnInit {
         )
     }
 
-    getModel() {
-        this._api.doGet<student_item[]>('/student/item/all').then(
-            res => this.studentItems$ = res
-        )
+    getLecturerAvailabilityConfig() {
+        const displayAll = new Promise(resolve => {
+            resolve(this.createRadioFilterOption('Display All', true, (item: lecturer_item) => {
+                return true;
+            }))
+        });
+        const Available = new Promise(resolve => {
+            resolve(this.createRadioFilterOption('Only Available', false, (item: lecturer_item) => {
+                return item.lecturer.availability == true;
+            }))
+        });
+        const Unavailable = new Promise(resolve => {
+            resolve(this.createRadioFilterOption('Only Unavailable', false, (item: lecturer_item) => {
+                return item.lecturer.availability == false
+            }))
+        });
 
-        this._api.doGet<lecturer_item[]>('/lecturer/item/all').then(
-            res => this.lecturerItems$ = res
-        )
+        return Promise.all([displayAll, Available, Unavailable]).then(options => {
+            const option: filterOption[] = options.map(x => x as filterOption);
+            return this.createRadioFilterConfig('Availability', 'lecturer.availability', option);
+        })
+
+
+    }
+
+    getStudentItems() {
+        this._student.getStudentItems().then(obs => {
+            obs.subscribe(res => this._studentItems$.next(res));
+        })
+    }
+
+    getLecturerItems() {
+        this._lecturer.getLecturerItems().then(obs => {
+            obs.subscribe(res => this._lecturerItems$.next(res));
+        })
     }
 
     selectStudent(item: student_item) {
@@ -263,11 +293,6 @@ export class MatchingComponent implements OnInit {
         this.doCheck();
     }
 
-    refreshData() {
-        this.getModel();
-        this.cancelSelection();
-    }
-
     async assignmentSubmit(isSupervisor: boolean, deAssignment: boolean = false) {
         const reqParam = this._matching.Assignment(isSupervisor, deAssignment);
         if (reqParam) {
@@ -279,7 +304,9 @@ export class MatchingComponent implements OnInit {
                             horizontalPosition: 'center',
                             verticalPosition: 'top'
                         })
-                        return this.refreshData();
+                        this.getStudentItems();
+                        this.getLecturerItems();
+                        this.cancelSelection();
                     },
                     error: err => {
                         this._snackbar.open('Assignment Unsuccessful!', '', {
@@ -302,12 +329,17 @@ export class MatchingComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.getModel();
+
+        this.studentItems$ = this._studentItems$.asObservable();
+        this.getStudentItems();
+        this.lecturerItems$ = this._lecturerItems$.asObservable();
+        this.getLecturerItems();
+
         this.getFilterConfig().then(([schools, campus, courses, intakes, departments, positions, locations]) => {
-            [schools, campus, courses, intakes].forEach(config => this.student_Filter.push(config));
-            [schools, campus, departments, positions, locations].forEach(config => this.lecturer_Filter?.push(config));
-            this.getDisplayConfig().then(res => this.student_Filter.push(res));
-            console.log(this.student_Filter);
+            [schools, campus, courses, intakes].forEach(config => this.student_Filter.push(JSON.parse(JSON.stringify(config))));
+            [schools, campus, departments, positions, locations].forEach(config => this.lecturer_Filter?.push(JSON.parse(JSON.stringify(config))));
+            this.getStudentDisplayConfig().then(res => this.student_Filter.push(res));
+            this.getLecturerAvailabilityConfig().then(res => this.lecturer_Filter.push(res));
         })
     }
 }

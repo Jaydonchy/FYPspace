@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { filterConfig, filterOption } from 'src/app/interfaces/list';
+import { MatchingService } from 'src/app/services/matching.service';
 import { SidenavService } from 'src/app/services/sidenav.service';
 
 @Component({
@@ -11,6 +12,7 @@ export class ListFilterPanelComponent implements OnInit {
 
     constructor(
         public _sidenav: SidenavService,
+        private _matching: MatchingService,
     ) { }
 
     @Input() filterConfigs: filterConfig[] = [];
@@ -30,6 +32,7 @@ export class ListFilterPanelComponent implements OnInit {
             } return false;
         }
         )
+        this._matching.filterPipeUpdate = new Date();
     }
 
     removeFilter(config: filterConfig, option: filterOption) {
@@ -45,6 +48,7 @@ export class ListFilterPanelComponent implements OnInit {
             } return false;
         }
         )
+        this._matching.filterPipeUpdate = new Date();
     }
 
     changeRadioConfig(config: filterConfig, event: filterOption) {
@@ -60,6 +64,7 @@ export class ListFilterPanelComponent implements OnInit {
                 return true;
             } return false;
         })
+        this._matching.filterPipeUpdate = new Date();
     }
 
     getSelectedRadio(config: filterConfig) {

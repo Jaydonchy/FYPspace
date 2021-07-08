@@ -4,7 +4,6 @@ import { filterConfig, filterOption, listable } from '../interfaces/list';
 
 @Pipe({
     name: 'listFilter',
-    pure: false,
 })
 export class ListFilterPipe implements PipeTransform {
     resolveKeyPath(object: any, path: string) {
@@ -15,7 +14,7 @@ export class ListFilterPipe implements PipeTransform {
             reduce((o: any, k: string) => (o || {})[k], object);
     }
 
-    transform<T extends listable>(items: T[] | null, filterConfig: filterConfig[] | null): T[] | null {
+    transform<T extends listable>(items: T[] | null, filterConfig: filterConfig[] | null,update:Date): T[] | null {
         if (!items || !filterConfig) {
             return items;
         }

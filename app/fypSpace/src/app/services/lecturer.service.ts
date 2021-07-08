@@ -1,6 +1,8 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Injectable } from '@angular/core';
+import { async } from 'rxjs';
 import { department, position, location, lecturer_simple } from '../interfaces/db_models';
+import { lecturer_item } from '../interfaces/list';
 import { BackendService } from './backend.service';
 
 @Injectable({
@@ -77,5 +79,9 @@ export class LecturerService {
 
     getPositions = async () => {
         return await this._api.doGet<position[]>('/lecturer/positions');
+    }
+
+    getLecturerItems = async() =>{
+        return  this._api.doGet<lecturer_item[]>('/lecturer/item/all');
     }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { async } from '@angular/core/testing';
 import { Observable } from 'rxjs';
 import { student, study_level, course, intake } from '../interfaces/db_models';
+import { student_item } from '../interfaces/list';
 import { BackendService } from './backend.service';
 
 @Injectable({
@@ -79,5 +80,9 @@ export class StudentService {
     getCourses = async () => {
         const promise = await this._api.doGet<course[]>('/student/courses');
         return promise;
+    }
+
+    getStudentItems(){
+        return this._api.doGet<student_item[]>('/student/item/all');   
     }
 }

@@ -10,6 +10,8 @@ import { LecturerService } from './lecturer.service';
 export class MatchingService {
     selectedLecturer?: lecturer_item;
     selectedStudent?: student_item;
+
+    filterPipeUpdate = new Date();
     constructor(
         private _api: BackendService,
     ) { }
@@ -100,7 +102,7 @@ export class MatchingService {
                 if (confirm(`Student already has marker assigned, confirm overwrite?`)) {
                     return {
                         student_id: student_id,
-                        marker: lecturer.lecturer_id,
+                        marker_id: lecturer.lecturer_id,
                     }
                 } else return null;
             }
