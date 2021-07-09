@@ -2,6 +2,7 @@
 <mat-card *ngIf="item != undefined" (click)="isSelected = !isSelected" [ngClass]="{'selected':isSelected}"class="item_container mat-elevation-z2">
     <div class="user_profile">
         <div class="user_name"> {{this.item.user.fullname}} </div>
+        <div class="student_tp"> TP {{this.item.student.tp_number}} </div>
         <div class="user_topic"> 
             {{this.item.assignment?.title || "No Title given"}}
         </div>

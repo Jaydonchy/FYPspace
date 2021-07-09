@@ -35,15 +35,15 @@ exports.seed = function (knex) {
                 position_id: 3,
                 is_pm: true,
                 is_admin: false,
-                department_id: 3,
-                location_id: 2
+                department_id: 2,
+                location_id: 1
             },
             {
                 user_id: 7,
                 position_id: 3,
                 is_pm: false,
                 is_admin: false,
-                department_id: 3,
+                department_id: 2,
                 location_id: 2,
                 availability: false,
             },
@@ -53,14 +53,14 @@ exports.seed = function (knex) {
                 is_pm: false,
                 is_admin: false,
                 department_id: 3,
-                location_id: 2
+                location_id: 1
             },
             {
                 user_id: 9,
                 position_id: 3,
                 is_pm: false,
                 is_admin: true,
-                department_id: 3,
+                department_id: 2,
                 location_id: 2
             },
         ]);

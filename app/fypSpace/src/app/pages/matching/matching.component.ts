@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { BackendService } from 'src/app/services/backend.service';
 import { LecturerService } from 'src/app/services/lecturer.service';
 import { StudentService } from 'src/app/services/student.service';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { student_item, lecturer_item, filterConfig, filterOption } from '../../interfaces/list';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { student_item, lecturer_item, filterConfig, filterOption, sortOption, user_item } from '../../interfaces/list';
 import { MatchingService } from 'src/app/services/matching.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { NullTemplateVisitor } from '@angular/compiler';
 
 
 @Component({
@@ -45,6 +46,14 @@ export class MatchingComponent implements OnInit {
     //Filter
     student_Filter: filterConfig[] = [];
     lecturer_Filter: filterConfig[] = [];
+    //Sorting
+    student_SortOptions: sortOption[] = [];
+    student_Sorter!: sortOption;
+    student_Sorter_asc = true;
+    lecturer_SortOptions: sortOption[] = [];
+    lecturer_Sorter!: sortOption;
+    lecturer_Sorter_asc = true;
+
 
     createSelectFilterConfig(filter_name: string, keyPath: string, filterOptions: filterOption[]): filterConfig {
         return {
@@ -81,7 +90,14 @@ export class MatchingComponent implements OnInit {
         }
     }
 
-    getFilterConfig() {
+    createSortingOption<T>(disp: string, comparator: (o1: T, o2: T) => number): sortOption {
+        return {
+            disp: disp,
+            comparator: comparator,
+        }
+    }
+
+    generateFilterConfig() {
         const schools = new Promise<filterConfig>(resolve => {
             this._user.getSchools().then(async obs => {
                 obs.subscribe(schools => {
@@ -172,7 +188,8 @@ export class MatchingComponent implements OnInit {
         return Promise.all([schools, campus, courses, intakes, departments, positions, locations]);
     }
 
-    getStudentDisplayConfig() {
+
+    generateStudentDisplayConfig() {
         const displayAll = new Promise(resolve => {
             resolve(this.createRadioFilterOption('Display All', true, (item: student_item) => {
                 return true;
@@ -207,7 +224,7 @@ export class MatchingComponent implements OnInit {
         )
     }
 
-    getLecturerAvailabilityConfig() {
+    generateLecturerAvailabilityConfig() {
         const displayAll = new Promise(resolve => {
             resolve(this.createRadioFilterOption('Display All', true, (item: lecturer_item) => {
                 return true;
@@ -256,6 +273,53 @@ export class MatchingComponent implements OnInit {
         this.doCheck()
     }
 
+    generateUserSortingOption() {
+        const isDefault = this.createSortingOption('Default', (o1: user_item, o2: user_item) => {
+            return o1.user.user_id - o2.user.user_id;
+        });
+        const school = this.createSortingOption<user_item>('School', (o1: user_item, o2: user_item) => {
+            return o1.user.school_id - o2.user.school_id;
+        })
+        const campus = this.createSortingOption<user_item>('Campus', (o1: user_item, o2: user_item) => {
+            return o1.user.campus_id - o2.user.campus_id;
+        })
+        const fullname = this.createSortingOption<user_item>('Name', (o1: user_item, o2: user_item) => {
+            return o1.user.fullname.localeCompare(o2.user.fullname, 'en', { sensitivity: 'base' })
+        })
+
+        return Promise.all([isDefault, school, campus, fullname])
+    }
+
+    generateStudentSortingOptions() {
+
+        const tpnumber = this.createSortingOption<student_item>('TP Number', (o1: student_item, o2: student_item) => {
+            return (+o1.student.tp_number) - (+o2.student.tp_number);
+        })
+        const course = this.createSortingOption<student_item>('Course', (o1: student_item, o2: student_item) => {
+            return o1.student.course_id - o2.student.course_id
+        })
+        const intake = this.createSortingOption<student_item>('Intake', (o1: student_item, o2: student_item) => {
+            return o1.student.intake_id - o2.student.intake_id
+        })
+
+        return Promise.all([tpnumber, course, intake])
+    }
+
+    generateLecturerSortingOptions() {
+        const position = this.createSortingOption<lecturer_item>('position', (o1: lecturer_item, o2: lecturer_item) => {
+            return o1.lecturer.position_id - o2.lecturer.position_id
+        })
+        const department = this.createSortingOption<lecturer_item>('department', (o1: lecturer_item, o2: lecturer_item) => {
+            return o1.lecturer.department_id - o2.lecturer.department_id
+        })
+        const location = this.createSortingOption<lecturer_item>('location', (o1: lecturer_item, o2: lecturer_item) => {
+            return o1.lecturer.location_id - o2.lecturer.location_id
+        })
+
+        return Promise.all([position,department,location])
+
+    }
+
     //Toolbar button logic
     doCheck() {
         if (this._matching.selectedLecturer && this._matching.selectedStudent) {
@@ -288,6 +352,7 @@ export class MatchingComponent implements OnInit {
     }
 
     cancelSelection() {
+        console.log(this.student_Sorter)
         this._matching.selectedLecturer = undefined;
         this._matching.selectedStudent = undefined;
         this.doCheck();
@@ -335,11 +400,34 @@ export class MatchingComponent implements OnInit {
         this.lecturerItems$ = this._lecturerItems$.asObservable();
         this.getLecturerItems();
 
-        this.getFilterConfig().then(([schools, campus, courses, intakes, departments, positions, locations]) => {
+        this.generateFilterConfig().then(([schools, campus, courses, intakes, departments, positions, locations]) => {
             [schools, campus, courses, intakes].forEach(config => this.student_Filter.push(JSON.parse(JSON.stringify(config))));
             [schools, campus, departments, positions, locations].forEach(config => this.lecturer_Filter?.push(JSON.parse(JSON.stringify(config))));
-            this.getStudentDisplayConfig().then(res => this.student_Filter.push(res));
-            this.getLecturerAvailabilityConfig().then(res => this.lecturer_Filter.push(res));
+            this.generateStudentDisplayConfig().then(res => this.student_Filter.push(res));
+            this.generateLecturerAvailabilityConfig().then(res => this.lecturer_Filter.push(res));
+        })
+
+        this.generateUserSortingOption().then((userSortingOptions) => {
+            userSortingOptions.forEach(option => {
+                if(option.disp=="Default") {
+                    this.student_Sorter = option;
+                    this.lecturer_Sorter = option;
+                }
+                this.student_SortOptions.push(option);
+                this.lecturer_SortOptions.push(option);
+            })
+        })
+
+        this.generateStudentSortingOptions().then((studentSortingOptions) => {
+            studentSortingOptions.forEach(option => {
+                this.student_SortOptions.push(option);
+            })
+        })
+
+        this.generateLecturerSortingOptions().then((lecturerSortingOptions)=>{
+            lecturerSortingOptions.forEach(option=> {
+                this.lecturer_SortOptions.push(option);
+            })
         })
     }
 }

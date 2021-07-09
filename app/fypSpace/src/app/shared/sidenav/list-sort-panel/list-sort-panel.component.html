@@ -1,1 +1,20 @@
-<p>list-sort-panel works!</p>
+<div class="panel_container">
+    <div class="options">
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Sorting Options</mat-label>
+                <mat-select (selectionChange)="assignSorter($event.value)">
+                    <mat-option *ngFor="let option of sortOptions" [value]="option">
+                        {{option.disp}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <!-- add asc toggle and default button -->
+    <div class="toggle">
+        <span>Descending</span>
+        <mat-slide-toggle [(ngModel)]="this.asc"  (change)="this.ascEmitter.emit($event.checked)"></mat-slide-toggle>
+        <span>Ascending</span>
+    </div>
+</div>

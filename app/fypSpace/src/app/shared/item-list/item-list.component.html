@@ -28,8 +28,12 @@
         </div>
     </div>
     <div class="list_util">
-        <div class="">Filter: </div>
-        <div class="">Sort by: </div>
+        <div class="">Filter: <span></span> </div>
+        <div class="">Sort by: 
+            <button mat-icon-button (click)="this.ascEmitter.emit(!this.asc)">
+                <mat-icon>{{this.asc ? 'arrow_upward' : 'arrow_downward'}}</mat-icon>
+            </button>
+        </div>
     </div>
     <mat-action-list class="list_content">
         <ng-content></ng-content>
@@ -41,5 +45,6 @@
     </app-list-filter-panel>
 </ng-template>
 <ng-template #sortPanel>
-    <app-list-sort-panel></app-list-sort-panel>
+    <app-list-sort-panel [sortOptions]="this.sortOptions" (selectedSortEmitter)="this.selectedSortEmitter.emit($event)"
+        (ascEmitter)="this.ascEmitter.emit($event)" [asc]="asc"></app-list-sort-panel>
 </ng-template>

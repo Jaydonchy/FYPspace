@@ -10,9 +10,11 @@
     <div class="lists_container ">
         <div class="list_wrapper first-child">
             <app-item-list [header]="'Student'" (searchStringEmitter)="this.student_SearchString = $event"
-                [filterConfigs]="student_Filter">
+                [filterConfigs]="student_Filter" [sortOptions]="this.student_SortOptions"
+                (selectedSortEmitter)="this.student_Sorter = $event" (ascEmitter)="this.student_Sorter_asc = $event"
+                [asc]="this.student_Sorter_asc">
                 <div *ngIf="this.studentItems$">
-                    <div *ngFor="let student of (studentItems$| async) | studentSearch:student_SearchString|listFilter:student_Filter:this._matching.filterPipeUpdate"
+                    <div *ngFor="let student of (studentItems$| async) | studentSearch:student_SearchString|listFilter:student_Filter:this._matching.filterPipeUpdate|listSort:this.student_Sorter:this.student_Sorter_asc"
                         (click)="selectStudent(student)">
                         <app-student-item
                             [isSelected]="student.user.user_id == this._matching.selectedStudent?.user?.user_id"
@@ -23,9 +25,11 @@
         </div>
         <div class="list_wrapper">
             <app-item-list [header]="'Lecturer'" (searchStringEmitter)="this.lecturer_SearchString = $event"
-                [filterConfigs]="lecturer_Filter">
+                [filterConfigs]="lecturer_Filter" [sortOptions]="this.lecturer_SortOptions"
+                (selectedSortEmitter)="this.lecturer_Sorter = $event" (ascEmitter)="this.lecturer_Sorter_asc = $event"
+                [asc]="this.lecturer_Sorter_asc">
                 <div *ngIf="this.lecturerItems$">
-                    <div *ngFor="let lecturer of (lecturerItems$|async) | lecturerSearch: lecturer_SearchString|listFilter:lecturer_Filter:this._matching.filterPipeUpdate"
+                    <div *ngFor="let lecturer of (lecturerItems$|async) | lecturerSearch: lecturer_SearchString|listFilter:lecturer_Filter:this._matching.filterPipeUpdate|listSort:this.lecturer_Sorter:this.lecturer_Sorter_asc"
                         (click)="selectLecturer(lecturer)">
                         <app-lecturer-item
                             [isSelected]="lecturer.user.user_id == this._matching.selectedLecturer?.user?.user_id"

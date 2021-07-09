@@ -76,6 +76,7 @@ export class ListFilterPanelComponent implements OnInit {
         this.filterConfigs.forEach(config => {
             config.filterOptions.forEach(option => { if (config.type == 'select') option.enabled = false })
         })
+        this._matching.filterPipeUpdate = new Date();
     }
 
     ngOnInit(): void {

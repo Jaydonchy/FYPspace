@@ -1,6 +1,6 @@
 import { identifierModuleUrl } from '@angular/compiler';
 import { Injectable } from '@angular/core';
-import { student_item, lecturer_item } from '../interfaces/list';
+import { student_item, lecturer_item, sortOption } from '../interfaces/list';
 import { BackendService } from './backend.service';
 import { LecturerService } from './lecturer.service';
 
@@ -10,12 +10,12 @@ import { LecturerService } from './lecturer.service';
 export class MatchingService {
     selectedLecturer?: lecturer_item;
     selectedStudent?: student_item;
+    
 
     filterPipeUpdate = new Date();
     constructor(
         private _api: BackendService,
     ) { }
-
 
 
     checkIfLecturerAssigned(studentItem: student_item, lecturerItem: lecturer_item) {

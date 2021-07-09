@@ -29,9 +29,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import {MatCheckboxModule} from '@angular/material/checkbox'; 
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDividerModule } from '@angular/material/divider';
-import {MatRadioModule} from '@angular/material/radio'; 
+import { MatRadioModule } from '@angular/material/radio';
 import { PortalModule } from '@angular/cdk/portal';
 //Additional packages
 //Pipes
@@ -47,6 +47,7 @@ import { LecturerItemComponent } from './pages/matching/parts/lecturer-item/lect
 import { StudentSearchPipe } from './pipes/student-search.pipe';
 import { LecturerSearchPipe } from './pipes/lecturer-search.pipe';
 import { ListFilterPipe } from './pipes/list-filter.pipe';
+import { ListSortPipe } from './pipes/list-sort.pipe';
 
 
 
@@ -67,6 +68,7 @@ import { ListFilterPipe } from './pipes/list-filter.pipe';
         StudentSearchPipe,
         LecturerSearchPipe,
         ListFilterPipe,
+        ListSortPipe,
     ],
     imports: [
         BrowserModule,
@@ -94,7 +96,7 @@ import { ListFilterPipe } from './pipes/list-filter.pipe';
         MatTooltipModule,
         MatSnackBarModule,
         MatDividerModule,
-        MatCheckboxModule,
+        MatSlideToggleModule,
         MatRadioModule,
         PortalModule,
     ],

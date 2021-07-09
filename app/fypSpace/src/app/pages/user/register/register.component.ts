@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
 
 
     register_form = this._fb.group({
-        tp_number: ['', [Validators.required, Validators.minLength(6)]],
+        tp_number: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6), Validators.pattern("^[0-9]*$")]],
         fullname: ['', [Validators.required]],
         level_of_study: ['', [Validators.required]],
         intake_id: ['', Validators.required],
@@ -99,7 +99,7 @@ export class RegisterComponent implements OnInit {
                             horizontalPosition: 'center',
                             verticalPosition: 'top'
                         })
-                        this.formSubmitting =false;
+                        this.formSubmitting = false;
                         console.log(err);
                     }
 

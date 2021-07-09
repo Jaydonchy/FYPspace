@@ -3,13 +3,17 @@ import { user, student, lecturer, lect_field, assignment } from "./db_models";
 export interface listable {
 }
 
-export interface student_item extends listable {
+export interface user_item{
+    user: user,
+}
+
+export interface student_item extends listable,user_item {
     user: user,
     student: student,
     assignment?: assignment,
 }
 
-export interface lecturer_item extends listable {
+export interface lecturer_item extends listable,user_item {
     user: user,
     lecturer: lecturer,
     lect_field?: lect_field[],
@@ -32,4 +36,8 @@ export interface filterOption {
     filter_fn?:(arg:any)=> boolean;
 }
 
+export interface sortOption {
+    disp:string,
+    comparator: (o1:any,o2:any)=>number;
+}
  

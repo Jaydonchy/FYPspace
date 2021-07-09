@@ -1,7 +1,7 @@
 import { Component, Input, Output, OnInit, TemplateRef, ViewChild, ViewContainerRef, EventEmitter } from '@angular/core';
 import { SidenavService } from 'src/app/services/sidenav.service';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { filterConfig, listable } from 'src/app/interfaces/list';
+import { filterConfig, listable,sortOption } from 'src/app/interfaces/list';
 
 @Component({
     selector: 'app-item-list',
@@ -11,6 +11,12 @@ import { filterConfig, listable } from 'src/app/interfaces/list';
 export class ItemListComponent implements OnInit {
     @Input() header = "placeholder list header";
     @ViewChild('filterPanel', { static: true }) filterPanel?: TemplateRef<any>;
+    
+    @Input() sortOptions!:sortOption[]
+    @Input() asc!:boolean
+    @Output() selectedSortEmitter = new EventEmitter<sortOption>();
+    @Output() ascEmitter = new EventEmitter<boolean>();
+
     @ViewChild('sortPanel', { static: true }) sortPanel?: TemplateRef<any>;
     @Output() searchStringEmitter = new EventEmitter<string>();
     searchString = "";
