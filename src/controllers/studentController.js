@@ -1,7 +1,9 @@
 const studentModel = require('../models/studentModel');
 const basicModel = require('../models/basicModel');
 const assignmentModel = require('../models/assignmentModel');
-const { query } = require('express');
+const userModel = require('../models/userModel');
+const { selectStudentWhere } = require('../models/studentModel');
+const { selectUserWhere } = require('../models/userModel');
 
 const getAllCourses = (req, res) => {
     basicModel.selectAll('course')
@@ -61,13 +63,22 @@ const registerNewStudent = (req, res) => {
             intake_id: intake_id.id,
         }
     }
-    studentModel.addNewStudent(student_user)
-        .then(query =>
-            res.status(200).send({ message: 'success', res: query })
-        )
-        .catch(
-            err => res.status(400).send({ message: `error in creating new student Error: ${err}` })
-        );
+    const validateStudentTP = studentModel.selectStudentWhere({ tp_number: tp_number })
+    const validateUserEmail = userModel.selectUserWhere({ email_work: email_work })
+    Promise.all([validateStudentTP, validateUserEmail]).then(([validateStudentTP, validateUserEmail]) => {
+        if (validateStudentTP.length == 0 && validateUserEmail.length == 0) {
+            userModel.insertNewUser(student_user.user)
+                .then(user_id => {
+                    return studentModel.addNewStudent(user_id, student_user.student)
+                }).then(student_id => {
+                    return assignmentModel.insertNewAssignment(student_id);
+                }).then(query =>
+                    res.status(200).send({ message: 'success', res: query })
+                ).catch(
+                    err => res.status(501).send({ message: `error in creating new student Error: ${err}` })
+                );
+        } else res.status(502).send({ message: `Account already created previously` })
+    })
 }
 
 //Getting Student Items for Matching process
@@ -201,7 +212,7 @@ const restructureStudentUser = ({
     }
 }
 
-const getProposedLecturerByStudent = async (req, res) =>{
+const getProposedLecturerByStudent = async (req, res) => {
     const { id } = req.params;
     studentModel.selectProposedLecturerById(id)
         .then(query => res.status(200).send(query))

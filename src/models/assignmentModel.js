@@ -4,6 +4,7 @@ module.exports = {
     selectAllAssignments,
     selectAllAssignmentFields,
     updateLecturer,
+    insertNewAssignment,
 };
 
 async function selectAllAssignments() {

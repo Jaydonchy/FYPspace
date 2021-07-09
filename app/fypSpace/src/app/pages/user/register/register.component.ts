@@ -91,10 +91,11 @@ export class RegisterComponent implements OnInit {
                             horizontalPosition: 'center',
                             verticalPosition: 'top'
                         })
+                        this.formSubmitting = false;
                         this.router.navigate(['..', 'login'], { relativeTo: this.route });
                     },
                     error: err => {
-                        this._snackbar.open('Registration ', 'Unsuccessful!', {
+                        this._snackbar.open(`Registration Unsuccessful: ${err}`, '', {
                             duration: 2500,
                             horizontalPosition: 'center',
                             verticalPosition: 'top'

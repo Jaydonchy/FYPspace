@@ -7,6 +7,8 @@
                     <div class="inner_form_field">
                         <!-- TP Number -->
                         <mat-form-field>
+                            <mat-label>TP Number / Student ID</mat-label>
+                            <mat-label class="prefix" matPrefix>TP </mat-label>
                             <input matInput placeholder="TP Number / Student ID" formControlName="tp_number">
                         </mat-form-field>
                         <!-- Level of Study -->
@@ -89,7 +91,7 @@
                     </div>
                 </div>
                 <app-submit-btn class='submit_button' [formSubmitting]="formSubmitting"></app-submit-btn>
-                
+
             </form>
         </mat-card-content>
     </mat-card>

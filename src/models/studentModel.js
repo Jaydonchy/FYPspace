@@ -4,17 +4,21 @@ module.exports = {
     addNewStudent,
     selectAllStudentUser,
     selectProposedLecturerById,
+    selectStudentWhere,
 }
 
 
-async function addNewStudent({ user, student }) {
-
-    const [user_id] = await db('user').insert(user);
+async function addNewStudent(user_id,student) {
     student.user_id = user_id;
-    //Future: Create Assignment
-    const [query_res] = await db('student').insert(student);
-    return query_res;
+    const [student_id] = await db('student').insert(student);
+    return student_id;
 
+}
+
+async function selectStudentWhere(whereCondition){
+    const res = await db('student').select().where(whereCondition);
+    console.log(res);
+    return res;
 }
 
 async function selectAllStudentUser() {
