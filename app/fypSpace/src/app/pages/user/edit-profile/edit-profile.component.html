@@ -1,1 +1,122 @@
-<p>edit-profile works!</p>
+<div class="">
+    <mat-card class="mat-elevation-z5">
+        <mat-card-content class="">
+            <form [formGroup]="edit_form" (ngSubmit)="onSubmit()">
+                <h2>Edit Profile</h2>
+                <div class="form_fields">
+                    <div class="inner_form_field">
+                        <!-- TP Number -->
+                        <mat-form-field *ngIf="edit_form.contains('tp_number')">
+                            <mat-label>TP Number / Student ID</mat-label>
+                            <mat-label class="prefix" matPrefix>TP </mat-label>
+                            <input matInput placeholder="TP Number / Student ID" formControlName="tp_number">
+                        </mat-form-field>
+                        <!-- Level of Study -->
+                        <mat-form-field *ngIf="edit_form.contains('level_of_study')">
+                            <mat-label>Level of Study</mat-label>
+                            <mat-select disableOptionCentering formControlName="level_of_study">
+                                <mat-option *ngFor=" let level of study_levels$ | async" [value]="level.id">
+                                    {{level.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field *ngIf="edit_form.contains('position_id')">
+                            <mat-label>Position</mat-label>
+                            <mat-select disableOptionCentering formControlName="position_id">
+                                <mat-option *ngFor=" let position of positions$ | async" [value]="position.id">
+                                    {{position.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <!-- Intake / Class Code -->
+                        <mat-form-field *ngIf="edit_form.contains('intake_id')">
+                            <mat-label>Intake/ Class code</mat-label>
+                            <mat-select disableOptionCentering formControlName="intake_id">
+                                <mat-option *ngFor="let intake of this.intakes$ | async" [value]="intake.id">
+                                    {{intake.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field *ngIf="edit_form.contains('location_id')">
+                            <mat-label>Location</mat-label>
+                            <mat-select disableOptionCentering formControlName="location_id">
+                                <mat-option *ngFor=" let location of locations$ | async" [value]="location.id">
+                                    {{location.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <!-- Full Name -->
+                        <mat-form-field>
+                            <input matInput placeholder="Full Name" formControlName="fullname">
+                        </mat-form-field>
+                        <!-- Select your School -->
+                        <mat-form-field>
+                            <mat-label>Select your School</mat-label>
+                            <mat-select disableOptionCentering formControlName="school_id">
+                                <mat-option *ngFor=" let school of schools$ | async" [value]="school.id">
+                                    {{school.description}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <!-- Work Email -->
+                        <mat-form-field>
+                            <input matInput formControlName="email_work" placeholder="APU APSpace / LBEF Email Address"
+                                required>
+                        </mat-form-field>
+                        <!-- Campus -->
+                        <mat-form-field>
+                            <mat-label>Campus</mat-label>
+                            <mat-select disableOptionCentering formControlName="campus_id">
+                                <mat-option *ngFor=" let campus of campus$ | async" [value]="campus.id">
+                                    {{campus.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="inner_form_field">
+                        <!-- Category: Full Time/Part Time -->
+                        <mat-form-field>
+                            <mat-label>Category</mat-label>
+                            <mat-select disableOptionCentering formControlName="is_full_time">
+                                <mat-option *ngFor="let category of categories" [value]="category">
+                                    {{category.title}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <!-- Programme Course B(Sc) -->
+                        <mat-form-field *ngIf="edit_form.contains('course_id')">
+                            <mat-label>Programme / Course</mat-label>
+                            <mat-select disableOptionCentering formControlName="course_id">
+                                <mat-option *ngFor="let course of courses$ | async" [value]="course.id">
+                                    {{course.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field *ngIf="edit_form.contains('department_id')">
+                            <mat-label>Department</mat-label>
+                            <mat-select disableOptionCentering formControlName="department_id">
+                                <mat-option *ngFor=" let department of departments$ | async" [value]="department.id">
+                                    {{department.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <!-- Personal Email -->
+                        <mat-form-field>
+                            <input matInput placeholder="Personal Email Address" formControlName="email_personal">
+                        </mat-form-field>
+                        <!-- Mobile Phone Number -->
+                        <mat-form-field>
+                            <input matInput placeholder="Mobile Phone Number" formControlName="contact_no">
+                        </mat-form-field>
+                        <!-- Password -->
+                        <mat-form-field>
+                            <input type="password" matInput placeholder="Password" formControlName="password">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <app-submit-btn class='submit_button' [btnName]="'Update'" [formSubmitting]="formSubmitting">
+                </app-submit-btn>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

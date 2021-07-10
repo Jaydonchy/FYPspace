@@ -31,6 +31,7 @@ export class RegisterComponent implements OnInit {
     schools$?: Observable<school[]>
     campus$?: Observable<campus[]>
     courses$?: Observable<course[]>
+    submitPath!:string;
     categories = [
         {
             bool_val: 0,
@@ -59,19 +60,19 @@ export class RegisterComponent implements OnInit {
     });
 
     formFieldModels = () => {
-        this._api.doGet<intake[]>('/student/intakes').then(
-            res => this.intakes$ = res
-        );
-        this._api.doGet<study_level[]>('/student/study_level').then(
-            res => this.study_levels$ = res
-        );
-        this._api.doGet<school[]>('/user/schools').then(
+        this._user.getSchools().then(
             res => this.schools$ = res
         );
-        this._api.doGet<campus[]>('/user/campus').then(
+        this._user.getCampus().then(
             res => this.campus$ = res
         );
-        this._api.doGet<course[]>('/student/courses').then(
+        this._student.getIntakes().then(
+            res => this.intakes$ = res
+        );
+        this._student.getStudyLevels().then(
+            res => this.study_levels$ = res
+        );
+        this._student.getCourses().then(
             res => this.courses$ = res
         );
     }

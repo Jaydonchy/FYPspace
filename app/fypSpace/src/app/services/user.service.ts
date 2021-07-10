@@ -49,10 +49,6 @@ export class UserService {
         )!.name : 'Loading';
     }
 
-    getSchoolByIdTest = async (id: number) => {
-        const promise = await this._api.doGet<school>(`/user/school/${id}`);
-        return promise;
-    }
 
     getSchools = async () => {
         const promise = await this._api.doGet<school[]>('/user/schools');
