@@ -2,8 +2,7 @@ const studentModel = require('../models/studentModel');
 const basicModel = require('../models/basicModel');
 const assignmentModel = require('../models/assignmentModel');
 const userModel = require('../models/userModel');
-const { selectStudentWhere } = require('../models/studentModel');
-const { selectUserWhere } = require('../models/userModel');
+const structureHelper = require('../models/userStructureHelper')
 
 const getAllCourses = (req, res) => {
     basicModel.selectAll('course')
@@ -88,7 +87,7 @@ const getAllStudentUsers = async () => {
             return resArr = resArr.map((resElement) => {
                 //Split Student User into Student and User
                 //Restructure studentuser
-                return restructureStudentUser(resElement);
+                return structureHelper.restructureStudentUser(resElement);
             });
         })
         .catch(err => console.log(`getAllStudentUsers: ${err}`));
@@ -100,7 +99,7 @@ const getAllAssignmentWithField = async () => {
         .then(resArr => {
             return resArr = resArr.map(resElement => {
                 //Restructure Assignment to add Assignment field
-                return restructureAssignment(resElement);
+                return structureHelper.restructureAssignment(resElement);
             })
         }).catch(err =>
             console.log(`Error in retrieving Assignments: ${err}`));
@@ -145,71 +144,6 @@ const getAllStudentItems = async (req, res) => {
         })
         .then(items => res.status(200).send(items))
         .catch(err => res.status(500).send({ message: err }));
-}
-
-//Restructure db assignment to match front end interface
-const restructureAssignment = ({
-    id,
-    student_id,
-    title,
-    description,
-    supervisor_id,
-    marker_id,
-    ppf,
-    psf,
-    ir,
-    final }) => {
-    return {
-        assignment_id: id,
-        student_id: student_id,
-        title: title,
-        description: description,
-        supervisor_id: supervisor_id,
-        marker_id: marker_id,
-        ppf: ppf,
-        psf: psf,
-        ir: ir,
-        final: final,
-        assignment_fields: [],
-    };
-}
-
-//Restructure select student inner join user to match frontend interface
-const restructureStudentUser = ({
-    student_id,
-    user_id,
-    level_of_study,
-    course_id,
-    intake_id,
-    tp_number,
-    fullname,
-    email_work,
-    email_personal,
-    contact_no,
-    school_id,
-    campus_id,
-    is_full_time,
-}) => {
-    return {
-        user: {
-            user_id: user_id,
-            fullname: fullname,
-            email_work: email_work,
-            email_personal: email_personal,
-            contact_no: contact_no,
-            school_id: school_id,
-            campus_id: campus_id,
-            is_full_time: is_full_time,
-        },
-        student: {
-            student_id: student_id,
-            tp_number: tp_number,
-            level_of_study: level_of_study,
-            course_id: course_id,
-            intake_id: intake_id,
-        },
-        assignment: {}
-    }
 }
 
 const getProposedLecturerByStudent = async (req, res) => {

@@ -114,3 +114,9 @@ export interface assignment {
     created_at?: Date,
     deleted_at?: Date,
 }
+
+export interface authUser {
+    user:user,
+    lecturer?:lecturer,
+    student?:student,
+}

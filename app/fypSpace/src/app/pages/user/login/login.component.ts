@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { lecturer_item, student_item } from 'src/app/interfaces/list';
 import { AuthService } from 'src/app/services/auth.service';
 import { BackendService } from 'src/app/services/backend.service';
 
@@ -15,8 +18,9 @@ export class LoginComponent implements OnInit {
     formSubmitting = false;
     constructor(
         private _fb: FormBuilder,
-        private _api: BackendService,
         private _auth: AuthService,
+        private _snackbar: MatSnackBar,
+        private _router: Router,
 
     ) { }
 
@@ -26,34 +30,46 @@ export class LoginComponent implements OnInit {
     });;
 
     ngOnInit(): void {
+        this._auth.logOut();
     }
 
     onSubmit() {
         if (this.form.valid) {
             this.formSubmitting = true;
-            this._auth.loginPost(this.form.value).then(
-                res => res.subscribe({
+            this._auth.loginPost(this.form.value).then(res => {
+                res.subscribe({
                     next: res => {
-                        this.formSubmitting = false;
-                        const r = res as Array<Object>;
-                        if (r.length == 1) {
-                            console.log('Login Successful');
-                            let [user] = r;
-                            console.log(user);
+                        if (res.length == 1) {
+                            this._snackbar.open('Login Successful!', '', {
+                                duration: 2000,
+                                horizontalPosition: 'center',
+                                verticalPosition: 'top'
+                            })
+                            let [user] = res;
+                            this._auth.logIn(user);
+                            this.formSubmitting = false;
                         }
                         else {
-                            console.warn('Invalid Login Attempt');
+                            this._snackbar.open('No user found', '', {
+                                duration: 2000,
+                                horizontalPosition: 'center',
+                                verticalPosition: 'top'
+                            })
+                            this.formSubmitting = false;
                         }
                     },
                     error: err => {
                         console.log(err);
                     }
-
                 })
-            )
-
+            });
         } else {
-            console.warn('Login form is not valid')
+            this._snackbar.open('Login was not valid', '', {
+                duration: 1500,
+                horizontalPosition: 'center',
+                verticalPosition: 'top'
+            })
+            this.formSubmitting = false;
         }
     }
 

@@ -2,6 +2,7 @@ const db = require('../Helper/knex-connection');
 
 module.exports = {
     selectAllLecturerUser,
+    selectLecturerUserById,
     selectAllLecturerLoad,
     selectAllLecturerFields,
     selectSimpleLecturerById,
@@ -29,6 +30,32 @@ async function selectAllLecturerUser() {
         )
         .from('lecturer')
         .innerJoin('user', 'lecturer.user_id', 'user.id')
+    return res;
+}
+
+async function selectLecturerUserById(lecturer_id) {
+
+    const res = await db
+        .select(
+            'lecturer.id as lecturer_id',
+            'user.id as user_id',
+            'lecturer.availability',
+            'lecturer.is_pm',
+            'lecturer.is_admin',
+            'lecturer.position_id',
+            'lecturer.department_id',
+            'lecturer.location_id',
+            'user.fullname',
+            'user.email_work',
+            'user.email_personal',
+            'user.contact_no',
+            'user.school_id',
+            'user.campus_id',
+            'user.is_full_time',
+        )
+        .from('lecturer')
+        .innerJoin('user', 'lecturer.user_id', 'user.id')
+        .where({"lecturer.id":lecturer_id})
     return res;
 }
 

@@ -92,7 +92,7 @@ export class RegisterComponent implements OnInit {
                             verticalPosition: 'top'
                         })
                         this.formSubmitting = false;
-                        this.router.navigate(['..', 'login'], { relativeTo: this.route });
+                        this.router.navigate(['login']);
                     },
                     error: err => {
                         this._snackbar.open(`Registration Unsuccessful: ${err}`, '', {

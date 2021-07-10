@@ -32,8 +32,8 @@ export class BackendService {
         return res;
     }
 
-    async doPost(route: string, body: any): Promise<Observable<Object>> {
-        const res = await this._http.post(this.appendRoute(route), body, this.httpOptions)
+    async doPost<T>(route: string, body: any): Promise<Observable<T>> {
+        const res = await this._http.post<T>(this.appendRoute(route), body, this.httpOptions)
             .pipe(
                 catchError(this.handleError)
             );

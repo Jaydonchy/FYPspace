@@ -79,7 +79,6 @@ export class FaqComponent implements OnInit {
     ngOnInit(): void {
         this._route.paramMap.subscribe(params => {
             this.role = params.get('role');
-            console.log(this.role);
         });
     };
 

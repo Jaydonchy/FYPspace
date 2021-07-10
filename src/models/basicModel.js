@@ -3,7 +3,8 @@ const db = require('../Helper/knex-connection');
 module.exports = {
     selectAll,
     selectOneById,
-    selectAllByField
+    selectAllByField,
+    selectAllWhere
 }
 
 async function selectAll(tablename) {
@@ -14,11 +15,18 @@ async function selectAll(tablename) {
     return res;
 }
 
-async function selectAllByField(tablename,fieldname) {
+async function selectAllByField(tablename, fieldname) {
     const res = await db
-    .select(fieldname)
-    .from(tablename)
+        .select(fieldname)
+        .from(tablename)
     return res;
+}
+
+async function selectAllWhere(tablename, whereCondition) {
+    return await db
+        .select()
+        .from(tablename)
+        .where(whereCondition);
 }
 
 async function selectOneById(tablename, id) {
