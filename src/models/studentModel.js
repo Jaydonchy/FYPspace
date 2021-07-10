@@ -17,7 +17,6 @@ async function addNewStudent(user_id,student) {
 
 async function selectStudentWhere(whereCondition){
     const res = await db('student').select().where(whereCondition);
-    console.log(res);
     return res;
 }
 

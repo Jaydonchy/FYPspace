@@ -11,17 +11,18 @@ const routes: Routes = [
     // Application routes here
     // Example
     // {path:'url' , component: 'component'}
-    { path: "matching", component: MatchingComponent},
-    { path: "user/login", component: LoginComponent},
-    { path: "user/register", component: RegisterComponent},
+    { path: "user/login", component: LoginComponent },
+    { path: "user/register", component: RegisterComponent },
     { path: "FAQ/:role", component: FaqComponent },
-    { path: "", component: AboutComponent },
+    { path: "about", component: AboutComponent },
+    { path: "matching", component: MatchingComponent },
+    { path: "", redirectTo: "/about", pathMatch: 'full' },
     { path: "**", component: ErrorPageComponent },
 ];
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(routes,{ onSameUrlNavigation: 'reload' }),
+        RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' }),
     ],
     exports: [RouterModule]
 })

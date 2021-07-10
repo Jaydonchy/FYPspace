@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { BackendService } from 'src/app/services/backend.service';
 
 
@@ -16,8 +16,8 @@ export class LoginComponent implements OnInit {
     constructor(
         private _fb: FormBuilder,
         private _api: BackendService,
-        private route: ActivatedRoute,
-        private router: Router,
+        private _auth: AuthService,
+
     ) { }
 
     form = this._fb.group({
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     onSubmit() {
         if (this.form.valid) {
             this.formSubmitting = true;
-            this._api.doPost('/user/login', this.form.value).then(
+            this._auth.loginPost(this.form.value).then(
                 res => res.subscribe({
                     next: res => {
                         this.formSubmitting = false;
@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit {
                             console.log(user);
                         }
                         else {
-                            console.log(r);
                             console.warn('Invalid Login Attempt');
                         }
                     },

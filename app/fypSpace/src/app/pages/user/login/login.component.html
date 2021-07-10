@@ -9,7 +9,7 @@
                 <mat-form-field>
                     <input matInput placeholder="Password ( Do not enter your APSPACE / LBEF password )" type="password" formControlName="password">
                 </mat-form-field>
-                <app-submit-btn class="submit_button" [formSubmitting]="this.formSubmitting"></app-submit-btn>
+                <app-submit-btn class="submit_button" [btnName]="'Login'" [formSubmitting]="this.formSubmitting"></app-submit-btn>
             </form>
         </mat-card-content>
     </mat-card>

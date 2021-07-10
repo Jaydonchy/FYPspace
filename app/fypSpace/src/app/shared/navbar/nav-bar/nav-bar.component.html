@@ -6,7 +6,7 @@
         <div class="navbar-collapse collapse">
             <ul class="navbar-nav mr-auto">
                 <li *ngFor="let nav_item of left_nav_items">
-                    <div [routerLink]="nav_item.router_link" *ngIf="!childItemExist(nav_item)"
+                    <div [routerLink]="nav_item.router_link" routerLinkActive="active" *ngIf="!childItemExist(nav_item)"
                         class="nav-item remove_focus">
                         <span *ngIf="nav_item.icon === undefined">{{nav_item.display_name}}</span>
                         <mat-icon aria-hidden="false" *ngIf="nav_item.icon != undefined">{{nav_item.icon}}</mat-icon>
@@ -29,7 +29,7 @@
         <div class="navbar-collapse collapse">
             <ul class="navbar-nav mx-auto">
                 <li *ngFor="let nav_item of mid_nav_items">
-                    <div [routerLink]="nav_item.router_link" *ngIf="!childItemExist(nav_item)"
+                    <div [routerLink]="nav_item.router_link" routerLinkActive="active" *ngIf="!childItemExist(nav_item)"
                         class="nav-item remove_focus">
                         <span *ngIf="nav_item.icon === undefined">{{nav_item.display_name}}</span>
                         <mat-icon aria-hidden="false" *ngIf="nav_item.icon != undefined">{{nav_item.icon}}</mat-icon>
@@ -37,7 +37,7 @@
                     <div *ngIf="childItemExist(nav_item)" class="dropdown" dropdown>
                         <a class="nav-link nav-item dropdown-toggle" id="navbardrop" data-toggle="dropdown"
                             dropdownToggle>
-                            <span >{{nav_item.display_name}}</span>
+                            <span>{{nav_item.display_name}}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
                             <a *ngFor="let nav_child of nav_item.childItem" class="dropdown-item"
@@ -52,7 +52,7 @@
         <div class="navbar-collapse collapse">
             <ul class="navbar-nav ml-auto">
                 <li *ngFor="let nav_item of right_nav_items">
-                    <div [routerLink]="nav_item.router_link" *ngIf="!childItemExist(nav_item)"
+                    <div [routerLink]="nav_item.router_link" routerLinkActive="active" *ngIf="!childItemExist(nav_item)"
                         class="nav-item remove_focus">
                         <span *ngIf="nav_item.icon === undefined">{{nav_item.display_name}}</span>
                         <mat-icon aria-hidden="false" *ngIf="nav_item.icon != undefined">{{nav_item.icon}}</mat-icon>
@@ -60,7 +60,7 @@
                     <div *ngIf="childItemExist(nav_item)" class="dropdown" dropdown>
                         <a class="nav-link nav-item dropdown-toggle" id="navbardrop" data-toggle="dropdown"
                             dropdownToggle>
-                            <span >{{nav_item.display_name}}</span>
+                            <span>{{nav_item.display_name}}</span>
 
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>

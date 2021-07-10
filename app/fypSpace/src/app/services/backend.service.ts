@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { resetFakeAsyncZone } from '@angular/core/testing';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +13,7 @@ export class BackendService {
         private _http: HttpClient
     ) { }
 
-    private root = "http://localhost:3000/api";
+    private baseUrl = environment.baseUrl;
     private httpOptions = {
         headers: new HttpHeaders({
             'Content-Type': 'application/json',
@@ -20,7 +21,7 @@ export class BackendService {
     };
 
     appendRoute(route: string): string {
-        return `${this.root}${route}`;
+        return `${this.baseUrl}${route}`;
     }
 
     async doGet<T>(route: string): Promise<Observable<T>> {

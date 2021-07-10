@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
 import { school, campus } from '../interfaces/db_models';
 import { BackendService } from './backend.service';
 

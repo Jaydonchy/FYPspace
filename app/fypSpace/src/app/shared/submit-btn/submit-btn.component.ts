@@ -10,6 +10,7 @@ export class SubmitBtnComponent implements OnInit {
   constructor() { }
 
   @Input() formSubmitting?:boolean;
+  @Input() btnName!:string;
 
   ngOnInit(): void {
   }

@@ -15,7 +15,6 @@ export class NavBarComponent implements OnInit {
             router_link: ["/Home"],
             icon:"home"
         },
-
     ];
 
     mid_nav_items: nav_item[] = [
@@ -28,9 +27,10 @@ export class NavBarComponent implements OnInit {
     ];
 
     right_nav_items: nav_item[] = [
+        
         {
             display_name: "About",
-            router_link: ["/"],
+            router_link: ["/about"],
         },
         {
             display_name: "FAQs",

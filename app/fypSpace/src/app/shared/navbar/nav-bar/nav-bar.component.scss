@@ -16,11 +16,17 @@
         font-size:20px;
         padding: 10px 15px;
         color:$primary_text;
+        border-radius:5px;
         &:hover{
             background-color: $primary_color_lighter;
             color: $primary_text_lighter;
             border-radius:5px;
             cursor: pointer;
         }
+        &.active{
+            background-color: $secondary_color;
+            color:$secondary_text_lighter;
+        }
     }
 }
+
