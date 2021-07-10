@@ -6,6 +6,7 @@ module.exports = {
     selectAllLecturerLoad,
     selectAllLecturerFields,
     selectSimpleLecturerById,
+    updateLecturer,
 }
 
 async function selectAllLecturerUser() {
@@ -33,6 +34,12 @@ async function selectAllLecturerUser() {
     return res;
 }
 
+async function updateLecturer(lecturer_id, updateObject) {
+    return await db('lecturer')
+        .where({ id: lecturer_id })
+        .update(updateObject)
+}
+
 async function selectLecturerUserById(lecturer_id) {
 
     const res = await db
@@ -55,7 +62,7 @@ async function selectLecturerUserById(lecturer_id) {
         )
         .from('lecturer')
         .innerJoin('user', 'lecturer.user_id', 'user.id')
-        .where({"lecturer.id":lecturer_id})
+        .where({ "lecturer.id": lecturer_id })
     return res;
 }
 
@@ -67,7 +74,7 @@ async function selectSimpleLecturerById(id) {
         )
         .from('lecturer')
         .where({
-            "lecturer.id" : id,
+            "lecturer.id": id,
         })
         .innerJoin('user', 'lecturer.user_id', 'user.id')
         .limit(1);

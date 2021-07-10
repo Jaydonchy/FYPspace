@@ -6,19 +6,26 @@ module.exports = {
     selectStudentUserById,
     selectProposedLecturerById,
     selectStudentWhere,
+    updateStudent,
 }
 
 
-async function addNewStudent(user_id,student) {
+async function addNewStudent(user_id, student) {
     student.user_id = user_id;
     const [student_id] = await db('student').insert(student);
     return student_id;
 
 }
 
-async function selectStudentWhere(whereCondition){
+async function selectStudentWhere(whereCondition) {
     const res = await db('student').select().where(whereCondition);
     return res;
+}
+
+async function updateStudent(student_id, updateObject) {
+    return await db('student')
+        .where({ id: student_id })
+        .update(updateObject);
 }
 
 async function selectAllStudentUser() {
@@ -63,7 +70,7 @@ async function selectStudentUserById(student_id) {
         )
         .from('student')
         .innerJoin('user', 'student.user_id', 'user.id')
-        .where({"student.id":student_id})
+        .where({ "student.id": student_id })
     return res;
 }
 
@@ -85,17 +92,17 @@ async function selectProposedLecturerById(id) {
         'lecturerUser.fullname AS lecturer_name',
         'proposed.priority'
     ).from('proposed_lecturer AS proposed')
-    .leftJoin(
-        db.select('lecturer.id AS id', 'user.fullname AS fullname')
-        .from('lecturer')
-        .leftJoin('user','lecturer.user_id','user.id')
-        .as('lecturerUser'),
-        'lecturerUser.id',
-        'proposed.lecturer_id'
-    )
-    .where({'proposed.student_id':id})
-    .orderBy('proposed.student_id','asc')
-    .orderBy('priority','asc');
+        .leftJoin(
+            db.select('lecturer.id AS id', 'user.fullname AS fullname')
+                .from('lecturer')
+                .leftJoin('user', 'lecturer.user_id', 'user.id')
+                .as('lecturerUser'),
+            'lecturerUser.id',
+            'proposed.lecturer_id'
+        )
+        .where({ 'proposed.student_id': id })
+        .orderBy('proposed.student_id', 'asc')
+        .orderBy('priority', 'asc');
     return res;
 }
 

@@ -80,6 +80,54 @@ const registerNewStudent = (req, res) => {
     })
 }
 
+const updateStudentProfile = async (req, res) => {
+    const {
+        user_id,
+        tp_number,
+        fullname,
+        level_of_study,
+        intake_id,
+        password,
+        school_id,
+        email_work,
+        email_personal,
+        student_id,
+        contact_no,
+        campus_id,
+        is_full_time,
+        course_id
+    } = req.body;
+    const student_user = {
+        user: {
+            fullname: fullname,
+            password: password,
+            school_id: school_id,
+            campus_id: campus_id,
+            email_work: email_work,
+            email_personal: email_personal,
+            contact_no: contact_no,
+            is_full_time: is_full_time.bool_val,
+        },
+        student: {
+            level_of_study: level_of_study,
+            tp_number: tp_number,
+            course_id: course_id,
+            intake_id: intake_id,
+        }
+    }
+    const validateStudentTP = studentModel.selectStudentWhere({ tp_number: tp_number }).then(q => q.filter(e => e.id != student_id));
+    const validateUserEmail = userModel.selectUserWhere({ email_work: email_work }).then(q => q.filter(e => e.id != user_id));
+    Promise.all([validateStudentTP, validateUserEmail]).then(([validateStudentTP, validateUserEmail]) => {
+        if (validateStudentTP.length == 0 && validateUserEmail.length == 0) {
+            userModel.updateUser(user_id, student_user.user)
+                .then(studentModel.updateStudent(student_id, student_user.student))
+                .then(query => res.status(200).send({ query: query }))
+                .catch(err => res.status(500).send({ message: `error in updating student ${err}` }))
+        } else res.status(502).send({ message: `TP Number or Email already have an account` })
+    })
+
+}
+
 //Getting Student Items for Matching process
 const getAllStudentUsers = async () => {
     return await studentModel.selectAllStudentUser()
@@ -161,4 +209,5 @@ module.exports = {
     getStudentList,
     getAllStudentItems,
     getProposedLecturerByStudent,
+    updateStudentProfile,
 }

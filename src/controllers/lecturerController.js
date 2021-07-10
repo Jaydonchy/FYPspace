@@ -1,6 +1,7 @@
 const basicModel = require('../models/basicModel');
 // const assignmentModel = require('../models/assignmentModel');
 const lecturerModel = require('../models/lecturerModel');
+const userModel = require('../models/userModel')
 const structureHelper = require('../models/userStructureHelper')
 
 
@@ -30,7 +31,6 @@ const getAllLecturerUser = async () => {
             });
         })
         .catch(err => console.log(`getLecturerUser: ${err}`))
-
 }
 
 const getLecturerNameById = async (req, res) => {
@@ -38,6 +38,50 @@ const getLecturerNameById = async (req, res) => {
     return await lecturerModel.selectSimpleLecturerById(id)
         .then(query => res.status(200).send(query[0]))
         .catch(err => res.status(500).send({ message: `lecturer not found :${err}` }))
+}
+
+const updateLecturerProfile = async (req, res) => {
+    const {
+        user_id,
+        fullname,
+        password,
+        school_id,
+        campus_id,
+        email_work,
+        email_personal,
+        contact_no,
+        is_full_time,
+        lecturer_id,
+        position_id,
+        location_id,
+        department_id
+    } = req.body;
+    const lecturerUser = {
+        user: {
+            fullname: fullname,
+            password: password,
+            school_id: school_id,
+            campus_id: campus_id,
+            email_work: email_work,
+            email_personal: email_personal,
+            contact_no: contact_no,
+            is_full_time: is_full_time.bool_val,
+        },
+        lecturer: {
+            position_id: position_id,
+            location_id: location_id,
+            department_id: department_id,
+        }
+    }
+    const validateUserEmail = userModel.selectUserWhere({ email_work: email_work }).then(q => q.filter(e => e.id != user_id));
+    validateUserEmail.then(validation => {
+        if (validation.length == 0) {
+            userModel.updateUser(user_id, lecturerUser.user)
+                .then(lecturerModel.updateLecturer(lecturer_id, lecturerUser.lecturer))
+                .then(query => res.status(200).send({ query: query }))
+                .catch(err => res.status(500).send({ message: `error in updating lecturer ${err}` }))
+        } else res.status(502).send({ message: `Email already have an account` })
+    })
 }
 
 const getAllLecturerItems = async (req, res) => {
@@ -76,4 +120,5 @@ module.exports = {
     getAllLocation,
     getAllPosition,
     getLecturerNameById,
+    updateLecturerProfile,
 }

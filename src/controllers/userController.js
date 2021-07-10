@@ -1,5 +1,4 @@
 //Require Model
-const userModel = require('../models/userModel');
 const basicModel = require('../models/basicModel');
 
 //Methods
@@ -23,6 +22,7 @@ const getSchoolById = (req, res) => {
         .then(q => res.status(200).send(q))
         .catch(err => res.status(400).send({ message: `error in getting school by id ${err}` }));
 }
+
 
 //Exports
 module.exports = {

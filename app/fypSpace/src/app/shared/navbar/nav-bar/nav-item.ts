@@ -22,7 +22,7 @@ export function getNavItems():nav_itemConfig {
 
 const home: nav_item = {
     display_name: "Home",
-    router_link: ["/Home"],
+    router_link: ["/dashboard"],
     icon: "home",
 }
 

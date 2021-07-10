@@ -23,10 +23,15 @@ export class AuthService {
         private _snackbar: MatSnackBar,
     ) {
         //Dev
-        this.loginPost({email_work:"testLogin@staffmail", password:'12345678'}).then( res=>{
-            res.subscribe(user=> {this.logIn(user[0])})
+        this.loginPost({ email_work: "testLogin@staffmail", password: '12345678' }).then(res => {
+            res.subscribe(user => { this.logIn(user[0]) })
         })
-            
+
+    }
+
+    refreshSessionUser() {
+        this._api.doPost<authUser[]>('/user/login/refresh', { user_id: this.loggedInUser?.user.user_id })
+            .then(res => res.subscribe(authUsers => this.loggedInUser = authUsers[0]))
     }
 
     loginPost = (form: { email_work: string, password: string }) => {
@@ -38,6 +43,10 @@ export class AuthService {
         else if (user.student) this.loggedInUser = user as student_item;
         this._router.navigate(['about']);
         this.loggedInUser$.next()
+    }
+
+    getPassword = () => {
+        return this._api.doPost<string>('/user/getPassword', { user_id: this.loggedInUser?.user.user_id })
     }
 
     logOut = () => {

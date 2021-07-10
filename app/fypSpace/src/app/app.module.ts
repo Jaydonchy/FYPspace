@@ -16,6 +16,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 //Angular Material
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -48,6 +49,7 @@ import { StudentSearchPipe } from './pipes/student-search.pipe';
 import { LecturerSearchPipe } from './pipes/lecturer-search.pipe';
 import { ListFilterPipe } from './pipes/list-filter.pipe';
 import { ListSortPipe } from './pipes/list-sort.pipe';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 
 
@@ -69,6 +71,7 @@ import { ListSortPipe } from './pipes/list-sort.pipe';
         LecturerSearchPipe,
         ListFilterPipe,
         ListSortPipe,
+        DashboardComponent,
     ],
     imports: [
         BrowserModule,
@@ -83,6 +86,7 @@ import { ListSortPipe } from './pipes/list-sort.pipe';
         AccordionModule.forRoot(),
         ButtonsModule.forRoot(),
         TooltipModule.forRoot(),
+        TabsModule.forRoot(),
         MatCardModule,
         MatFormFieldModule,
         MatInputModule,
