@@ -1,5 +1,5 @@
 //Require Model
-const basicModel = require('../models/basicModel');
+const basicModel = require('../models/basicModel')
 
 //Methods
 

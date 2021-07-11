@@ -1,8 +1,10 @@
+const assignmentModel = require('../models/assignmentModel');
 const basicModel = require('../models/basicModel');
 // const assignmentModel = require('../models/assignmentModel');
 const lecturerModel = require('../models/lecturerModel');
-const userModel = require('../models/userModel')
-const structureHelper = require('../models/userStructureHelper')
+const userModel = require('../models/userModel');
+const userStructureHelper = require('../models/StructureHelper');
+const structureHelper = require('../models/StructureHelper')
 
 
 const getAllDepartment = async (req, res) => {
@@ -114,6 +116,21 @@ const getAllLecturerItems = async (req, res) => {
         .catch(err => res.status(500).send({ message: err }))
 }
 
+const getLecturerWorkLoad = async (req, res) => {
+    const { lecturer_id } = req.params;
+    assignmentModel.selectLecturerLoadById(lecturer_id)
+        .then(query => query.map(userStructureHelper.restructureLecturerWorkload))
+        .then(query => res.status(200).send(query))
+        .catch(err => res.status(500).send({ message: err }))
+}
+
+const getLecturerMeetingLogs = async (req, res) => {
+    const { lecturer_id } = req.params;
+    assignmentModel.selectMeetingLogsByLecturerId(lecturer_id)
+        .then(query => res.status(200).send(query))
+        .catch(err => res.status(500).send({ message: err }))
+}
+
 module.exports = {
     getAllLecturerItems,
     getAllDepartment,
@@ -121,4 +138,6 @@ module.exports = {
     getAllPosition,
     getLecturerNameById,
     updateLecturerProfile,
+    getLecturerWorkLoad,
+    getLecturerMeetingLogs
 }

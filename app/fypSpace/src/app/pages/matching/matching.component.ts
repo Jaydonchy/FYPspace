@@ -352,7 +352,6 @@ export class MatchingComponent implements OnInit {
     }
 
     cancelSelection() {
-        console.log(this.student_Sorter)
         this._matching.selectedLecturer = undefined;
         this._matching.selectedStudent = undefined;
         this.doCheck();

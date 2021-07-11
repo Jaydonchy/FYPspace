@@ -1,0 +1,50 @@
+@import "../../../../styles/variables";
+.assignment_info {
+    display: flex;
+    justify-content: space-between;
+    .info_section {
+        width: 49%;
+        .info_key{
+            color:$primary_color_darker;
+            font-weight:bold;
+            margin-right:1vw;
+        }
+        .info_value{
+            text-align:right;
+        }
+    }
+}
+
+.assignment_topic {
+    display: flex;
+    flex-direction: column;
+    .assignment_title {
+        font-size: 20px;
+        text-align: center;
+    }
+    .assignment_description {
+    }
+}
+.document_tab {
+    height:35vh;
+    max-height: 35vh;
+    overflow-y:overlay;
+    .document {
+        background-color: #ffffff;
+        height: 100%;
+        color: black;
+        overflow-y: scroll;
+        overflow: overlay;
+        display: flex;
+        flex-direction: column;
+        padding: 1vh 1vw;
+        .document_section {
+            margin-bottom:2vh;
+            .title {
+                font-weight: bold;
+            }
+            .content {
+            }
+        }
+    }
+}

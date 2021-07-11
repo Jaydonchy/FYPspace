@@ -1,0 +1,91 @@
+<div class="table_wrapper">
+    <table mat-table [fixedLayout]="true" class="mat_table" [dataSource]="lecturerWorkloadData">
+        <!-- Position Column -->
+        <ng-container matColumnDef="student_name">
+            <th mat-header-cell *matHeaderCellDef> Student </th>
+            <td mat-cell *matCellDef="let element">
+                {{element.student.fullname}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="intake_name">
+            <th mat-header-cell *matHeaderCellDef> Intake </th>
+            <td mat-cell *matCellDef="let element"> {{element.intake.intake_name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="assignment_title">
+            <th mat-header-cell *matHeaderCellDef> Title </th>
+            <td mat-cell *matCellDef="let element"> {{element.assignment.assignment_title}} </td>
+        </ng-container>
+        <ng-container matColumnDef="view_assignment">
+            <th mat-header-cell *matHeaderCellDef> View </th>
+            <td mat-cell *matCellDef="let element">
+                <button (click)="viewAssignment(element.assignment.assignment_id)" mat-flat-button color="accent"> View </button>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="ppf_completed">
+            <th mat-header-cell *matHeaderCellDef > PPF completed </th>
+            <td mat-cell *matCellDef="let element">
+                <span *ngIf="element.assignment.ppf_completed" class="green">
+                    <mat-icon>task_alt</mat-icon>
+                </span>
+                <span *ngIf="!element.assignment.ppf_completed" class="red">
+                    <mat-icon>close</mat-icon>
+                </span>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="ppf_approved">
+            <th mat-header-cell *matHeaderCellDef> PPF approved </th>
+            <td mat-cell *matCellDef="let element">
+                <span *ngIf="element.assignment.ppf_approved" class="green">
+                    <mat-icon>task_alt</mat-icon>
+                </span>
+                <span *ngIf="!element.assignment.ppf_approved" class="red">
+                    <mat-icon>close</mat-icon>
+                </span></td>
+        </ng-container>
+        <ng-container matColumnDef="psf_completed">
+            <th mat-header-cell *matHeaderCellDef> PSF approved </th>
+            <td mat-cell *matCellDef="let element">
+                <span *ngIf="element.assignment.psf_completed" class="green">
+                    <mat-icon>task_alt</mat-icon>
+                </span>
+                <span *ngIf="!element.assignment.psf_completed" class="red">
+                    <mat-icon>close</mat-icon>
+                </span>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="psf_approved">
+            <th mat-header-cell *matHeaderCellDef> PSF completed </th>
+            <td mat-cell *matCellDef="let element">
+                <span *ngIf="element.assignment.psf_approved" class="green">
+                    <mat-icon>task_alt</mat-icon>
+                </span>
+                <span *ngIf="!element.assignment.psf_approved" class="red">
+                    <mat-icon>close</mat-icon>
+                </span>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="ir">
+            <th mat-header-cell *matHeaderCellDef> IR </th>
+            <td mat-cell *matCellDef="let element">
+                <span *ngIf="element.assignment.ir" class="green">
+                    <mat-icon>task_alt</mat-icon>
+                </span>
+                <span *ngIf="!element.assignment.ir" class="red">
+                    <mat-icon>close</mat-icon>
+                </span> </td>
+        </ng-container>
+        <ng-container matColumnDef="final">
+            <th mat-header-cell *matHeaderCellDef> Final </th>
+            <td mat-cell *matCellDef="let element">
+                <span *ngIf="element.assignment.final" class="green">
+                    <mat-icon>task_alt</mat-icon>
+                </span>
+                <span *ngIf="!element.assignment.final" class="red">
+                    <mat-icon>close</mat-icon>
+                </span> </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

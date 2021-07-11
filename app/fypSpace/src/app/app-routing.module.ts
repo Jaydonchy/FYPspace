@@ -13,6 +13,10 @@ import { StudentDashboardComponent } from './pages/dashboard/student-dashboard/s
 import { LecturerDashboardComponent } from './pages/dashboard/lecturer-dashboard/lecturer-dashboard.component';
 import { StudentGuardGuard } from './guards/student-guard.guard';
 import { LecturerGuardGuard } from './guards/lecturer-guard.guard';
+import { RoleAuthGuardGuard } from './guards/role-auth-guard.guard';
+import { AssignmentComponent } from './pages/assignment/assignment.component';
+import { AssignmentViewComponent } from './pages/assignment/parts/assignment-view/assignment-view.component';
+import { AssignmentListComponent } from './pages/assignment/parts/assignment-list/assignment-list.component';
 
 const routes: Routes = [
     // Application routes here
@@ -24,6 +28,22 @@ const routes: Routes = [
     { path: "FAQ/:role", component: FaqComponent },
     { path: "about", component: AboutComponent },
     { path: "matching", component: MatchingComponent },
+    {
+        path: "assignment",
+        component: AssignmentComponent,
+        canActivateChild: [SessionAuthGuard],
+        children: [
+            {
+                path: "view/:id",
+                component: AssignmentViewComponent,
+                canActivate: [LecturerGuardGuard]
+            },
+            {
+                path: '',
+                component: AssignmentListComponent,
+            }
+        ]
+    },
     {
         path: "dashboard",
         component: DashboardComponent,
@@ -38,6 +58,11 @@ const routes: Routes = [
                 path: "lecturer",
                 component: LecturerDashboardComponent,
                 canActivate: [LecturerGuardGuard]
+            },
+            {
+                path: '',
+                component: DashboardComponent,
+                canActivate: [RoleAuthGuardGuard]
             }
         ]
     },
@@ -74,4 +99,7 @@ export const routingComponents = [
     DashboardComponent,
     StudentDashboardComponent,
     LecturerDashboardComponent,
+    AssignmentViewComponent,
+    AssignmentListComponent,
+    AssignmentComponent
 ]

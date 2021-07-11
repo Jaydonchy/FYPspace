@@ -11,6 +11,9 @@
     }
     .navbar-logo{
         padding:0px 2vw;
+        .fypSpace{
+            color:$primary_text_darker; 
+        }
     }
     .nav-item{
         font-size:20px;

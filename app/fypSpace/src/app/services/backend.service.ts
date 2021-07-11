@@ -24,7 +24,7 @@ export class BackendService {
         return `${this.baseUrl}${route}`;
     }
 
-    async doGet<T>(route: string): Promise<Observable<T>> {
+    async doGet<T>(route: string,body?:any): Promise<Observable<T>> {
         const res = await this._http.get<T>(this.appendRoute(route))
             .pipe(
                 catchError(this.handleError)

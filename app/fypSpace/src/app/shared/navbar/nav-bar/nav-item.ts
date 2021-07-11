@@ -14,7 +14,7 @@ export interface nav_itemConfig {
 export function getNavItems():nav_itemConfig {
     return {
         left_nav_items:[home],
-        mid_nav_items:[match],
+        mid_nav_items:[match,assignments],
         right_nav_items:[about,faq,login,register,editProfile,logout]
     }
 }
@@ -73,4 +73,10 @@ const logout: nav_item = {
     display_name: "Log out",
     router_link: ["/logout"],
     icon:'logout'
+}
+
+const assignments: nav_item = {
+    display_name:"Assignments",
+    router_link: ["/assignment"],
+    icon:'article'
 }

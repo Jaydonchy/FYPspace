@@ -1,0 +1,33 @@
+.table_wrapper {
+    height: 30vh;
+    max-height: 30vh;
+    overflow-y: overlay;
+    .mat_table {
+        width: 100%;
+        .mat-column-student_name,
+        .mat-column-assignment_title {
+            padding: 0 1vw;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .mat-column-student_name,
+        .mat-column-assignment_title {
+            width:15%
+        }
+
+        .mat-column-view_assignment{
+            text-align:center;
+        }
+
+        .mat-column-ppf_completed,
+        .mat-column-ppf_approved,
+        .mat-column-psf_completed,
+        .mat-column-psf_approved,
+        .mat-column-ir,
+        .mat-column-final{
+            text-align:right;
+        }
+        
+    }
+}

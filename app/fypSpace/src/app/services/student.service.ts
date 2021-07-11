@@ -49,7 +49,7 @@ export class StudentService {
         )
     }
 
-    getIntakeById(id: number) {
+    getIntakeNameById(id: number) {
         return this.intakes != undefined ? this.intakes.find(intake =>
             intake.id == id
         )!.name : 'Loading';
@@ -61,7 +61,7 @@ export class StudentService {
         })!.name : 'Loading';
     }
 
-    getCourseById(id: number) {
+    getCourseNameById(id: number) {
         return this.courses != undefined ? this.courses.find(course =>
             course.id == id
         )!.name : 'Loading';

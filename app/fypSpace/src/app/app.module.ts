@@ -33,7 +33,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatTableModule } from '@angular/material/table';
 import { PortalModule } from '@angular/cdk/portal';
+import {MatSortModule} from '@angular/material/sort'; 
 //Additional packages
 //Pipes
 import { FilterPipePipe } from './pipes/filter-pipe.pipe';
@@ -50,6 +52,10 @@ import { LecturerSearchPipe } from './pipes/lecturer-search.pipe';
 import { ListFilterPipe } from './pipes/list-filter.pipe';
 import { ListSortPipe } from './pipes/list-sort.pipe';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { LecturerWorkloadTableComponent } from './pages/dashboard/lecturer-dashboard/parts/lecturer-workload-table/lecturer-workload-table.component';
+import { LecturerMeetingTableComponent } from './pages/dashboard/lecturer-dashboard/parts/lecturer-meeting-table/lecturer-meeting-table.component';
+import { AssignmentComponent } from './pages/assignment/assignment.component';
+import { AssignmentViewComponent } from './pages/assignment/parts/assignment-view/assignment-view.component';
 
 
 
@@ -72,6 +78,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
         ListFilterPipe,
         ListSortPipe,
         DashboardComponent,
+        LecturerWorkloadTableComponent,
+        LecturerMeetingTableComponent,
     ],
     imports: [
         BrowserModule,
@@ -102,6 +110,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
         MatDividerModule,
         MatSlideToggleModule,
         MatRadioModule,
+        MatTableModule,
+        MatSortModule,
         PortalModule,
     ],
     providers: [],

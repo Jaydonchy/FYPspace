@@ -67,7 +67,7 @@ button.active:focus {
 
 mat-card.float_design {
     border-radius: 5px;
-    background-color: #e1e8ff;
+    background-color: #ffffff;
     margin-bottom: 1vh;
 }
 
@@ -81,6 +81,14 @@ mat-card.float_design {
             color: $secondary_text;
         }
     }
+}
+
+//Helper Color
+.green {
+    color:rgb(18, 148, 23);
+}
+.red {
+    color:rgb(175, 33, 33);
 }
 
 //Helper Styles
@@ -111,6 +119,7 @@ a:hover {
         }
     }
 }
+
 //Helper Styles Hyperlink
 .remove_focus:focus {
     outline: 0;

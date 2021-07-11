@@ -18,15 +18,14 @@ export class StudentSearchPipe implements PipeTransform {
             return items;
         }
         const searchString = searchValue.toLocaleLowerCase();
-        // console.log(items);
         return items.filter(item => {
             return item.user.fullname.toLocaleLowerCase().includes(searchString) ||
                 this._user.getCampusNameById(item.user.campus_id).toLocaleLowerCase().includes(searchString) ||
                 this._user.getSchoolNameById(item.user.school_id).toLocaleLowerCase().includes(searchString) ||
                 item.student.tp_number.toLocaleLowerCase().includes(searchString) ||
-                this._student.getCourseById(item.student.course_id).toLocaleLowerCase().includes(searchString) ||
-                item.assignment?.title.toLocaleLowerCase().includes(searchString)||
-                this._student.getIntakeById(item.student.intake_id).toLocaleLowerCase().includes(searchString);
+                this._student.getCourseNameById(item.student.course_id).toLocaleLowerCase().includes(searchString) ||
+                (item.assignment?.title ? item.assignment.title:'' ).toLocaleLowerCase().includes(searchString)||
+                this._student.getIntakeNameById(item.student.intake_id).toLocaleLowerCase().includes(searchString);
         })
     }
 

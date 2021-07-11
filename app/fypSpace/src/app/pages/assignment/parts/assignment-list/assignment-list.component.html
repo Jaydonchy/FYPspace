@@ -1,0 +1,22 @@
+<mat-card class="mat-elevation-z4 float_design workload_table">
+    <tabset [justified]="true">
+        <tab [customClass]="'tab primary'" heading="All Assignment Workload">
+            <div class="tab_content">
+                <app-lecturer-workload-table [lecturerWorkloadData]="this.allWorkload">
+                </app-lecturer-workload-table>
+            </div>
+        </tab>
+        <tab [customClass]="'tab primary'" heading="Supervisory Workload">
+            <div class="tab_content">
+                <app-lecturer-workload-table [type]="'supervisor'" [lecturerWorkloadData]="this.supervisorWorkload">
+                </app-lecturer-workload-table>
+            </div>
+        </tab>
+        <tab [customClass]="'tab primary'" heading="Marker Workload">
+            <div class="tab_content">
+                <app-lecturer-workload-table [type]="'marker'" [lecturerWorkloadData]="this.markerWorkload">
+                </app-lecturer-workload-table>
+            </div>
+        </tab>
+    </tabset>
+</mat-card>

@@ -99,6 +99,11 @@ export interface assignment_field {
     field_name: string,
 }
 
+export interface document {
+    completed:boolean
+    approved:boolean
+}
+
 export interface assignment {
     id: number,
     student_id: number,
@@ -120,3 +125,57 @@ export interface authUser {
     lecturer?:lecturer,
     student?:student,
 }
+
+
+    export interface assignmentView{
+        assignment_id: number,
+        assignment_title: string,
+        assignment_description: string,
+        student: {
+            user_id: number,
+            student_id: number,
+            fullname: string,
+            tp_number: string,
+        },
+        course: {
+            course_id: number,
+            course_name: string
+        },
+        intake: {
+            intake_id: number,
+            intake_name: string,
+            ppf_submission: Date,
+            psf_submission: Date,
+            ir_submission: Date,
+            final_submission: Date,
+        },
+        supervisor: {
+            supervisor_id: number,
+            supervisor_name: string
+        },
+        marker: {
+            marker_id: number,
+            marker_name: string
+        },
+        ppf: {
+            ppf_id: number,
+            introduction: string,
+            problem_statement: string,
+            project_aim: string,
+            project_obj: string,
+            lit_review: string,
+            deliverables: string,
+            completed: boolean,
+            approved: boolean,
+        },
+        psf: {
+            psf_id: number,
+            project_background: string,
+            project_objectives: string,
+            resources: string,
+            research: string,
+            dev_plan: string,
+            test_plan: string
+        }
+    }
+    

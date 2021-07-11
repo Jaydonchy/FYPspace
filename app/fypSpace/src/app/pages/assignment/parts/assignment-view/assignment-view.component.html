@@ -1,0 +1,93 @@
+<button mat-raised-button color="accent" (click)="back()"> Back </button>
+<div *ngIf="assignmentView">
+    <mat-card class="mat-elevation-z4 float_design assignment_info">
+        <div class="info_section">
+            <div>{{assignmentView.student.fullname}}</div>
+            <div>{{assignmentView.student.tp_number}}</div>
+            <div>{{assignmentView.intake.intake_name}}</div>
+            <div>{{assignmentView.course.course_name}}</div>
+        </div>
+        <div class="info_section">
+            <div><span class="info_key">Supervisor:</span> <span
+                    class="info_value">{{assignmentView.supervisor.supervisor_name}}</span> </div>
+            <div><span class="info_key">Marker:</span> <span
+                    class="info_value">{{assignmentView.marker.marker_name}}</span></div>
+            <div><span class="info_key">PPF Submission Date: </span><span
+                    class="info_value">{{assignmentView.intake.ppf_submission|date:'short'}}</span></div>
+            <div><span class="info_key">PSF Submission Date: </span><span
+                    class="info_value">{{assignmentView.intake.psf_submission|date:'short'}}</span></div>
+            <div><span class="info_key">IR Submission Date:</span> <span
+                    class="info_value">{{assignmentView.intake.ir_submission|date:'short'}}</span></div>
+            <div><span class="info_key">Final Date:</span> <span
+                    class="info_value">{{assignmentView.intake.final_submission|date:'short'}}</span></div>
+        </div>
+    </mat-card>
+    <mat-card class="mat-elevation-z4 float_design assignment_topic">
+        <div class="assignment_title">
+            {{assignmentView.assignment_title}}
+        </div>
+        <div class="assignment_description">
+            {{assignmentView.assignment_description}}
+        </div>
+    </mat-card>
+    <mat-card class="mat-elevation-z4 float_design">
+        <tabset [justified]="true">
+            <tab [customClass]="'tab primary'" class="document_tab" heading="PPF">
+                <div class="document">
+                    <div class="document_section">
+                        <div class="title">Introduction</div>
+                        <div class="content">{{assignmentView.ppf.introduction}}</div>
+                    </div>
+                    <div class="document_section">
+                        <div class="title">Problem Statement</div>
+                        <div class="content">{{assignmentView.ppf.problem_statement}}</div>
+                    </div>
+                    <div class="document_section">
+                        <div class="title">Project Aim</div>
+                        <div class="content">{{assignmentView.ppf.project_aim}}</div>
+                    </div>
+                    <div class="document_section">
+                        <div class="title">Project Objective</div>
+                        <div class="content">{{assignmentView.ppf.project_obj}}</div>
+                    </div>
+                    <div class="document_section">
+                        <div class="title">Literature Review</div>
+                        <div class="content">{{assignmentView.ppf.lit_review}}</div>
+                    </div>
+                    <div class="document_section">
+                        <div class="title">Deliverables</div>
+                        <div class="content">{{assignmentView.ppf.deliverables}}</div>
+                    </div>
+                </div>
+            </tab>
+            <tab [customClass]="'tab primary'" class="document_tab" heading="PSF">
+                <div class="document">
+                    <div class="document_section">
+                        <div class="title">Project Background</div>
+                        <div class="content">{{assignmentView.psf.project_background}}</div>
+                    </div>
+                    <div class="document_section">
+                        <div class="title">Project Objectives</div>
+                        <div class="content">{{assignmentView.psf.project_objectives}}</div>
+                    </div>
+                    <div class="document_section">
+                        <div class="title">Resources</div>
+                        <div class="content">{{assignmentView.psf.resources}}</div>
+                    </div>
+                    <div class="document_section">
+                        <div class="title">Research</div>
+                        <div class="content">{{assignmentView.psf.research}}</div>
+                    </div>
+                    <div class="document_section">
+                        <div class="title">Development Plan</div>
+                        <div class="content">{{assignmentView.psf.dev_plan}}</div>
+                    </div>
+                    <div class="document_section">
+                        <div class="title">Test Plan</div>
+                        <div class="content">{{assignmentView.psf.test_plan}}</div>
+                    </div>
+                </div>
+            </tab>
+        </tabset>
+    </mat-card>
+</div>

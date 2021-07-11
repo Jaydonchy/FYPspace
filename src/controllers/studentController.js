@@ -2,7 +2,7 @@ const studentModel = require('../models/studentModel');
 const basicModel = require('../models/basicModel');
 const assignmentModel = require('../models/assignmentModel');
 const userModel = require('../models/userModel');
-const structureHelper = require('../models/userStructureHelper')
+const structureHelper = require('../models/StructureHelper')
 
 const getAllCourses = (req, res) => {
     basicModel.selectAll('course')
