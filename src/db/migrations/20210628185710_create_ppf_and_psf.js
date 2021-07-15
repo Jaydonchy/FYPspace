@@ -6,7 +6,7 @@ exports.up = function (knex) {
             ['introduction', 'problem_statement', 'project_aim', 'project_obj', 'lit_review', 'deliverables']
                 .map(section =>
                     table.string(section,'65535')
-                        .defaultTo(null)
+                        .defaultTo()
                 );
             ['completed', 'approved']
                 .map(status =>
@@ -19,7 +19,7 @@ exports.up = function (knex) {
             ['project_background', 'project_objectives', 'resources', 'research', 'dev_plan', 'test_plan']
                 .map(section =>
                     table.string(section,'65535')
-                        .defaultTo(null)
+                        .defaultTo()
                 );
             ['completed', 'approved']
                 .map(status =>

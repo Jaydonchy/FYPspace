@@ -23,9 +23,9 @@ export class AuthService {
         private _snackbar: MatSnackBar,
     ) {
         //Dev
-        this.loginPost({ email_work: "testLogin@staffmail", password: '12345678' }).then(res => {
-            res.subscribe(user => { this.logIn(user[0]) })
-        })
+        // this.loginPost({ email_work: "testLogin@staffmail", password: '12345678' }).then(res => {
+        //     res.subscribe(user => { this.logIn(user[0]) })
+        // })
 
     }
 

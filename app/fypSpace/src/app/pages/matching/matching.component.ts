@@ -327,14 +327,21 @@ export class MatchingComponent implements OnInit {
             this.showMarkerBtn = true;
             this.showCancelBtn = true;
         }
-        else if (this._matching.selectedLecturer || this._matching.selectedStudent) {
+        else if (this._matching.selectedLecturer && !this._matching.selectedStudent) {
             this.showCancelBtn = true;
+            this.showSupervisorBtn = false;
+            this.showMarkerBtn = false
+        }
+        else if (!this._matching.selectedLecturer && this._matching.selectedStudent) {
+            this.showCancelBtn = true;
+            this.showSupervisorBtn = false;
+            this.showMarkerBtn = false
         }
         else if (!this._matching.selectedLecturer && !this._matching.selectedStudent) {
             this.showSupervisorBtn = false;
             this.showCancelBtn = false;
             this.showMarkerBtn = false;
-        }
+        } 
         //Deassignment option
         if (this._matching.selectedStudent) {
 

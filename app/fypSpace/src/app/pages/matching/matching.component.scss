@@ -121,6 +121,7 @@ $badge-font: 15px;
     .item_util {
         display: grid;
         grid-template-columns: auto auto;
+        align-content:space-around;
         .circleNumber {
             border-radius: 50%;
             width: $util-size;

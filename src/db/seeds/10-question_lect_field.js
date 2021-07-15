@@ -67,7 +67,11 @@ exports.seed = function (knex) {
                 },
                 {
                     lect_id: 5,
-                    field_id: 1
+                    field_id: 2
+                },
+                {
+                    lect_id: 5,
+                    field_id: 3
                 },
                 {
                     lect_id: 3,

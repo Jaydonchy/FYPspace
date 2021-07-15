@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
                     next: res => {
                         if (res.length == 1) {
                             this._snackbar.open('Login Successful!', '', {
-                                duration: 2000,
+                                duration: 1500,
                                 horizontalPosition: 'center',
                                 verticalPosition: 'top'
                             })
@@ -50,8 +50,8 @@ export class LoginComponent implements OnInit {
                             this.formSubmitting = false;
                         }
                         else {
-                            this._snackbar.open('No user found', '', {
-                                duration: 2000,
+                            this._snackbar.open('Wrong Credentials', '', {
+                                duration: 1500,
                                 horizontalPosition: 'center',
                                 verticalPosition: 'top'
                             })
@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
                 })
             });
         } else {
-            this._snackbar.open('Login was not valid', '', {
+            this._snackbar.open('Form is not valid', '', {
                 duration: 1500,
                 horizontalPosition: 'center',
                 verticalPosition: 'top'

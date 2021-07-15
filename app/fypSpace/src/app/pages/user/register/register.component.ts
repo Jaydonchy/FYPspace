@@ -88,7 +88,7 @@ export class RegisterComponent implements OnInit {
                 res => res.subscribe({
                     next: res => {
                         this._snackbar.open('Registration ', 'Successful!', {
-                            duration: 2500,
+                            duration: 1500,
                             horizontalPosition: 'center',
                             verticalPosition: 'top'
                         })
@@ -96,8 +96,8 @@ export class RegisterComponent implements OnInit {
                         this.router.navigate(['login']);
                     },
                     error: err => {
-                        this._snackbar.open(`Registration Unsuccessful: ${err}`, '', {
-                            duration: 2500,
+                        this._snackbar.open(`There is already an existing account with the same TP Number / same APU/LBEF Email`, '', {
+                            duration: 1500,
                             horizontalPosition: 'center',
                             verticalPosition: 'top'
                         })
@@ -108,6 +108,11 @@ export class RegisterComponent implements OnInit {
                 })
             );
         } else {
+            this._snackbar.open('Form is not valid ', '', {
+                duration: 1500,
+                horizontalPosition: 'center',
+                verticalPosition: 'top'
+            })
             console.warn('Register form is not valid')
         }
     }

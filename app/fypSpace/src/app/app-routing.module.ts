@@ -27,7 +27,7 @@ const routes: Routes = [
     { path: "register", component: RegisterComponent },
     { path: "FAQ/:role", component: FaqComponent },
     { path: "about", component: AboutComponent },
-    { path: "matching", component: MatchingComponent },
+    { path: "matching", component: MatchingComponent, canActivate:[LecturerGuardGuard] },
     {
         path: "assignment",
         component: AssignmentComponent,

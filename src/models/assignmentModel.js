@@ -9,6 +9,8 @@ module.exports = {
     selectLecturerLoadById,
     selectMeetingLogsByLecturerId,
     selectAssignmentViewById,
+    updatePPF,
+    updatePSF,
 };
 
 async function selectAllAssignments() {
@@ -206,8 +208,8 @@ async function selectAssignmentViewById(assignment_id) {
             'a1.title', 'a1.description',
             'a1.supervisor_id', 'lecturerUser1.fullname AS supervisor_name',
             'a1.marker_id', 'lecturerUser2.fullname AS marker_name',
-            'a1.ppf AS ppf_id', `ppf.*`,
-            'a1.psf AS psf_id', `psf.*`
+            'a1.ppf AS ppf_id', 'ppf.introduction', 'ppf.problem_statement', 'ppf.project_aim', 'ppf.project_obj', 'ppf.lit_review', 'ppf.deliverables', 'ppf.completed AS ppf_completed', 'ppf.approved AS ppf_approved',
+            'a1.psf AS psf_id', 'psf.project_background', ' psf.project_objectives', 'psf.resources', 'psf.research', 'psf.dev_plan', 'psf.test_plan', 'psf.completed AS psf_completed', 'psf.approved AS psf_approved'
         )
         .from('assignment as a1')
         .leftJoin(
@@ -300,4 +302,27 @@ async function updateLecturer(newAssignment) {
     return res;
 }
 
+async function updatePPF(assignment_id) {
+    const { ppf } = await db.select('ppf')
+        .from('assignment')
+        .where({ id: assignment_id }).then(res => {
+            return res[0]
+        });
+        console.log(ppf)
 
+    return await db('proposal_form')
+        .where('id', '=', ppf)
+        .update({ approved: true })
+}
+
+async function updatePSF(assignment_id) {
+    const { psf } = await db.select('psf')
+        .from('assignment')
+        .where({ id: assignment_id }).then(res => {
+            return res[0]
+        });
+
+    return await db('specification_form')
+        .where('id', '=', psf)
+        .update({ approved: true })
+}

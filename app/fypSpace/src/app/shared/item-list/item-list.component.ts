@@ -34,6 +34,11 @@ export class ItemListComponent implements OnInit {
         this.searchStringEmitter.emit(newValue);
     }
 
+    clear(){
+        this.searchString ='';
+        this.onSearchChange('');
+    }
+
     //Open Right Panel
     openSideNav(templateRef: TemplateRef<any>) {
         const portal = new TemplatePortal(templateRef, this.vcf);

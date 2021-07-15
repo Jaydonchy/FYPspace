@@ -28,9 +28,15 @@ export class NavbarService {
             this.mid_nav_items = [];
             this.right_nav_items = this.resolveNavItems(['About', 'FAQs', 'Login', 'Register'], navItems.right_nav_items)
         } else {
-            this.left_nav_items = navItems.left_nav_items;
-            this.mid_nav_items = navItems.mid_nav_items;
             this.right_nav_items = this.resolveNavItems(['About', 'FAQs', 'Edit Profile', 'Log out'], navItems.right_nav_items)
+            if (user.lecturer) {
+                this.left_nav_items = navItems.left_nav_items;
+                if (user.lecturer.is_pm) {
+                    this.mid_nav_items = navItems.mid_nav_items;
+                } else {
+                    this.mid_nav_items = this.resolveNavItems(['Assignments'], navItems.mid_nav_items)
+                }
+            }
         }
     }
 

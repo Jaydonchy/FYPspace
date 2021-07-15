@@ -9,7 +9,7 @@
                     <mat-label>Search</mat-label>
                     <input matInput type="text" [(ngModel)]="searchString" (ngModelChange)="onSearchChange($event)">
                     <button *ngIf="searchString" matSuffix class="searchbar_icon" mat-icon-button aria-label="Clear"
-                        (click)="searchString=''">
+                        (click)="clear()">
                         <mat-icon>close</mat-icon>
                     </button>
                     <button matSuffix mat-icon-button class="searchbar_icon" aria-label="Search">
@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="list_util">
-        <div class="">Filter: <span></span> </div>
+        <div class=""><span></span> </div>
         <div class="">Sort by: 
             <button mat-icon-button (click)="this.ascEmitter.emit(!this.asc)">
                 <mat-icon>{{this.asc ? 'arrow_upward' : 'arrow_downward'}}</mat-icon>

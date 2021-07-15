@@ -18,9 +18,26 @@ const getAssignmentView = (req, res) => {
         .catch(err => res.status(400).send({ message: `${err.toString()}` }));
 }
 
+const approvePPF = (req, res) => {
+    const { assignment_id } = req.body;
+    assignmentModel.updatePPF(assignment_id)
+        .then(query => res.status(200).send({message: `update Successful query: ${query}`}))
+        .catch(err => res.status(400).send({ message: `${err.toString()}` }));
+
+}
+const approvePSF = (req, res) => {
+    const { assignment_id } = req.body;
+    assignmentModel.updatePSF(assignment_id)
+        .then(query => res.status(200).send({message: `update Successful query: ${query}`}))
+        .catch(err => res.status(400).send({ message: `${err.toString()}` }));
+
+}
+
 
 
 module.exports = {
     assignLecturer,
-    getAssignmentView
+    getAssignmentView,
+    approvePPF,
+    approvePSF
 }

@@ -34,14 +34,10 @@
     <div class="item_util">
         <div class="circleNumber cursor default supervisor" matTooltip="supervisory load">{{item.supervisor_load}}</div>
         <div class="circleNumber cursor default marker" matTooltip="marker load">{{item.marker_load}}</div>
-        <!-- View Profile -->
-        <mat-icon class="stateless cursor pointable" matTooltip="view user">account_circle</mat-icon>
         <!-- Unanswered Question -->
-        <mat-icon class="cursor default" matTooltip="view questions">help_center</mat-icon>
+        <mat-icon class="cursor stateless pointable" [matTooltipClass]="'newline'" [matTooltip]="this.question_string" matTooltip="view questions">help_center</mat-icon>
         <!-- Availability -->
         <mat-icon *ngIf="item.lecturer.availability" matTooltip="available" class="green cursor pointable">done</mat-icon>
         <mat-icon *ngIf="!item.lecturer.availability" matTooltip="unavailable" class="red cursor pointable">close</mat-icon>
-        <!-- Message -->
-        <mat-icon class="stateless cursor pointable" matTooltip="Message">message</mat-icon>
     </div>
 </mat-card>

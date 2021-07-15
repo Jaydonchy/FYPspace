@@ -139,8 +139,8 @@ export class EditProfileComponent implements OnInit {
             this._api.doPost(this.apiUrl, this.edit_form.value).then(
                 res => res.subscribe({
                     next: res => {
-                        this._snackbar.open('Registration ', 'Successful!', {
-                            duration: 2500,
+                        this._snackbar.open('Update ', 'Successful!', {
+                            duration: 1500,
                             horizontalPosition: 'center',
                             verticalPosition: 'top'
                         })
@@ -149,19 +149,22 @@ export class EditProfileComponent implements OnInit {
                         this._router.navigate(['./'], { relativeTo: this._route });
                     },
                     error: err => {
-                        this._snackbar.open(`Registration Unsuccessful: ${err}`, '', {
-                            duration: 2500,
+                        this._snackbar.open(`Update Unsuccessful: TP Number or APU email already exist in database`, '', {
+                            duration: 1500,
                             horizontalPosition: 'center',
                             verticalPosition: 'top'
                         })
                         this.formSubmitting = false;
-                        console.log(err);
                     }
 
                 })
             );
         } else {
-            console.warn('Register form is not valid')
+            this._snackbar.open('Form is not valid', '', {
+                duration: 1500,
+                horizontalPosition: 'center',
+                verticalPosition: 'top'
+            })
         }
     }
 

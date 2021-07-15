@@ -7,7 +7,6 @@ import { listable, sortOption } from '../interfaces/list';
 export class ListSortPipe implements PipeTransform {
 
     transform<T extends listable>(items: T[] | null, sortOption: sortOption, ascending: boolean): T[] | null {
-        // console.log(sortOption)
         if (!items || !sortOption || sortOption.comparator == null) {
             return items;
         }

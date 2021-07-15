@@ -1,4 +1,4 @@
-<button mat-raised-button color="accent" (click)="back()"> Back </button>
+<button mat-raised-button color="accent" class="back" (click)="back()"> Back </button>
 <div *ngIf="assignmentView">
     <mat-card class="mat-elevation-z4 float_design assignment_info">
         <div class="info_section">
@@ -58,6 +58,32 @@
                         <div class="title">Deliverables</div>
                         <div class="content">{{assignmentView.ppf.deliverables}}</div>
                     </div>
+                    <div class="document_action">
+                        <div class="document_status">
+                            <div class="document_completed">
+                                Completed: 
+                                <span *ngIf="assignmentView.ppf.completed" class="green">
+                                    <mat-icon>task_alt</mat-icon>
+                                </span>
+                                <span *ngIf="!assignmentView.ppf.completed" class="red">
+                                    <mat-icon>close</mat-icon>
+                                </span>
+                            </div>
+                            <div class="document_approved">
+                                Approved: 
+                                <span *ngIf="assignmentView.ppf.approved" class="green">
+                                    <mat-icon>task_alt</mat-icon>
+                                </span>
+                                <span *ngIf="!assignmentView.ppf.approved" class="red">
+                                    <mat-icon>close</mat-icon>
+                                </span>
+                            </div>
+                        </div>
+                        <button mat-raised-button color="accent" [disabled]="isMarker || !!this.assignmentView.ppf.approved" (click)="approvePPF()">
+                            Approve
+                        </button>
+                    </div>
+                   
                 </div>
             </tab>
             <tab [customClass]="'tab primary'" class="document_tab" heading="PSF">
@@ -86,6 +112,32 @@
                         <div class="title">Test Plan</div>
                         <div class="content">{{assignmentView.psf.test_plan}}</div>
                     </div>
+                    <div class="document_action">
+                        <div class="document_status">
+                            <div class="document_completed">
+                                Completed: 
+                                <span *ngIf="assignmentView.psf.completed" class="green">
+                                    <mat-icon>task_alt</mat-icon>
+                                </span>
+                                <span *ngIf="!assignmentView.psf.completed" class="red">
+                                    <mat-icon>close</mat-icon>
+                                </span>
+                            </div>
+                            <div class="document_approved">
+                                Approved: 
+                                <span *ngIf="assignmentView.psf.approved" class="green">
+                                    <mat-icon>task_alt</mat-icon>
+                                </span>
+                                <span *ngIf="!assignmentView.psf.approved" class="red">
+                                    <mat-icon>close</mat-icon>
+                                </span>
+                            </div>
+                        </div>
+                        <button mat-raised-button color="accent" [disabled]="isSupervisor || !!this.assignmentView.psf.approved" (click)="approvePSF()">
+                            Approve
+                        </button>
+                    </div>
+                    
                 </div>
             </tab>
         </tabset>

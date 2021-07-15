@@ -43,7 +43,7 @@
                 </span></td>
         </ng-container>
         <ng-container matColumnDef="psf_completed">
-            <th mat-header-cell *matHeaderCellDef> PSF approved </th>
+            <th mat-header-cell *matHeaderCellDef> PSF completed </th>
             <td mat-cell *matCellDef="let element">
                 <span *ngIf="element.assignment.psf_completed" class="green">
                     <mat-icon>task_alt</mat-icon>
@@ -54,7 +54,7 @@
             </td>
         </ng-container>
         <ng-container matColumnDef="psf_approved">
-            <th mat-header-cell *matHeaderCellDef> PSF completed </th>
+            <th mat-header-cell *matHeaderCellDef> PSF approved </th>
             <td mat-cell *matCellDef="let element">
                 <span *ngIf="element.assignment.psf_approved" class="green">
                     <mat-icon>task_alt</mat-icon>

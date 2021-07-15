@@ -1,4 +1,8 @@
 @import "../../../../styles/variables";
+.back{
+    margin-bottom: 2vh;
+}
+
 .assignment_info {
     display: flex;
     justify-content: space-between;
@@ -44,6 +48,16 @@
                 font-weight: bold;
             }
             .content {
+            }
+        }
+        .document_action{
+            display:flex;
+            justify-content: space-between;
+            .document_status{
+                display:flex;
+                .document_completed{
+                    margin-right:1vw
+                }
             }
         }
     }
